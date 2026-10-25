@@ -1,0 +1,6 @@
+{
+  "name": "CivilsInshorts",
+  "description": "UPSC Civil Services 60-word exam briefs with vertical swipe reader, Hi-Translate instant tap-to-meaning dictionary, and bilingual summaries.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
