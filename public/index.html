@@ -154,8 +154,8 @@
           <span id="networkStatusText">ONLINE</span>
         </div>
 
-        <!-- Live RSS / Refresh Sync -->
-        <button id="btnSyncFeeds" onclick="syncFeeds()" title="Sync Feeds & Updates" class="p-2 rounded-lg text-slate-300 hover:text-amber-400 hover:bg-slate-800 transition active:scale-95">
+        <!-- Dynamic Cache-Busting Refresh Button (Prominent Yellow/Amber Accent) -->
+        <button id="btnSyncFeeds" onclick="forceCacheBustingRefresh(true)" title="Force Cache-Busting Refresh (Clears Stale Cache & Loads Latest News)" class="p-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 border border-amber-500/40 transition active:scale-95 shadow-sm shadow-amber-500/10 flex items-center justify-center" data-test="refresh-button">
           <i id="syncIcon" class="ph-bold ph-arrows-clockwise text-lg"></i>
         </button>
 
@@ -531,7 +531,7 @@
     /* ========================================================================
        2. GLOBAL STATE & VERSION CONTROL
        ======================================================================== */
-    const APP_VERSION = "2.4.0";
+    const APP_VERSION = "2.5.0";
     let activeCardIndex = 0;
     let activeSourceFilter = "ALL";
     let activeTappedWord = "";
@@ -539,6 +539,7 @@
     let isBilingualActive = false;
     let savedWordBank = [];
     let customBriefs = [];
+    let remoteBriefs = [];
     let allBriefs = [];
     let filteredBriefs = [];
 
@@ -3597,10 +3598,142 @@
     }
 
     /* ========================================================================
-       13. NETWORK STATUS, AUTO-UPDATE & LIVE EDITORIAL FEEDS
+       13. DYNAMIC CACHE-BUSTING DATA FETCHING & NETWORK SYNCHRONIZATION
        ======================================================================== */
     let lastAutoFetchTime = 0;
     let autoFetchIntervalTimer = null;
+
+    /**
+     * Fetches news.json with real-time timestamp cache-busting parameter
+     * and strict no-store / must-revalidate headers.
+     */
+    async function fetchNewsWithCacheBusting(userTriggered = false) {
+      const icon = document.getElementById('syncIcon');
+      if (icon) icon.classList.add('animate-spin');
+
+      const timestamp = Date.now();
+      const randToken = Math.random().toString(36).substring(2, 8);
+      const candidates = [
+        `news.json?t=${timestamp}&_cb=${randToken}`,
+        `public/news.json?t=${timestamp}&_cb=${randToken}`,
+        `./news.json?t=${timestamp}&_cb=${randToken}`
+      ];
+
+      let freshItems = null;
+
+      for (const endpoint of candidates) {
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 4500);
+
+          const response = await fetch(endpoint, {
+            cache: 'no-store',
+            headers: {
+              'Cache-Control': 'no-cache, no-store, must-revalidate',
+              'Pragma': 'no-cache',
+              'Expires': '0'
+            },
+            signal: controller.signal
+          });
+          clearTimeout(timeoutId);
+
+          if (response.ok) {
+            const data = await response.json();
+            if (Array.isArray(data) && data.length > 0) {
+              freshItems = data;
+              break;
+            }
+          }
+        } catch (err) {
+          // Fall through to next candidate endpoint
+        }
+      }
+
+      if (freshItems && freshItems.length > 0) {
+        remoteBriefs = freshItems.map(sanitizeCardObject);
+        try {
+          localStorage.setItem('civils_remote_news_cache', JSON.stringify(remoteBriefs));
+        } catch (e) {}
+
+        compileAllBriefs();
+        applyFilterAndRender();
+        updateSyncStatus(true);
+
+        const counterLabel = document.getElementById('cardIndexLabel');
+        if (counterLabel) {
+          counterLabel.textContent = `${activeCardIndex + 1} / ${filteredBriefs.length}`;
+        }
+
+        if (userTriggered) {
+          showToast(`⚡ Refreshed! ${filteredBriefs.length} live cards loaded`, "success");
+        }
+      } else {
+        // Load fallback cached remote briefs if offline
+        loadOfflineRemoteCache();
+        compileAllBriefs();
+        applyFilterAndRender();
+      }
+
+      if (icon) {
+        setTimeout(() => icon.classList.remove('animate-spin'), 500);
+      }
+    }
+
+    function loadOfflineRemoteCache() {
+      try {
+        const stored = localStorage.getItem('civils_remote_news_cache');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            remoteBriefs = parsed.map(sanitizeCardObject);
+          }
+        }
+      } catch (e) {}
+    }
+
+    /**
+     * Top-right Yellow Refresh Button Handler:
+     * Clears stale data caches, fetches fresh news.json with cache-busting,
+     * updates the article counter dynamically, and renders newest cards at top.
+     */
+    async function forceCacheBustingRefresh(userTriggered = true) {
+      const icon = document.getElementById('syncIcon');
+      if (icon) icon.classList.add('animate-spin');
+
+      if (userTriggered) {
+        showToast("Clearing stale cache & fetching latest news...", "info");
+      }
+
+      // 1. Invalidate stale service worker data caches
+      if ('caches' in window) {
+        try {
+          const cacheKeys = await caches.keys();
+          for (const key of cacheKeys) {
+            if (key.includes('news') || key.includes('data')) {
+              await caches.delete(key);
+            }
+          }
+        } catch (e) {}
+      }
+
+      // 2. Fetch fresh canonical news.json with timestamp cache-busting
+      await fetchNewsWithCacheBusting(false);
+
+      // 3. Auto-sync external editorial RSS feeds
+      await autoFetchLatestNews(false);
+
+      // 4. Jump to the first card and render with smooth slide transition
+      activeCardIndex = 0;
+      applyFilterAndRender('card-anim-next');
+
+      if (userTriggered) {
+        showToast(`✓ Fresh sync complete! Showing ${allBriefs.length} exam briefs`, "success");
+      }
+
+      if (icon) {
+        setTimeout(() => icon.classList.remove('animate-spin'), 600);
+      }
+    }
 
     function setupNetworkStatusListeners() {
       updateNetworkStatusBadge(navigator.onLine);
@@ -3608,18 +3741,18 @@
       window.addEventListener('online', () => {
         updateNetworkStatusBadge(true);
         showToast("🌐 Internet Connected! Auto-updating latest news...", "success");
-        autoFetchLatestNews(true);
+        forceCacheBustingRefresh(false);
       });
 
       window.addEventListener('offline', () => {
         updateNetworkStatusBadge(false);
-        showToast("Offline Mode: 30+ verified exam briefs ready", "info");
+        showToast("Offline Mode: Serving cached exam briefs", "info");
       });
 
       document.addEventListener('visibilitychange', () => {
         if (document.visibilityState === 'visible' && navigator.onLine) {
           if (Date.now() - lastAutoFetchTime > 120000) {
-            autoFetchLatestNews(false);
+            fetchNewsWithCacheBusting(false);
           }
         }
       });
@@ -3627,9 +3760,9 @@
       if (autoFetchIntervalTimer) clearInterval(autoFetchIntervalTimer);
       autoFetchIntervalTimer = setInterval(() => {
         if (navigator.onLine) {
-          autoFetchLatestNews(false);
+          fetchNewsWithCacheBusting(false);
         }
-      }, 180000); // Recurring check every 3 minutes
+      }, 180000); // Check every 3 minutes
     }
 
     function updateNetworkStatusBadge(online) {
@@ -3652,7 +3785,7 @@
     }
 
     async function syncFeeds() {
-      await autoFetchLatestNews(true);
+      await forceCacheBustingRefresh(true);
     }
 
     async function autoFetchLatestNews(userTriggered = false) {
@@ -3660,12 +3793,10 @@
       if (icon) icon.classList.add('animate-spin');
 
       if (!navigator.onLine) {
-        if (userTriggered) showToast("Offline mode: Reading 30+ pre-cached verified briefs", "info");
+        if (userTriggered) showToast("Offline mode: Reading pre-cached verified briefs", "info");
         if (icon) setTimeout(() => icon.classList.remove('animate-spin'), 600);
         return;
       }
-
-      if (userTriggered) showToast("Refreshing & fetching latest news from sources...", "info");
 
       let addedCount = 0;
 
@@ -3680,8 +3811,12 @@
         try {
           const controller = new AbortController();
           const timeoutId = setTimeout(() => controller.abort(), 3500);
-          const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(feed.url)}`;
-          const res = await fetch(proxyUrl, { signal: controller.signal });
+          const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(feed.url)}&_t=${Date.now()}`;
+          const res = await fetch(proxyUrl, {
+            cache: 'no-store',
+            headers: { 'Cache-Control': 'no-cache' },
+            signal: controller.signal
+          });
           clearTimeout(timeoutId);
 
           if (res.ok) {
@@ -3735,17 +3870,6 @@
         }
       }
 
-      // Strategy B: Fresh Live Editorial Pool from top 10 sources
-      const freshPool = getFreshLiveEditorialPool();
-      freshPool.forEach(item => {
-        const snippet = item.headline.slice(0, 32).toLowerCase();
-        const alreadyExists = allBriefs.some(b => b.id === item.id || b.headline.toLowerCase().includes(snippet));
-        if (!alreadyExists) {
-          customBriefs.unshift(item);
-          addedCount++;
-        }
-      });
-
       lastAutoFetchTime = Date.now();
 
       if (addedCount > 0) {
@@ -3754,8 +3878,6 @@
         applyFilterAndRender();
         showToast(`⚡ Auto-updated ${addedCount} latest news briefs from sources!`, "success");
         showNewCardsNotification(addedCount);
-      } else if (userTriggered) {
-        showToast("All editorial news sources are already up to date!", "info");
       }
 
       if (icon) {
@@ -3810,76 +3932,6 @@
       return "GS-II: Governance & Public Policy";
     }
 
-    function getFreshLiveEditorialPool() {
-      return [
-        {
-          id: "live-pool-1",
-          source: "Down To Earth",
-          sourceBadge: "DOWN TO EARTH LIVE",
-          syllabus: "GS-III: Environment & Urban Ecology",
-          headline: "Central Pollution Control Board NCAP 2.0 Review on Ambient Particulate Targets:",
-          body: "The Central Pollution Control Board (CPCB) released an updated compliance review of the National Clean Air Programme (NCAP 2.0). Fifty-four non-attainment cities registered a measurable reduction in PM2.5 and PM10 concentrations over baseline metrics. The Ministry mandated high-altitude airshed monitoring and the integration of continuous ambient air quality monitoring stations (CAAQMS) with municipal urban planning to enforce target-based industrial emission curbs.",
-          hindi: "केंद्रीय प्रदूषण नियंत्रण बोर्ड (CPCB) ने राष्ट्रीय स्वच्छ वायु कार्यक्रम (NCAP 2.0) की अद्यतन समीक्षा जारी की है। 54 गैर-प्राप्ति शहरों में PM2.5 और PM10 सांद्रता में उल्लेखनीय कमी दर्ज की गई है। पर्यावरण मंत्रालय ने सतत परिवेशी वायु गुणवत्ता निगरानी स्टेशनों (CAAQMS) को नगर नियोजन से जोड़ना अनिवार्य बनाया है।",
-          tags: ["#DownToEarth", "#NCAP", "#PollutionControl", "#GS3"],
-          image: resolveTopicPhoto("GS-III: Environment", "CPCB NCAP PM2.5 pollution air quality ecology environment"),
-          sourceUrl: "https://www.downtoearth.org.in",
-          isLiveFetched: true
-        },
-        {
-          id: "live-pool-2",
-          source: "Economy / Mint",
-          sourceBadge: "MINT BANKING DESK",
-          syllabus: "GS-III: Financial Inclusion & Digital Public Infrastructure",
-          headline: "Reserve Bank of India Accelerates Nationwide Deployment of Unified Lending Interface:",
-          body: "The Reserve Bank of India announced the nationwide expansion of the Unified Lending Interface (ULI) across scheduled commercial banks. Mirroring UPI's success in retail transactions, ULI enables frictionless digital credit appraisal by seamlessly aggregating non-financial data—including digitized land records, satellite crop assessments, and dairy pouring records. This architecture drastically compresses rural micro-credit appraisal timeframes from weeks to under ten minutes.",
-          hindi: "भारतीय रिज़र्व बैंक (RBI) ने वाणिज्यिक बैंकों में यूनिफाइड लेंडिंग इंटरफेस (ULI) के राष्ट्रव्यापी विस्तार की घोषणा की है। यूपीआई की तर्ज पर ULI डिजिटल ऋण मूल्यांकन को आसान बनाता है, जिससे भूमि रिकॉर्ड और उपग्रह फसल डेटा के जरिए किसानों को तत्काल ऋण मिल सकेगा।",
-          tags: ["#MintEconomy", "#RBI", "#ULI", "#DigitalBanking", "#GS3"],
-          image: resolveTopicPhoto("GS-III: Economy", "RBI banking unified lending interface financial currency economy"),
-          sourceUrl: "https://www.livemint.com",
-          isLiveFetched: true
-        },
-        {
-          id: "live-pool-3",
-          source: "ISRO / Science & Tech",
-          sourceBadge: "ISRO HEADQUARTERS",
-          syllabus: "GS-III: Space Technology & Human Spaceflight",
-          headline: "ISRO Successfully Validates Integrated Human-Rated Crew Module ECLSS Life Support Systems:",
-          body: "The Indian Space Research Organisation completed vacuum chamber qualification for the indigenous Environmental Control and Life Support System (ECLSS) destined for the Gaganyaan orbital crew module. The system autonomously manages atmospheric cabin pressurization, carbon dioxide removal, temperature regulation, and vital nitrogen-oxygen ratios inside the module. This definitive qualification milestone paves the way for the impending uncrewed orbital mission carrying the humanoid robot Vyommitra.",
-          hindi: "इसरो ने गगनयान मानव अंतरिक्ष उड़ान मॉड्यूल के लिए स्वदेशी पर्यावरण नियंत्रण एवं जीवन रक्षक प्रणाली (ECLSS) का वैक्यूम परीक्षण सफलतापूर्वक पूरा कर लिया है। यह प्रणाली अंतरिक्ष यात्रियों के लिए केबिन का दबाव, कार्बन डाईऑक्साइड निष्कासन और ऑक्सीजन संतुलन नियंत्रित करती है।",
-          tags: ["#ISRO", "#Gaganyaan", "#ECLSS", "#SpaceTech", "#GS3"],
-          image: resolveTopicPhoto("GS-III: Space", "ISRO Gaganyaan crew module satellite orbit rocket space"),
-          sourceUrl: "https://www.isro.gov.in",
-          isLiveFetched: true
-        },
-        {
-          id: "live-pool-4",
-          source: "The Hindu",
-          sourceBadge: "THE HINDU LAW DESK",
-          syllabus: "GS-II: Fundamental Rights & Judicial Safeguards",
-          headline: "Supreme Court Clarifies Constitutional Strictures and Due Process in Preventive Detention:",
-          body: "A three-judge bench of the Supreme Court ruled that preventive detention constitutes an extraordinary executive measure that must rigorously satisfy constitutional safeguards guaranteed under Article 22(5). The apex court held that unjustified delays in considering a detenu's formal representation render the detention order null and void. The judgment reaffirmed that procedural strictures are sacrosanct and must be construed strictly against executive arbitrariness to protect personal liberty under Article 21.",
-          hindi: "सर्वोच्च न्यायालय की तीन-न्यायाधीशों की पीठ ने स्पष्ट किया कि निवारक हिरासत एक असाधारण उपाय है और इसे अनुच्छेद 22(5) के तहत प्रक्रियात्मक सुरक्षा उपायों का अनिवार्य रूप से पालन करना होगा। अनावश्यक देरी निवारक हिरासत आदेश को असंवैधानिक बना देती है।",
-          tags: ["#TheHindu", "#SupremeCourt", "#Article22", "#Judiciary", "#GS2"],
-          image: resolveTopicPhoto("GS-II: Polity", "Supreme Court article 21 22 detention judiciary court justice"),
-          sourceUrl: "https://www.thehindu.com",
-          isLiveFetched: true
-        },
-        {
-          id: "live-pool-5",
-          source: "PIB Delhi",
-          sourceBadge: "MNRE GAZETTE",
-          syllabus: "GS-III: Renewable Energy & Clean Maritime Hubs",
-          headline: "Ministry of New and Renewable Energy Unveils Pilot Framework for Offshore Electrolysers:",
-          body: "The Ministry of New and Renewable Energy released operational guidelines for developing coastal green hydrogen and ammonia bunkering terminals under the Strategic Interventions for Green Hydrogen Transition (SIGHT) scheme. The scheme provides dedicated deep-sea port berths, exemptions from inter-state transmission system (ISTS) tariffs, and targeted capital support for indigenously manufactured proton exchange membrane (PEM) electrolysers to establish India as a major clean marine fuel bunkering hub.",
-          hindi: "नवीन एवं नवीकरणीय ऊर्जा मंत्रालय ने राष्ट्रीय हरित हाइड्रोजन मिशन के तहत तटीय हरित हाइड्रोजन और अमोनिया बंकरिंग केंद्रों के लिए परिचालन दिशानिर्देश जारी किए हैं। इसके तहत अंतर्देशीय ट्रांसमिशन शुल्क में छूट और स्वदेशी इलेक्ट्रोलाइज़र सब्सिडी प्रदान की जाएगी।",
-          tags: ["#PIBDelhi", "#GreenHydrogen", "#SIGHT", "#CleanEnergy", "#GS3"],
-          image: resolveTopicPhoto("GS-III: Renewable Energy", "green hydrogen solar renewable wind clean energy"),
-          sourceUrl: "https://pib.gov.in",
-          isLiveFetched: true
-        }
-      ];
-    }
-
     function checkURLParamsForSharedCards() {
       try {
         const params = new URLSearchParams(window.location.search);
@@ -3904,8 +3956,44 @@
       }
     }
 
+    /**
+     * Deduplicates and compiles all briefs from:
+     * 1. User-authored briefs (highest priority)
+     * 2. Canonical news.json (AI summarized briefs & live RSS feeds)
+     * 3. Pre-loaded default curated briefs
+     */
     function compileAllBriefs() {
-      allBriefs = [...customBriefs, ...DEFAULT_UPSC_BRIEFS];
+      const seen = new Set();
+      const combined = [];
+
+      // 1. User custom-authored briefs
+      for (const b of customBriefs) {
+        const key = (b.headline || "").toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 32);
+        if (key && !seen.has(key)) {
+          seen.add(key);
+          combined.push(b);
+        }
+      }
+
+      // 2. Remote briefs fetched with cache-busting from news.json
+      for (const b of remoteBriefs) {
+        const key = (b.headline || "").toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 32);
+        if (key && !seen.has(key)) {
+          seen.add(key);
+          combined.push(b);
+        }
+      }
+
+      // 3. Fallback default briefs
+      for (const b of DEFAULT_UPSC_BRIEFS) {
+        const key = (b.headline || "").toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 32);
+        if (key && !seen.has(key)) {
+          seen.add(key);
+          combined.push(b);
+        }
+      }
+
+      allBriefs = combined;
     }
 
     /* ========================================================================
@@ -3947,6 +4035,7 @@
     window.addEventListener('DOMContentLoaded', () => {
       checkVersionAndCache();
       loadCustomBriefs();
+      loadOfflineRemoteCache();
       loadSavedWordBank();
       checkURLParamsForSharedCards();
       compileAllBriefs();
@@ -3955,11 +4044,14 @@
       initSwipeGestures();
       setupNetworkStatusListeners();
 
-      // If online on start, auto-check and update live editorial feeds smoothly
+      // Register Service Worker with Network-First news data strategy (only on HTTP/HTTPS protocols)
+      if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.protocol === 'http:')) {
+        navigator.serviceWorker.register('sw.js?v=' + APP_VERSION).catch(() => {});
+      }
+
+      // Immediately fetch fresh news.json with cache-busting
       if (navigator.onLine) {
-        setTimeout(() => {
-          autoFetchLatestNews(false);
-        }, 1000);
+        fetchNewsWithCacheBusting(false);
       }
     });
   </script>

@@ -34,6 +34,7 @@ class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
+    cleanupCorruptedVariationsSeed()
 
     setContent {
       var webViewRef by remember { mutableStateOf<WebView?>(null) }
@@ -69,6 +70,24 @@ class MainActivity : ComponentActivity() {
           onWebViewCreated = { webViewRef = it }
         )
       }
+    }
+  }
+
+  private fun cleanupCorruptedVariationsSeed() {
+    try {
+      val dataDir = applicationInfo.dataDir
+      val webviewDir = java.io.File(dataDir, "app_webview")
+      if (webviewDir.exists() && webviewDir.isDirectory) {
+        val targets = listOf("variations_seed", "variations_seed_new", "variations_stamp")
+        for (target in targets) {
+          val file = java.io.File(webviewDir, target)
+          if (file.exists()) {
+            file.delete()
+          }
+        }
+      }
+    } catch (_: Throwable) {
+      // Safe fallback
     }
   }
 }
@@ -131,9 +150,17 @@ fun CivilsWebViewContainer(
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
               }
               context.startActivity(intent)
-            } catch (e: Exception) {
+            } catch (_: Exception) {
               // Graceful fallback
             }
+            return true
+          }
+
+          override fun onRenderProcessGone(
+            view: WebView?,
+            detail: android.webkit.RenderProcessGoneDetail?
+          ): Boolean {
+            view?.loadUrl("file:///android_asset/index.html")
             return true
           }
 
@@ -143,13 +170,13 @@ fun CivilsWebViewContainer(
             description: String?,
             failingUrl: String?
           ) {
-            super.onReceivedError(view, errorCode, description, failingUrl)
+            // Handled non-fatal error gracefully
           }
         }
 
         webChromeClient = object : WebChromeClient() {
           override fun onConsoleMessage(consoleMessage: android.webkit.ConsoleMessage?): Boolean {
-            return super.onConsoleMessage(consoleMessage)
+            return true
           }
         }
 
