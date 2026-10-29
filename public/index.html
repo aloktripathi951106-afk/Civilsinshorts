@@ -213,7 +213,7 @@
         <!-- Source Badge on Image -->
         <div class="absolute top-3 left-3 flex items-center space-x-1.5 px-2.5 py-1 rounded-md bg-slate-950/80 backdrop-blur-md border border-slate-700/60 text-xs font-semibold tracking-wide text-slate-200">
           <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-dot"></span>
-          <span id="cardSourceBadge" class="uppercase text-[11px] font-bold text-amber-400">PIB DELHI</span>
+          <span id="cardSourceBadge" class="uppercase text-[11px] font-bold text-amber-400">CivilsInshorts</span>
         </div>
 
         <!-- Bilingual Hindi Toggle Button -->
@@ -225,7 +225,7 @@
         <!-- Syllabus Banner at Bottom of Image -->
         <div class="absolute bottom-2 left-4">
           <span id="cardSyllabus" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-sky-950/80 text-sky-300 border border-sky-800/60 shadow-sm">
-            GS-II: Indian Constitution & Statutory Bodies
+            UPSC Civil Services Examination
           </span>
         </div>
       </div>
@@ -237,12 +237,12 @@
         <div id="englishView" class="space-y-3">
           <!-- Interactive Headline -->
           <h2 id="cardHeadline" class="text-base sm:text-lg font-bold text-slate-100 leading-snug tracking-tight">
-            <!-- Words dynamically tokenized -->
+            Loading latest UPSC CSE 60-word briefs...
           </h2>
 
           <!-- Interactive 60-Word Body -->
           <div id="cardBody" class="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
-            <!-- Words dynamically tokenized -->
+            Preparing verified editorial summaries, GS paper syllabus tags, and tap-to-meaning bilingual vocabulary...
           </div>
         </div>
 
@@ -270,7 +270,7 @@
       <footer class="flex-shrink-0 bg-[#0f172a]/95 border-t border-slate-800/90 px-4 py-2.5 flex items-center justify-between z-10">
         <!-- Card Index, Latest Jump & Offline Status -->
         <div class="flex items-center space-x-2 text-xs font-medium text-slate-400">
-          <span id="cardIndexLabel" class="text-slate-200 font-bold">1 / 45</span>
+          <span id="cardIndexLabel" class="text-slate-200 font-bold">...</span>
           <button onclick="jumpToNewestCard()" title="Jump to Latest Newest Brief (Card 1)" class="flex items-center space-x-1 px-2 py-0.5 rounded-md bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 text-[10px] font-bold active:scale-95 transition border border-amber-500/30">
             <i class="ph-bold ph-lightning"></i>
             <span>Latest</span>
@@ -562,7 +562,7 @@
        ======================================================================== */
     // Strictly relevant, diverse Indian administration, disaster management,
     // constitutional, scientific and economic photography. ZERO unrelated politicians or typewriters.
-    const TOPIC_PHOTO_VAULT = {
+    const TOPIC_PHOTO_VAULT_RAW = {
       cyclones_disasters: [
         "https://images.unsplash.com/photo-1527482797697-8795b05a13fe?w=800&auto=format&fit=crop&q=80",
         "https://images.unsplash.com/photo-1514632595-4944383f2737?w=800&auto=format&fit=crop&q=80",
@@ -581,6 +581,19 @@
         "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&auto=format&fit=crop&q=80",
         "https://images.unsplash.com/photo-1561731216-c3a4d99437d5?w=800&auto=format&fit=crop&q=80",
         "https://images.unsplash.com/photo-1500534623283-312aade485b7?w=800&auto=format&fit=crop&q=80"
+      ],
+      ecology_environment: [
+        "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1561731216-c3a4d99437d5?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1500534623283-312aade485b7?w=800&auto=format&fit=crop&q=80"
+      ],
+      parliament_polity: [
+        "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1450133064473-71024230f91b?w=800&auto=format&fit=crop&q=80",
+        "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800&auto=format&fit=crop&q=80"
       ],
       water_rivers_dams: [
         "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=800&auto=format&fit=crop&q=80",
@@ -650,6 +663,16 @@
         "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&auto=format&fit=crop&q=80"
       ]
     };
+
+    // Crash-proof proxy: unknown categories gracefully return reliable photos instead of throwing undefined
+    const TOPIC_PHOTO_VAULT = new Proxy(TOPIC_PHOTO_VAULT_RAW, {
+      get(target, prop) {
+        if (typeof prop === 'string' && prop in target) {
+          return target[prop];
+        }
+        return target.bureaucracy_governance || target.environment_pollution || [];
+      }
+    });
 
     function resolveTopicPhoto(topicKey, fallbackKeyword = "", cardId = "") {
       const combined = ((fallbackKeyword || "") + " " + (topicKey || "")).toLowerCase();
@@ -4179,21 +4202,33 @@
     /* ========================================================================
        15. APP INITIALIZATION & AUTO-BOOTSTRAP
        ======================================================================== */
-    window.addEventListener('DOMContentLoaded', () => {
-      checkVersionAndCache();
-      loadCustomBriefs();
-      loadOfflineRemoteCache();
-      loadSavedWordBank();
-      checkURLParamsForSharedCards();
-      compileAllBriefs();
-      renderSourceChips();
-      updateSortButtonUI();
-      applyFilterAndRender();
-      if (activeCardIndex > 0) {
-        showToast(`Resumed reading at Card ${activeCardIndex + 1} of ${filteredBriefs.length}`, "info");
+    function bootCivilsApp() {
+      try {
+        checkVersionAndCache();
+        loadCustomBriefs();
+        loadOfflineRemoteCache();
+        loadSavedWordBank();
+        checkURLParamsForSharedCards();
+        compileAllBriefs();
+        renderSourceChips();
+        updateSortButtonUI();
+        applyFilterAndRender();
+        if (activeCardIndex > 0 && filteredBriefs.length > 0) {
+          showToast(`Resumed reading at Card ${activeCardIndex + 1} of ${filteredBriefs.length}`, "info");
+        }
+        initSwipeGestures();
+        setupNetworkStatusListeners();
+      } catch (bootErr) {
+        console.error("Critical error during bootCivilsApp:", bootErr);
+        try {
+          filteredBriefs = [...DEFAULT_UPSC_BRIEFS];
+          activeCardIndex = 0;
+          renderActiveCard();
+          renderSourceChips();
+        } catch (innerErr) {
+          console.error("Fallback render error:", innerErr);
+        }
       }
-      initSwipeGestures();
-      setupNetworkStatusListeners();
 
       // Register Service Worker with Network-First news data strategy (only on HTTP/HTTPS protocols)
       if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.protocol === 'http:')) {
@@ -4204,7 +4239,13 @@
       if (navigator.onLine) {
         fetchNewsWithCacheBusting(false);
       }
-    });
+    }
+
+    if (document.readyState === 'loading') {
+      window.addEventListener('DOMContentLoaded', bootCivilsApp);
+    } else {
+      bootCivilsApp();
+    }
   </script>
 </body>
 </html>

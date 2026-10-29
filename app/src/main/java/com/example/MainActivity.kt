@@ -176,6 +176,9 @@ fun CivilsWebViewContainer(
 
         webChromeClient = object : WebChromeClient() {
           override fun onConsoleMessage(consoleMessage: android.webkit.ConsoleMessage?): Boolean {
+            if (consoleMessage != null) {
+              android.util.Log.d("CivilsWeb", "${consoleMessage.message()} -- line ${consoleMessage.lineNumber()} of ${consoleMessage.sourceId()}")
+            }
             return true
           }
         }
