@@ -129,6 +129,36 @@
     .pulse-dot {
       animation: pulseDot 2s infinite ease-in-out;
     }
+
+    /* 2-Column Printable Revision Digest Stylesheet */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        overflow: visible !important;
+      }
+      header, footer, #mainSwipeContainer, #bottomSheetModal, #wordBankModal, #addNewsModal, #cloudSyncModal, #shareCardModal, #readLaterModal, #toastContainer, .no-print {
+        display: none !important;
+      }
+      #printableDigestContainer {
+        display: block !important;
+        position: static !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 20px !important;
+        background: #ffffff !important;
+        color: #111827 !important;
+      }
+      .print-digest-card {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+        border: 1px solid #cbd5e1 !important;
+        border-radius: 8px !important;
+        padding: 14px !important;
+        background: #ffffff !important;
+        color: #0f172a !important;
+      }
+    }
   </style>
 </head>
 <body class="bg-[#0b0f17] text-slate-100 flex flex-col h-full overflow-hidden select-none">
@@ -169,15 +199,26 @@
           <span id="sortLabelText" class="text-[11px] font-bold">Newest</span>
         </button>
 
+        <!-- Read Later & Revision Deck -->
+        <button onclick="openReadLaterModal()" title="Saved 'Read Later' Cards" class="relative p-2 rounded-lg text-slate-300 hover:text-amber-400 hover:bg-slate-800 transition active:scale-95">
+          <i class="ph-bold ph-clock-countdown text-lg"></i>
+          <span id="readLaterBadge" class="hidden absolute -top-0.5 -right-0.5 bg-amber-500 text-slate-950 text-[10px] font-black rounded-full w-4 h-4 flex items-center justify-center">0</span>
+        </button>
+
         <!-- Saved Vocabulary WordBank -->
         <button onclick="openWordBankModal()" title="Saved Vocabulary WordBank" class="relative p-2 rounded-lg text-slate-300 hover:text-amber-400 hover:bg-slate-800 transition active:scale-95">
-          <i class="ph-bold ph-bookmark-simple text-lg"></i>
+          <i class="ph-bold ph-book-bookmark text-lg"></i>
           <span id="wordBankBadge" class="hidden absolute -top-0.5 -right-0.5 bg-amber-500 text-slate-950 text-[10px] font-black rounded-full w-4 h-4 flex items-center justify-center">0</span>
         </button>
 
         <!-- Add News Brief -->
         <button onclick="openAddNewsModal()" title="Add Exam News Brief" class="p-2 rounded-lg text-slate-300 hover:text-amber-400 hover:bg-slate-800 transition active:scale-95">
           <i class="ph-bold ph-plus-circle text-lg"></i>
+        </button>
+
+        <!-- PDF Revision Digest Export -->
+        <button onclick="openPdfDigestModal()" title="One-Click PDF Revision Digest & Printable Summary" class="p-2 rounded-lg text-slate-300 hover:text-amber-400 hover:bg-slate-800 transition active:scale-95">
+          <i class="ph-bold ph-file-pdf text-lg text-amber-400"></i>
         </button>
 
         <!-- Cloud Sync / Cross-Device -->
@@ -187,10 +228,17 @@
       </div>
     </div>
 
+    <!-- DIRECT GS PAPER & SYLLABUS TOPIC FILTER BAR -->
+    <div class="max-w-2xl mx-auto mt-1.5 px-0.5">
+      <div id="gsFilterChipsList" class="flex space-x-1.5 overflow-x-auto no-scrollbar py-0.5">
+        <!-- GS Paper Chips injected dynamically -->
+      </div>
+    </div>
+
     <!-- HORIZONTAL SOURCE FILTER CHIPS -->
-    <div class="max-w-2xl mx-auto mt-2 -mb-0.5">
-      <div id="sourceChipsList" class="flex space-x-2 overflow-x-auto no-scrollbar py-1">
-        <!-- Chips injected dynamically by JS -->
+    <div class="max-w-2xl mx-auto mt-1 -mb-0.5">
+      <div id="sourceChipsList" class="flex space-x-1.5 overflow-x-auto no-scrollbar py-0.5">
+        <!-- Source Chips injected dynamically by JS -->
       </div>
     </div>
   </header>
@@ -218,10 +266,16 @@
           <span id="cardSourceBadge" class="uppercase text-[11px] font-bold text-amber-400">CivilsInshorts</span>
         </div>
 
-        <!-- Right Action Buttons on Image: Share & Hindi Toggle -->
-        <div class="absolute top-3 right-3 flex items-center space-x-2">
+        <!-- Right Action Buttons on Image: Read Later, Share & Hindi Toggle -->
+        <div class="absolute top-3 right-3 flex items-center space-x-1.5 sm:space-x-2">
+          <!-- Read Later Bookmark Button on Image -->
+          <button id="btnReadLaterTop" onclick="toggleReadLaterCurrentCard()" title="Save to Read Later" class="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg bg-slate-950/80 hover:bg-slate-900 border border-slate-700/70 active:scale-95 text-slate-300 font-bold text-xs shadow-md transition backdrop-blur-md">
+            <i id="btnReadLaterTopIcon" class="ph-bold ph-bookmark-simple text-sm"></i>
+            <span id="btnReadLaterTopText" class="hidden sm:inline">Save</span>
+          </button>
+
           <!-- News Card Share Button -->
-          <button id="btnShareCardTop" onclick="openShareModal()" title="Share UPSC Brief (WhatsApp, Telegram, Notes, System Share)" class="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg bg-slate-950/80 hover:bg-slate-900 border border-slate-700/70 active:scale-95 text-amber-400 font-bold text-xs shadow-md transition backdrop-blur-md">
+          <button id="btnShareCardTop" onclick="handleCardShare(event)" title="Share UPSC Brief (WhatsApp, Telegram, Notes, System Share)" class="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg bg-slate-950/80 hover:bg-slate-900 border border-slate-700/70 active:scale-95 text-amber-400 font-bold text-xs shadow-md transition backdrop-blur-md">
             <i class="ph-bold ph-share-network text-sm"></i>
             <span class="hidden sm:inline">Share</span>
           </button>
@@ -275,6 +329,90 @@
         <div id="cardTagsBar" class="flex flex-wrap gap-1.5 pt-2">
           <!-- Tags injected dynamically -->
         </div>
+
+        <!-- UPSC CSE ACTIVE STUDY TOOLBAR (PRELIMS DRILL, MAINS BOOSTER, READ ALOUD) -->
+        <div class="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between gap-1.5 flex-wrap">
+          <div class="flex items-center space-x-1.5">
+            <!-- Prelims Drill Toggle -->
+            <button id="btnTogglePrelimsDrill" onclick="togglePrelimsDrill()" class="px-2.5 py-1 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-400 font-bold text-[11px] flex items-center space-x-1 transition active:scale-95 shadow-sm">
+              <i class="ph-bold ph-target text-xs"></i>
+              <span>Prelims MCQ</span>
+            </button>
+
+            <!-- Mains Booster Toggle -->
+            <button id="btnToggleMainsBooster" onclick="toggleMainsBooster()" class="px-2.5 py-1 rounded-lg bg-purple-500/15 hover:bg-purple-500/25 border border-purple-500/30 text-purple-300 font-bold text-[11px] flex items-center space-x-1 transition active:scale-95 shadow-sm">
+              <i class="ph-bold ph-pencil-line text-xs"></i>
+              <span>Mains Booster</span>
+            </button>
+          </div>
+
+          <!-- Audio Read Aloud Player Controls (Web Speech API) -->
+          <div class="flex items-center space-x-1 bg-slate-900/90 border border-slate-800 px-2 py-0.5 rounded-lg">
+            <button id="btnAudioPlayPause" onclick="toggleAudioSpeech()" title="Listen Aloud (Text-to-Speech)" class="text-amber-400 hover:text-amber-300 flex items-center space-x-1 text-[11px] font-bold transition active:scale-95">
+              <i id="audioPlayIcon" class="ph-bold ph-play text-xs"></i>
+              <span id="audioPlayText">Listen</span>
+            </button>
+            <span class="text-slate-600 text-xs">|</span>
+            <select id="audioSpeedSelect" onchange="changeAudioSpeed(this.value)" class="bg-transparent text-[10px] text-slate-300 focus:outline-none cursor-pointer">
+              <option value="1" class="bg-slate-900 text-slate-100" selected>1x</option>
+              <option value="1.25" class="bg-slate-900 text-slate-100">1.25x</option>
+              <option value="1.5" class="bg-slate-900 text-slate-100">1.5x</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- COLLAPSIBLE PRELIMS MCQ DRILL BOX -->
+        <div id="prelimsDrillBox" class="hidden mt-2.5 p-3 rounded-xl bg-slate-900/95 border border-emerald-500/30 text-xs space-y-2 animate-in fade-in duration-200">
+          <div class="flex items-center justify-between text-[11px] font-bold text-emerald-400 border-b border-slate-800 pb-1.5">
+            <div class="flex items-center space-x-1.5">
+              <i class="ph-bold ph-seal-question text-emerald-400 text-sm"></i>
+              <span>UPSC CSE Prelims Drill (Active Recall)</span>
+            </div>
+            <span id="prelimsDrillStatusBadge" class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono">1 Q • Single Choice</span>
+          </div>
+          <p id="mcqQuestionText" class="text-slate-200 font-semibold leading-snug">
+            <!-- Question text injected dynamically -->
+          </p>
+          <div id="mcqOptionsGrid" class="space-y-1.5 pt-1">
+            <!-- 4 Options (A, B, C, D) injected dynamically -->
+          </div>
+          <!-- Instant Rationale Box -->
+          <div id="mcqRationaleBox" class="hidden mt-2 p-2.5 rounded-lg bg-slate-950 border border-slate-800 text-[11px] text-slate-300 leading-relaxed">
+            <!-- Explanation injected dynamically -->
+          </div>
+        </div>
+
+        <!-- COLLAPSIBLE MAINS ANSWER BOOSTER BOX -->
+        <div id="mainsBoosterBox" class="hidden mt-2.5 p-3 rounded-xl bg-slate-900/95 border border-purple-500/30 text-xs space-y-2.5 animate-in fade-in duration-200">
+          <div class="flex items-center justify-between text-[11px] font-bold text-purple-300 border-b border-slate-800 pb-1.5">
+            <div class="flex items-center space-x-1.5">
+              <i class="ph-bold ph-graduation-cap text-purple-400 text-sm"></i>
+              <span>Mains Perspective & Model Question (10/15M)</span>
+            </div>
+            <button onclick="copyMainsAnswerFramework()" title="Copy Mains Notes" class="text-[10px] text-purple-300 hover:text-white px-2 py-0.5 rounded bg-purple-900/40 border border-purple-700/50 flex items-center space-x-1 transition active:scale-95">
+              <i class="ph-bold ph-copy"></i>
+              <span>Copy Notes</span>
+            </button>
+          </div>
+          <div>
+            <span class="text-[10px] uppercase font-bold text-slate-400">Probable Question:</span>
+            <p id="mainsQuestionText" class="text-slate-200 font-semibold mt-0.5 leading-snug">
+              <!-- Model Mains Question -->
+            </p>
+          </div>
+          <div class="space-y-1">
+            <span class="text-[10px] uppercase font-bold text-amber-400">Key Dimensions & Value Addition:</span>
+            <ul id="mainsDimensionsList" class="space-y-1 text-slate-300 text-[11px] list-disc list-inside">
+              <!-- Key dimensions injected dynamically -->
+            </ul>
+          </div>
+          <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-800/80">
+            <span class="text-[10px] uppercase font-bold text-emerald-400">Way Forward / Committee Recommendation:</span>
+            <p id="mainsWayForwardText" class="text-[11px] text-slate-300 mt-0.5 leading-relaxed">
+              <!-- Way Forward -->
+            </p>
+          </div>
+        </div>
       </div>
 
       <!-- FOOTER ACTION BAR -->
@@ -293,7 +431,7 @@
           </span>
         </div>
 
-        <!-- Navigation Pill Buttons, Share Option & Source Link -->
+        <!-- Navigation Pill Buttons, Read Later, Share & Source Link -->
         <div class="flex items-center space-x-1.5">
           <button onclick="prevCard()" title="Previous Card (Up Arrow)" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-300 flex items-center justify-center transition">
             <i class="ph-bold ph-caret-up text-base"></i>
@@ -301,7 +439,11 @@
           <button onclick="nextCard()" title="Next Card (Down Arrow)" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-300 flex items-center justify-center transition">
             <i class="ph-bold ph-caret-down text-base"></i>
           </button>
-          <button onclick="openShareModal()" title="Share UPSC Brief" class="inline-flex items-center space-x-1 px-2.5 py-1 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 text-amber-400 border border-amber-500/30 text-xs font-semibold transition active:scale-95">
+          <button id="btnReadLaterFooter" onclick="toggleReadLaterCurrentCard()" title="Save to Read Later" class="inline-flex items-center space-x-1 px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs font-semibold transition active:scale-95">
+            <i id="btnReadLaterFooterIcon" class="ph-bold ph-bookmark-simple text-xs"></i>
+            <span id="btnReadLaterFooterText">Save</span>
+          </button>
+          <button id="btnShareCardFooter" onclick="handleCardShare(event)" title="Share UPSC Brief" class="inline-flex items-center space-x-1 px-2.5 py-1 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 text-amber-400 border border-amber-500/30 text-xs font-semibold transition active:scale-95">
             <i class="ph-bold ph-share-network text-xs"></i>
             <span>Share</span>
           </button>
@@ -412,6 +554,45 @@
       </div>
     </div>
   </div>
+
+  <!-- READ LATER (SAVED BRIEFS) MODAL -->
+  <div id="readLaterModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden flex items-center justify-center p-4" onclick="handleReadLaterBackdropClick(event)">
+    <div class="bg-[#131b2a] border border-slate-800 rounded-2xl w-full max-w-xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      <!-- Modal Header -->
+      <div class="px-5 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/60">
+        <div class="flex items-center space-x-2">
+          <i class="ph-bold ph-clock-countdown text-amber-400 text-xl"></i>
+          <h3 class="text-base sm:text-lg font-bold text-white">Read Later & Revision Deck</h3>
+          <span id="readLaterCountBadge" class="text-xs px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold">0 briefs</span>
+        </div>
+        <button onclick="closeReadLaterModal()" class="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition">
+          <i class="ph-bold ph-x text-xl"></i>
+        </button>
+      </div>
+
+      <!-- Action & Search Bar -->
+      <div class="px-5 py-3 border-b border-slate-800/60 bg-slate-900/40 flex items-center space-x-2">
+        <div class="relative flex-1">
+          <i class="ph-bold ph-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-sm"></i>
+          <input id="readLaterSearch" type="text" oninput="filterReadLaterList()" placeholder="Search saved briefs, syllabus, or keywords..." class="w-full bg-slate-950 border border-slate-800 rounded-lg pl-9 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-500">
+        </div>
+        <button onclick="startReadLaterStudyDeck()" title="Open Deck with Only Saved Cards" class="px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold flex items-center space-x-1.5 transition active:scale-95">
+          <i class="ph-bold ph-play-circle text-sm"></i>
+          <span class="hidden sm:inline">Start Revision Deck</span>
+          <span class="sm:hidden">Study</span>
+        </button>
+        <button onclick="clearAllReadLaterPrompt()" title="Clear All Saved Cards" class="px-2.5 py-1.5 rounded-lg bg-red-950/60 hover:bg-red-900/80 border border-red-800/50 text-xs font-semibold text-red-300 transition active:scale-95">
+          Clear
+        </button>
+      </div>
+
+      <!-- Saved Cards List Container -->
+      <div id="readLaterListContainer" class="flex-1 overflow-y-auto p-4 space-y-3">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </div>
+  </div>
+
 
   <!-- ADD EXAM NEWS BRIEF MODAL -->
   <div id="addNewsModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden flex items-center justify-center p-4">
@@ -537,7 +718,7 @@
     </div>
   <!-- NEWS CARD SHARING MODAL -->
   <div id="shareCardModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4" onclick="handleShareBackdropClick(event)">
-    <div class="bg-[#131b2a] border border-slate-700/80 rounded-2xl w-full max-w-md flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+    <div class="bg-[#131b2a] border border-slate-700/80 rounded-2xl w-full max-w-md flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200" onclick="event.stopPropagation()">
       <!-- Modal Header -->
       <div class="px-5 py-3.5 border-b border-slate-800 flex items-center justify-between bg-slate-900/60">
         <div class="flex items-center space-x-2 text-amber-400">
@@ -613,7 +794,58 @@
   <!-- TOAST NOTIFICATION CONTAINER -->
   <div id="toastContainer" class="fixed top-14 left-1/2 -translate-x-1/2 z-50 pointer-events-none space-y-2"></div>
 
-  <!-- APPLICATION JAVASCRIPT LOGIC & EMBEDDED DATASETS -->
+
+  <!-- PDF REVISION DIGEST & PRINTABLE SUMMARY MODAL -->
+  <div id="pdfDigestModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4" onclick="handlePdfModalBackdropClick(event)">
+    <div class="bg-[#131b2a] border border-slate-800 rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      <!-- Modal Header -->
+      <div class="px-5 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/70">
+        <div class="flex items-center space-x-2.5">
+          <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center border border-amber-500/30">
+            <i class="ph-bold ph-file-pdf text-lg"></i>
+          </div>
+          <div>
+            <h3 class="text-base sm:text-lg font-bold text-white leading-tight">UPSC Current Affairs Revision Digest</h3>
+            <p class="text-[11px] text-slate-400 leading-none mt-0.5">Printable 2-Column Summary • One-Click PDF Export</p>
+          </div>
+        </div>
+        <button onclick="closePdfDigestModal()" class="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition">
+          <i class="ph-bold ph-x text-xl"></i>
+        </button>
+      </div>
+
+      <!-- Control Toolbar -->
+      <div class="px-5 py-3 border-b border-slate-800/80 bg-slate-900/50 flex flex-wrap items-center justify-between gap-2">
+        <!-- Digest Source Selector -->
+        <div class="flex items-center space-x-1.5 bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs">
+          <button id="btnPdfTabBookmarked" onclick="switchPdfDigestScope('BOOKMARKED')" class="px-3 py-1 rounded-lg font-bold transition text-slate-400">
+            📑 Read Later (<span id="pdfBookmarkedCountText">0</span>)
+          </button>
+          <button id="btnPdfTabFiltered" onclick="switchPdfDigestScope('FILTERED')" class="px-3 py-1 rounded-lg font-bold transition text-slate-400">
+            📚 Current Filter (<span id="pdfFilteredCountText">0</span>)
+          </button>
+        </div>
+
+        <!-- Action: Print / PDF -->
+        <button onclick="printRevisionDigest()" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs flex items-center space-x-2 transition active:scale-95 shadow-md shadow-amber-500/20">
+          <i class="ph-bold ph-printer text-base"></i>
+          <span>Download as PDF / Print</span>
+        </button>
+      </div>
+
+      <!-- Scrollable Digest Preview Container -->
+      <div id="pdfDigestPreviewArea" class="flex-1 overflow-y-auto p-4 sm:p-6 bg-slate-950/60">
+        <!-- Rendered 2-column preview -->
+      </div>
+    </div>
+  </div>
+
+  <!-- HIDDEN PRINTABLE CONTAINER FOR 2-COLUMN PDF EXPORT (ACTIVATED DURING WINDOW.PRINT) -->
+  <div id="printableDigestContainer" class="hidden">
+    <!-- Rendered dynamically for clean print styles -->
+  </div>
+
+    <!-- APPLICATION JAVASCRIPT LOGIC & EMBEDDED DATASETS -->
   <script>
     /* ========================================================================
        1. SECURITY UTILITY & STRING SANITIZATION
@@ -634,11 +866,16 @@
     const APP_VERSION = "2.6.0";
     let activeCardIndex = 0;
     let activeSourceFilter = "ALL";
+    let activeGsFilter = "ALL"; // 'ALL', 'GS1', 'GS2', 'GS3', 'GS4', 'PIB'
+    let isSpeechActive = false;
+    let speechRate = 1.0;
+    let mcqAnswerHistory = {}; // cardId -> selectedOptionIdx
     let currentSortOrder = localStorage.getItem('civils_sort_order') || "NEWEST"; // 'NEWEST' or 'OLDEST'
     let activeTappedWord = "";
     let activeTappedSpan = null;
     let isBilingualActive = false;
     let savedWordBank = [];
+    let readLaterCards = [];
     let customBriefs = [];
     let remoteBriefs = [];
     let allBriefs = [];
@@ -3579,8 +3816,311 @@
     }
 
     /* ========================================================================
-       8. SOURCE FILTERS & TOP BAR CHIPS
+       7B. READ LATER & REVISION DECK ENGINE (PERSISTED IN LOCALSTORAGE)
        ======================================================================== */
+    function loadReadLaterFromStorage() {
+      try {
+        const stored = localStorage.getItem("civils_read_later");
+        readLaterCards = stored ? JSON.parse(stored) : [];
+        if (!Array.isArray(readLaterCards)) readLaterCards = [];
+      } catch (e) {
+        readLaterCards = [];
+      }
+      updateReadLaterBadgeUI();
+    }
+
+    function saveReadLaterToStorage() {
+      try {
+        localStorage.setItem("civils_read_later", JSON.stringify(readLaterCards));
+      } catch (e) {}
+      updateReadLaterBadgeUI();
+      renderSourceChips();
+    }
+
+    function isCardInReadLater(cardId) {
+      if (!cardId) return false;
+      return readLaterCards.some(c => c.id === cardId);
+    }
+
+    function updateReadLaterBadgeUI() {
+      const badge = document.getElementById('readLaterBadge');
+      const countBadge = document.getElementById('readLaterCountBadge');
+      const count = readLaterCards.length;
+      if (badge) {
+        if (count > 0) {
+          badge.textContent = count > 99 ? '99+' : count;
+          badge.classList.remove('hidden');
+        } else {
+          badge.classList.add('hidden');
+        }
+      }
+      if (countBadge) {
+        countBadge.textContent = `${count} brief${count === 1 ? '' : 's'}`;
+      }
+    }
+
+    function toggleReadLaterCurrentCard() {
+      const card = filteredBriefs[activeCardIndex];
+      if (!card) return;
+      const exists = isCardInReadLater(card.id);
+      if (exists) {
+        readLaterCards = readLaterCards.filter(c => c.id !== card.id);
+        saveReadLaterToStorage();
+        updateCardReadLaterUI(false);
+        showToast("Removed from Read Later", "info");
+        if (activeSourceFilter === "READ_LATER") {
+          applyFilterAndRender();
+        }
+      } else {
+        const copy = {
+          id: card.id,
+          source: card.source,
+          sourceBadge: card.sourceBadge || card.source,
+          syllabus: card.syllabus,
+          headline: card.headline,
+          body: card.body,
+          hindi: card.hindi,
+          tags: card.tags,
+          image: card.image,
+          sourceUrl: card.sourceUrl,
+          pubDate: card.pubDate,
+          timestamp: card.timestamp,
+          savedAt: Date.now()
+        };
+        readLaterCards.unshift(copy);
+        saveReadLaterToStorage();
+        updateCardReadLaterUI(true);
+        showToast("✓ Saved to Read Later for revision!", "success");
+      }
+    }
+
+    function updateCardReadLaterUI(isSaved) {
+      // Top Image Button
+      const topIcon = document.getElementById('btnReadLaterTopIcon');
+      const topText = document.getElementById('btnReadLaterTopText');
+      const topBtn = document.getElementById('btnReadLaterTop');
+      if (topIcon && topBtn) {
+        if (isSaved) {
+          topIcon.className = "ph-fill ph-bookmark-simple text-sm text-amber-400";
+          if (topText) topText.textContent = "Saved";
+          topBtn.classList.remove('text-slate-300', 'border-slate-700/70');
+          topBtn.classList.add('text-amber-400', 'border-amber-500/50', 'bg-amber-500/15');
+        } else {
+          topIcon.className = "ph-bold ph-bookmark-simple text-sm text-slate-300";
+          if (topText) topText.textContent = "Save";
+          topBtn.classList.remove('text-amber-400', 'border-amber-500/50', 'bg-amber-500/15');
+          topBtn.classList.add('text-slate-300', 'border-slate-700/70');
+        }
+      }
+
+      // Footer Bar Button
+      const footerIcon = document.getElementById('btnReadLaterFooterIcon');
+      const footerText = document.getElementById('btnReadLaterFooterText');
+      const footerBtn = document.getElementById('btnReadLaterFooter');
+      if (footerIcon && footerBtn) {
+        if (isSaved) {
+          footerIcon.className = "ph-fill ph-bookmark-simple text-xs text-amber-400";
+          if (footerText) footerText.textContent = "Saved";
+          footerBtn.classList.remove('bg-slate-800', 'text-slate-300', 'border-slate-700');
+          footerBtn.classList.add('bg-amber-500/20', 'text-amber-400', 'border-amber-500/40', 'font-bold');
+        } else {
+          footerIcon.className = "ph-bold ph-bookmark-simple text-xs text-slate-300";
+          if (footerText) footerText.textContent = "Save";
+          footerBtn.classList.remove('bg-amber-500/20', 'text-amber-400', 'border-amber-500/40', 'font-bold');
+          footerBtn.classList.add('bg-slate-800', 'text-slate-300', 'border-slate-700');
+        }
+      }
+    }
+
+    function openReadLaterModal() {
+      renderReadLaterList();
+      const modal = document.getElementById('readLaterModal');
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeReadLaterModal() {
+      const modal = document.getElementById('readLaterModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function handleReadLaterBackdropClick(event) {
+      if (event && event.target && event.target.id === 'readLaterModal') {
+        closeReadLaterModal();
+      }
+    }
+
+    function renderReadLaterList(searchQuery = "") {
+      const container = document.getElementById('readLaterListContainer');
+      if (!container) return;
+      updateReadLaterBadgeUI();
+
+      let list = [...readLaterCards];
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase();
+        list = list.filter(c => 
+          (c.headline || "").toLowerCase().includes(q) ||
+          (c.syllabus || "").toLowerCase().includes(q) ||
+          (c.source || "").toLowerCase().includes(q) ||
+          (c.body || "").toLowerCase().includes(q)
+        );
+      }
+
+      if (list.length === 0) {
+        if (readLaterCards.length === 0) {
+          container.innerHTML = `
+            <div class="py-12 flex flex-col items-center justify-center text-center space-y-3 text-slate-400">
+              <div class="w-14 h-14 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-amber-400">
+                <i class="ph-bold ph-clock-countdown text-2xl"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-slate-200 text-sm">No Saved Briefs Yet</h4>
+                <p class="text-xs text-slate-400 mt-1 max-w-xs">Tap the bookmark "Save" button on any news card to add it to your Read Later revision deck.</p>
+              </div>
+            </div>
+          `;
+        } else {
+          container.innerHTML = `
+            <div class="py-8 text-center text-slate-400 text-xs">
+              No saved briefs match "${escapeHtml(searchQuery)}".
+            </div>
+          `;
+        }
+        return;
+      }
+
+      container.innerHTML = list.map(item => {
+        const timeFormatted = item.savedAt ? new Date(item.savedAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : "";
+        return `
+          <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800/80 hover:border-slate-700 transition flex space-x-3 items-start group">
+            <img src="${escapeHtml(item.image || '')}" alt="Thumb" class="w-16 h-16 rounded-lg object-cover flex-shrink-0 bg-slate-950" onerror="handleImageError(this)">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center space-x-2 text-[10px] mb-1">
+                <span class="px-1.5 py-0.5 rounded bg-sky-950/80 text-sky-300 font-bold border border-sky-800/60 truncate max-w-[150px]">${escapeHtml(item.syllabus || 'GS Paper')}</span>
+                <span class="text-amber-400 font-semibold uppercase truncate">${escapeHtml(item.sourceBadge || item.source || '')}</span>
+                ${timeFormatted ? `<span class="text-slate-500">• ${timeFormatted}</span>` : ''}
+              </div>
+              <h4 class="text-xs font-bold text-slate-200 line-clamp-2 leading-snug cursor-pointer hover:text-amber-300 transition" onclick="jumpToReadLaterCard('${escapeHtml(item.id)}')">
+                ${escapeHtml(item.headline || '')}
+              </h4>
+              <div class="flex items-center space-x-2 mt-2">
+                <button onclick="jumpToReadLaterCard('${escapeHtml(item.id)}')" class="px-2.5 py-1 rounded bg-amber-500 hover:bg-amber-400 text-slate-950 text-[10px] font-bold transition active:scale-95 flex items-center space-x-1">
+                  <i class="ph-bold ph-eye"></i>
+                  <span>Read Card</span>
+                </button>
+                <button onclick="removeCardFromReadLater('${escapeHtml(item.id)}')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-red-950 hover:text-red-300 text-slate-400 text-[10px] font-semibold border border-slate-700/60 transition active:scale-95">
+                  Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filterReadLaterList() {
+      const q = document.getElementById('readLaterSearch')?.value || "";
+      renderReadLaterList(q);
+    }
+
+    function jumpToReadLaterCard(cardId) {
+      closeReadLaterModal();
+      const foundIdx = allBriefs.findIndex(b => b.id === cardId);
+      if (foundIdx >= 0) {
+        activeSourceFilter = "ALL";
+        renderSourceChips();
+        activeCardIndex = foundIdx;
+        applyFilterAndRender({ forceReset: false, animationClass: 'card-anim-next' });
+        showToast("Opened saved brief", "info");
+      } else {
+        startReadLaterStudyDeck(cardId);
+      }
+    }
+
+    function startReadLaterStudyDeck(targetId = null) {
+      closeReadLaterModal();
+      if (readLaterCards.length === 0) {
+        showToast("No cards in Read Later yet!", "info");
+        return;
+      }
+      activeSourceFilter = "READ_LATER";
+      renderSourceChips();
+      if (targetId) {
+        const idx = readLaterCards.findIndex(c => c.id === targetId);
+        activeCardIndex = idx >= 0 ? idx : 0;
+      } else {
+        activeCardIndex = 0;
+      }
+      applyFilterAndRender({ forceReset: false, animationClass: 'card-anim-next' });
+      showToast(`📑 Revision Deck: ${readLaterCards.length} saved briefs`, "success");
+    }
+
+    function removeCardFromReadLater(cardId) {
+      readLaterCards = readLaterCards.filter(c => c.id !== cardId);
+      saveReadLaterToStorage();
+      const activeCard = filteredBriefs[activeCardIndex];
+      if (activeCard && activeCard.id === cardId) {
+        updateCardReadLaterUI(false);
+      }
+      renderReadLaterList(document.getElementById('readLaterSearch')?.value || "");
+      showToast("Brief removed from Read Later", "info");
+      if (activeSourceFilter === "READ_LATER") {
+        applyFilterAndRender();
+      }
+    }
+
+    function clearAllReadLaterPrompt() {
+      if (readLaterCards.length === 0) return;
+      if (confirm("Remove all saved briefs from Read Later?")) {
+        readLaterCards = [];
+        saveReadLaterToStorage();
+        renderReadLaterList();
+        updateCardReadLaterUI(false);
+        showToast("Read Later list cleared", "info");
+        if (activeSourceFilter === "READ_LATER") {
+          activeSourceFilter = "ALL";
+          renderSourceChips();
+          applyFilterAndRender({ forceReset: true });
+        }
+      }
+    }
+
+
+    /* ========================================================================
+       8. GS PAPER & SOURCE FILTERS (DIRECT SYLLABUS BLOCKS)
+       ======================================================================== */
+    const GS_PAPER_FILTERS = [
+      { id: "ALL", label: "All Papers" },
+      { id: "GS1", label: "GS 1 (Art/Culture/Geo)" },
+      { id: "GS2", label: "GS 2 (Polity/IR/Gov)" },
+      { id: "GS3", label: "GS 3 (Economy/Env/Sci-Tech)" },
+      { id: "GS4", label: "GS 4 (Ethics/Probity)" },
+      { id: "PIB", label: "PIB Focus" }
+    ];
+
+    function renderGsFilterChips() {
+      const container = document.getElementById('gsFilterChipsList');
+      if (!container) return;
+      container.innerHTML = GS_PAPER_FILTERS.map(f => {
+        const isSelected = activeGsFilter === f.id;
+        const activeClass = isSelected
+          ? "bg-sky-500 text-slate-950 font-bold shadow-md shadow-sky-500/20 border border-sky-400"
+          : "bg-slate-900/90 text-slate-300 hover:bg-slate-800 border border-slate-800 text-[11px] font-semibold";
+        return `
+          <button onclick="selectGsFilter('${escapeHtml(f.id)}')" class="flex-shrink-0 px-2.5 py-1 rounded-xl transition duration-150 whitespace-nowrap active:scale-95 ${activeClass}">
+            ${escapeHtml(f.label)}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectGsFilter(gsId) {
+      activeGsFilter = gsId;
+      renderGsFilterChips();
+      applyFilterAndRender();
+      const label = GS_PAPER_FILTERS.find(f => f.id === gsId)?.label || gsId;
+      showToast(`Filtered: ${label} (${filteredBriefs.length} briefs)`, "info");
+    }
+
     const TOP_10_SOURCES = [
       { id: "ALL", label: "All 10 Sources (30+)" },
       { id: "PIB Delhi", label: "PIB Delhi" },
@@ -3596,11 +4136,23 @@
 
     function renderSourceChips() {
       const container = document.getElementById('sourceChipsList');
-      container.innerHTML = TOP_10_SOURCES.map(source => {
+      if (!container) return;
+      const count = readLaterCards.length;
+      const chipList = [
+        { id: "ALL", label: `All 10 Sources (${allBriefs.length})` },
+        ...(count > 0 ? [{ id: "READ_LATER", label: `📑 Read Later (${count})` }] : []),
+        ...TOP_10_SOURCES.slice(1)
+      ];
+      container.innerHTML = chipList.map(source => {
         const isSelected = activeSourceFilter === source.id;
-        const activeClass = isSelected
-          ? "bg-amber-500 text-slate-950 font-bold shadow-md shadow-amber-500/20"
-          : "bg-slate-800 text-slate-300 hover:bg-slate-700/80 font-medium";
+        let activeClass = "";
+        if (isSelected) {
+          activeClass = "bg-amber-500 text-slate-950 font-bold shadow-md shadow-amber-500/20";
+        } else if (source.id === "READ_LATER") {
+          activeClass = "bg-amber-500/15 text-amber-300 hover:bg-amber-500/25 border border-amber-500/30 font-semibold";
+        } else {
+          activeClass = "bg-slate-800 text-slate-300 hover:bg-slate-700/80 font-medium";
+        }
         return `
           <button onclick="selectSourceFilter('${escapeHtml(source.id)}')" class="flex-shrink-0 px-3 py-1.5 rounded-xl text-xs transition duration-150 whitespace-nowrap active:scale-95 ${activeClass}">
             ${escapeHtml(source.label)}
@@ -3627,11 +4179,48 @@
         forceReset = Boolean(options.forceReset);
       }
 
-      if (activeSourceFilter === "ALL") {
-        filteredBriefs = [...allBriefs];
-      } else {
-        filteredBriefs = allBriefs.filter(b => (b.source || "").toLowerCase().includes(activeSourceFilter.toLowerCase()));
+      // 1. Base list by Source or Read Later
+      let baseList = [...allBriefs];
+      if (activeSourceFilter === "READ_LATER") {
+        baseList = [...readLaterCards];
+      } else if (activeSourceFilter !== "ALL") {
+        baseList = baseList.filter(b => (b.source || "").toLowerCase().includes(activeSourceFilter.toLowerCase()));
       }
+
+      // 2. Direct GS Paper Syllabus Filter
+      if (activeGsFilter === "GS1") {
+        baseList = baseList.filter(b => {
+          const s = (b.syllabus || "").toUpperCase();
+          const t = (b.tags || []).join(" ").toUpperCase();
+          return s.includes("GS-I") || s.includes("GS 1") || t.includes("#GS1") || s.includes("ART") || s.includes("HERITAGE") || s.includes("HISTORY") || s.includes("GEOGRAPHY");
+        });
+      } else if (activeGsFilter === "GS2") {
+        baseList = baseList.filter(b => {
+          const s = (b.syllabus || "").toUpperCase();
+          const t = (b.tags || []).join(" ").toUpperCase();
+          return s.includes("GS-II") || s.includes("GS 2") || t.includes("#GS2") || s.includes("POLITY") || s.includes("GOVERNANCE") || s.includes("CONSTITUTION") || s.includes("JUDICIARY") || s.includes("INTERNATIONAL");
+        });
+      } else if (activeGsFilter === "GS3") {
+        baseList = baseList.filter(b => {
+          const s = (b.syllabus || "").toUpperCase();
+          const t = (b.tags || []).join(" ").toUpperCase();
+          return s.includes("GS-III") || s.includes("GS 3") || t.includes("#GS3") || s.includes("ECONOMY") || s.includes("ENVIRONMENT") || s.includes("DISASTER") || s.includes("SCIENCE") || s.includes("DEFENCE") || s.includes("AGRICULTURE");
+        });
+      } else if (activeGsFilter === "GS4") {
+        baseList = baseList.filter(b => {
+          const s = (b.syllabus || "").toUpperCase();
+          const t = (b.tags || []).join(" ").toUpperCase();
+          return s.includes("GS-IV") || s.includes("GS 4") || t.includes("#GS4") || s.includes("ETHICS") || s.includes("INTEGRITY") || s.includes("PROBITY");
+        });
+      } else if (activeGsFilter === "PIB") {
+        baseList = baseList.filter(b => {
+          const src = (b.source || "").toUpperCase();
+          const badge = (b.sourceBadge || "").toUpperCase();
+          return src.includes("PIB") || badge.includes("PIB");
+        });
+      }
+
+      filteredBriefs = baseList;
 
       if (filteredBriefs.length === 0) {
         renderActiveCard();
@@ -3706,6 +4295,16 @@
 
       // Hindi summary
       document.getElementById('cardHindiText').textContent = card.hindi || "हिन्दी अनुवाद उपलब्ध नहीं है।";
+
+      // Read Later Bookmark UI State
+      updateCardReadLaterUI(isCardInReadLater(card.id));
+
+      // Stop previous audio playback on card switch
+      stopAudioSpeech();
+
+      // Render Active Exam Study Addons (Prelims MCQ Drill & Mains Booster)
+      renderPrelimsDrill(card);
+      renderMainsBooster(card);
 
       // Tags
       const tagsBar = document.getElementById('cardTagsBar');
@@ -3984,7 +4583,458 @@
       return tags.slice(0, 4);
     }
 
-    function saveCustomBriefs() {
+
+    /* ========================================================================
+       9B. EXAM STUDY ENGINE: PRELIMS DRILL, MAINS BOOSTER & AUDIO TTS
+       ======================================================================== */
+    function getCardExamAddons(card) {
+      if (!card) return null;
+      if (card.prelimsMcq && card.mainsBooster) {
+        return { mcq: card.prelimsMcq, mains: card.mainsBooster };
+      }
+
+      // Dynamic UPSC CSE derivation for custom / live cards
+      const title = (card.headline || "").replace(/:\s*$/, "");
+      const syl = card.syllabus || "GS-II: Governance & Public Policy";
+      const tLower = (title + " " + (card.body || "")).toLowerCase();
+
+      let mcq = null;
+      let mains = null;
+
+      if (tLower.includes("cyclone") || tLower.includes("arnab") || tLower.includes("disaster")) {
+        mcq = {
+          question: "Under the Disaster Management Act, 2005 and IMD cyclone protocols, which statement is correct?",
+          options: [
+            "Tropical cyclones in the Northern Hemisphere rotate clockwise.",
+            "A Deep Depression transitions into a Cyclonic Storm when maximum sustained wind speed reaches 34 knots (62 km/h).",
+            "State governors are designated ex-officio chairpersons of NDMA.",
+            "Evacuation protocols under the DM Act require prior judicial approval."
+          ],
+          correct: 1,
+          rationale: "IMD classifies cyclonic storms at sustained surface winds of 34-47 knots (62-88 km/h). The Prime Minister heads NDMA."
+        };
+        mains = {
+          question: "Evaluate India's institutional transition from reactive disaster relief toward structured disaster risk reduction (DRR). (10 Marks, 150 Words)",
+          dimensions: [
+            "Technological Warning: Real-time Doppler radars and ocean buoys have drastically reduced evacuation lead times.",
+            "Resilient Infrastructure: National Cyclone Risk Mitigation Project (NCRMP) multi-purpose cyclone shelters and underground cabling.",
+            "Fiscal Architecture: State Disaster Response Fund (SDRF) allocation based on Finance Commission vulnerability metrics."
+          ],
+          wayForward: "Integrate localized community-based disaster management (CBDM) with automated last-mile siren alerts across coastal panchayats."
+        };
+      } else if (tLower.includes("water") || tLower.includes("river") || tLower.includes("godavari")) {
+        mcq = {
+          question: "Regarding interstate river water disputes under Article 262 of the Constitution, which statement is correct?",
+          options: [
+            "Parliament may by law exclude the jurisdiction of the Supreme Court and any other court over interstate river disputes.",
+            "Water is an exclusive entry in the Union List (List I) of the Seventh Schedule.",
+            "All water tribunal decisions must be ratified by a two-thirds majority in Parliament.",
+            "Article 131 explicitly bars state governments from approaching tribunals."
+          ],
+          correct: 0,
+          rationale: "Under Article 262(2), Parliament has constitutional power to exclude court jurisdiction over interstate river disputes."
+        }
+        mains = {
+          question: "Inter-state river water disputes test the tenets of cooperative federalism. Analyze the constitutional and administrative mechanisms to resolve them. (15 Marks, 250 Words)",
+          dimensions: [
+            "Constitutional Design: Article 262 and the Inter-State River Water Disputes Act, 1956 provide bespoke tribunal adjudication.",
+            "Implementation Delays: Protracted tribunal proceedings, delayed award gazetting, and state defiance.",
+            "Ecological Minimums: Multipurpose irrigation projects require balancing riparian rights with environmental flows."
+          ],
+          wayForward: "Pass the Inter-State River Water Disputes (Amendment) Bill to create a single permanent tribunal with fixed statutory timelines."
+        };
+      } else {
+        mcq = {
+          question: `In the context of the recent administrative development regarding ${syl}, which statement best reflects constitutional and policy principles?`,
+          options: [
+            "Statutory rules enacted by executive notification can bypass fundamental rights without legislative scrutiny.",
+            "Effective public administration requires institutional transparency, statutory compliance, and democratic accountability.",
+            "Constitutional bodies are exempted from judicial review under Article 32 of the Constitution.",
+            "Substantive equality under Article 14 bars states from enacting progressive regulatory classifications."
+          ],
+          correct: 1,
+          rationale: "Indian constitutionalism requires all executive and statutory authorities to operate within rule of law and transparency standards."
+        };
+        mains = {
+          question: `Examine the governance and policy implications of this development for Indian public administration under ${syl}. (10 Marks, 150 Words)`,
+          dimensions: [
+            "Statutory & Institutional Compliance: Alignment with constitutional safeguards, legislative intent, and administrative efficiency.",
+            "Socio-Economic Dimensions: Citizen-centric service delivery and protecting vulnerable or marginalized populations.",
+            "Inter-Agency Coordination: Strengthening cooperative federalism between Union and State administration."
+          ],
+          wayForward: "Institutionalize periodic social audits, digital monitoring dashboards, and Second ARC recommendations for administrative ethics."
+        };
+      }
+
+      return { mcq, mains };
+    }
+
+    function togglePrelimsDrill() {
+      const box = document.getElementById('prelimsDrillBox');
+      const btn = document.getElementById('btnTogglePrelimsDrill');
+      if (!box || !btn) return;
+
+      const isHidden = box.classList.contains('hidden');
+      if (isHidden) {
+        box.classList.remove('hidden');
+        btn.classList.add('bg-emerald-500', 'text-slate-950');
+        btn.classList.remove('bg-emerald-500/15', 'text-emerald-400');
+        // Close Mains box if open for clean layout
+        const mainsBox = document.getElementById('mainsBoosterBox');
+        const mainsBtn = document.getElementById('btnToggleMainsBooster');
+        if (mainsBox && !mainsBox.classList.contains('hidden')) {
+          mainsBox.classList.add('hidden');
+          if (mainsBtn) {
+            mainsBtn.classList.remove('bg-purple-500', 'text-slate-950');
+            mainsBtn.classList.add('bg-purple-500/15', 'text-purple-300');
+          }
+        }
+      } else {
+        box.classList.add('hidden');
+        btn.classList.remove('bg-emerald-500', 'text-slate-950');
+        btn.classList.add('bg-emerald-500/15', 'text-emerald-400');
+      }
+    }
+
+    function toggleMainsBooster() {
+      const box = document.getElementById('mainsBoosterBox');
+      const btn = document.getElementById('btnToggleMainsBooster');
+      if (!box || !btn) return;
+
+      const isHidden = box.classList.contains('hidden');
+      if (isHidden) {
+        box.classList.remove('hidden');
+        btn.classList.add('bg-purple-500', 'text-slate-950');
+        btn.classList.remove('bg-purple-500/15', 'text-purple-300');
+        // Close Prelims box if open for clean layout
+        const prelimsBox = document.getElementById('prelimsDrillBox');
+        const prelimsBtn = document.getElementById('btnTogglePrelimsDrill');
+        if (prelimsBox && !prelimsBox.classList.contains('hidden')) {
+          prelimsBox.classList.add('hidden');
+          if (prelimsBtn) {
+            prelimsBtn.classList.remove('bg-emerald-500', 'text-slate-950');
+            prelimsBtn.classList.add('bg-emerald-500/15', 'text-emerald-400');
+          }
+        }
+      } else {
+        box.classList.add('hidden');
+        btn.classList.remove('bg-purple-500', 'text-slate-950');
+        btn.classList.add('bg-purple-500/15', 'text-purple-300');
+      }
+    }
+
+    function renderPrelimsDrill(card) {
+      const qText = document.getElementById('mcqQuestionText');
+      const optionsGrid = document.getElementById('mcqOptionsGrid');
+      const rationaleBox = document.getElementById('mcqRationaleBox');
+      if (!qText || !optionsGrid || !rationaleBox) return;
+
+      const addons = getCardExamAddons(card);
+      if (!addons || !addons.mcq) return;
+
+      const mcq = addons.mcq;
+      qText.textContent = mcq.question;
+
+      const answeredIdx = mcqAnswerHistory[card.id];
+      const letters = ['A', 'B', 'C', 'D'];
+
+      optionsGrid.innerHTML = mcq.options.map((opt, idx) => {
+        let styleClass = "border-slate-800 bg-slate-950/80 text-slate-300 hover:border-slate-700";
+        let iconHtml = `<span class="w-5 h-5 rounded-md bg-slate-800 text-slate-400 font-bold flex items-center justify-center text-[10px] mr-2 flex-shrink-0">${letters[idx]}</span>`;
+
+        if (answeredIdx !== undefined) {
+          if (idx === mcq.correct) {
+            styleClass = "border-emerald-500 bg-emerald-950/60 text-emerald-200 font-semibold";
+            iconHtml = `<i class="ph-bold ph-check-circle text-emerald-400 text-base mr-2 flex-shrink-0"></i>`;
+          } else if (idx === answeredIdx) {
+            styleClass = "border-red-500 bg-red-950/60 text-red-200";
+            iconHtml = `<i class="ph-bold ph-x-circle text-red-400 text-base mr-2 flex-shrink-0"></i>`;
+          }
+        }
+
+        return `
+          <button onclick="handleMcqOptionSelect(${idx})" class="w-full text-left p-2.5 rounded-xl border ${styleClass} text-xs flex items-center transition active:scale-98">
+            ${iconHtml}
+            <span class="flex-1 leading-snug">${escapeHtml(opt)}</span>
+          </button>
+        `;
+      }).join('');
+
+      if (answeredIdx !== undefined) {
+        rationaleBox.classList.remove('hidden');
+        rationaleBox.innerHTML = `
+          <span class="font-bold text-amber-400 block mb-0.5">💡 UPSC Prelims Rationale:</span>
+          ${escapeHtml(mcq.rationale)}
+        `;
+      } else {
+        rationaleBox.classList.add('hidden');
+      }
+    }
+
+    function handleMcqOptionSelect(selectedIdx) {
+      const card = filteredBriefs[activeCardIndex];
+      if (!card) return;
+      const addons = getCardExamAddons(card);
+      if (!addons || !addons.mcq) return;
+
+      mcqAnswerHistory[card.id] = selectedIdx;
+      renderPrelimsDrill(card);
+
+      if (selectedIdx === addons.mcq.correct) {
+        showToast("🎉 Correct! Outstanding UPSC recall", "success");
+      } else {
+        showToast("❌ Incorrect. Check rationale below", "error");
+      }
+    }
+
+    function renderMainsBooster(card) {
+      const qText = document.getElementById('mainsQuestionText');
+      const dimList = document.getElementById('mainsDimensionsList');
+      const wayFwd = document.getElementById('mainsWayForwardText');
+      if (!qText || !dimList || !wayFwd) return;
+
+      const addons = getCardExamAddons(card);
+      if (!addons || !addons.mains) return;
+
+      const mains = addons.mains;
+      qText.textContent = mains.question;
+      dimList.innerHTML = (mains.dimensions || []).map(d => `<li class="leading-relaxed">${escapeHtml(d)}</li>`).join('');
+      wayFwd.textContent = mains.wayForward || "";
+    }
+
+    function copyMainsAnswerFramework() {
+      const card = filteredBriefs[activeCardIndex];
+      if (!card) return;
+      const addons = getCardExamAddons(card);
+      if (!addons || !addons.mains) return;
+
+      const text = `✍️ *UPSC Mains Model Framework*\n\n📌 *Question:* ${addons.mains.question}\n\n*Key Dimensions & Value Addition:*\n${(addons.mains.dimensions||[]).map(d => `• ${d}`).join('\n')}\n\n*Way Forward / Committee Recommendation:*\n${addons.mains.wayForward}\n\n🏷️ ${card.syllabus || 'GS Mains'} • CivilsInshorts`;
+      copyTextFallback(text, "Mains answer framework copied to clipboard!");
+    }
+
+    /* ========================================================================
+       9C. TEXT-TO-SPEECH (AUDIO / READ ALOUD MODE)
+       ======================================================================== */
+    function changeAudioSpeed(val) {
+      speechRate = parseFloat(val) || 1.0;
+      if (isSpeechActive) {
+        stopAudioSpeech();
+        toggleAudioSpeech();
+      }
+    }
+
+    function stopAudioSpeech() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      isSpeechActive = false;
+      const icon = document.getElementById('audioPlayIcon');
+      const text = document.getElementById('audioPlayText');
+      if (icon) icon.className = "ph-bold ph-play text-xs";
+      if (text) text.textContent = "Listen";
+    }
+
+    function toggleAudioSpeech() {
+      if (!('speechSynthesis' in window)) {
+        showToast("Text-to-Speech is not supported in this browser", "info");
+        return;
+      }
+
+      if (isSpeechActive) {
+        stopAudioSpeech();
+        showToast("Audio paused", "info");
+        return;
+      }
+
+      const card = filteredBriefs[activeCardIndex];
+      if (!card) return;
+
+      window.speechSynthesis.cancel();
+
+      const headline = (card.headline || "").replace(/:\s*$/, "");
+      let textToSpeak = "";
+      let lang = "en-IN";
+
+      if (isBilingualActive && card.hindi) {
+        textToSpeak = `${headline}। ${card.hindi}`;
+        lang = "hi-IN";
+      } else {
+        const substantive = ensureSubstantiveWords(card);
+        textToSpeak = `${headline}. ${substantive}`;
+        lang = "en-IN";
+      }
+
+      const utterance = new SpeechSynthesisUtterance(textToSpeak);
+      utterance.rate = speechRate;
+      utterance.lang = lang;
+
+      const icon = document.getElementById('audioPlayIcon');
+      const text = document.getElementById('audioPlayText');
+
+      utterance.onstart = () => {
+        isSpeechActive = true;
+        if (icon) icon.className = "ph-bold ph-waveform animate-pulse text-xs text-emerald-400";
+        if (text) text.textContent = "Playing";
+      };
+
+      utterance.onend = () => {
+        stopAudioSpeech();
+      };
+
+      utterance.onerror = () => {
+        stopAudioSpeech();
+      };
+
+      window.speechSynthesis.speak(utterance);
+      showToast(`🔊 Listening to brief (${speechRate}x)`, "info");
+    }
+
+    /* ========================================================================
+       9D. 2-COLUMN PDF REVISION DIGEST & PRINT ENGINE
+       ======================================================================== */
+    let pdfDigestScope = "BOOKMARKED"; // 'BOOKMARKED' or 'FILTERED'
+
+    function openPdfDigestModal() {
+      renderPdfDigest();
+      const modal = document.getElementById('pdfDigestModal');
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closePdfDigestModal() {
+      const modal = document.getElementById('pdfDigestModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function handlePdfModalBackdropClick(e) {
+      if (e && e.target && e.target.id === 'pdfDigestModal') {
+        closePdfDigestModal();
+      }
+    }
+
+    function switchPdfDigestScope(scope) {
+      pdfDigestScope = scope;
+      renderPdfDigest();
+    }
+
+    function renderPdfDigest() {
+      const area = document.getElementById('pdfDigestPreviewArea');
+      const printContainer = document.getElementById('printableDigestContainer');
+      const countBookmarked = document.getElementById('pdfBookmarkedCountText');
+      const countFiltered = document.getElementById('pdfFilteredCountText');
+      const tabBookmarked = document.getElementById('btnPdfTabBookmarked');
+      const tabFiltered = document.getElementById('btnPdfTabFiltered');
+
+      if (countBookmarked) countBookmarked.textContent = readLaterCards.length;
+      if (countFiltered) countFiltered.textContent = filteredBriefs.length;
+
+      if (tabBookmarked && tabFiltered) {
+        if (pdfDigestScope === "BOOKMARKED") {
+          tabBookmarked.className = "px-3 py-1 rounded-lg font-bold bg-amber-500 text-slate-950 shadow-sm";
+          tabFiltered.className = "px-3 py-1 rounded-lg font-bold text-slate-400 hover:text-white";
+        } else {
+          tabFiltered.className = "px-3 py-1 rounded-lg font-bold bg-amber-500 text-slate-950 shadow-sm";
+          tabBookmarked.className = "px-3 py-1 rounded-lg font-bold text-slate-400 hover:text-white";
+        }
+      }
+
+      const list = pdfDigestScope === "BOOKMARKED" ? [...readLaterCards] : [...filteredBriefs];
+
+      if (list.length === 0) {
+        const msg = pdfDigestScope === "BOOKMARKED"
+          ? "No bookmarked briefs in Read Later yet! Tap 'Save' on any card to add it to your revision digest."
+          : "No briefs found in the current filter.";
+        if (area) {
+          area.innerHTML = `
+            <div class="py-16 text-center text-slate-400 text-xs">
+              <i class="ph-bold ph-notebook text-3xl text-amber-400 mb-2 block"></i>
+              <p class="font-bold text-slate-200">${msg}</p>
+            </div>
+          `;
+        }
+        if (printContainer) printContainer.innerHTML = "";
+        return;
+      }
+
+      // Generate HTML for 2-column digest
+      const cardsHtml = list.map((item, idx) => {
+        const addons = getCardExamAddons(item);
+        const takeaway = addons && addons.mains ? addons.mains.wayForward : "";
+        return `
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 print-digest-card space-y-1.5 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between text-[10px] text-slate-400 pb-1 border-b border-slate-800 print:border-slate-300">
+                <span class="font-bold text-sky-400 print:text-sky-800">${escapeHtml(item.syllabus || 'GS Paper')}</span>
+                <span class="font-semibold text-amber-400 print:text-amber-800 uppercase">${escapeHtml(item.sourceBadge || item.source || '')}</span>
+              </div>
+              <h4 class="font-bold text-xs text-slate-100 print:text-black mt-1 leading-snug">
+                ${idx + 1}. ${escapeHtml(item.headline || '')}
+              </h4>
+              <p class="text-[11px] text-slate-300 print:text-slate-800 mt-1 leading-relaxed">
+                ${escapeHtml(item.body || '')}
+              </p>
+            </div>
+            ${takeaway ? `
+              <div class="mt-2 pt-1.5 border-t border-slate-800/60 print:border-slate-200 text-[10px] text-emerald-300 print:text-emerald-800">
+                <strong>UPSC Key Takeaway:</strong> ${escapeHtml(takeaway)}
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+
+      if (area) {
+        area.innerHTML = `
+          <div class="mb-4 pb-3 border-b border-slate-800 flex items-center justify-between">
+            <div>
+              <h4 class="font-bold text-slate-200 text-sm">Monthly / Weekly Revision Digest (${list.length} Briefs)</h4>
+              <p class="text-[11px] text-slate-400">Preview formatted in 2-column layout for quick exam revision.</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+            ${cardsHtml}
+          </div>
+        `;
+      }
+
+      if (printContainer) {
+        const todayStr = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+        printContainer.innerHTML = `
+          <div style="margin-bottom: 20px; border-bottom: 2px solid #0f172a; padding-bottom: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <h1 style="font-size: 20px; font-weight: 800; margin: 0; color: #0f172a;">CivilsInshorts • UPSC Civil Services Revision Digest</h1>
+                <p style="font-size: 11px; color: #475569; margin: 2px 0 0 0;">Curated 60-Word Prelims & Mains Briefs • Date: ${todayStr} • Scope: ${pdfDigestScope} (${list.length} Articles)</p>
+              </div>
+              <div style="font-size: 12px; font-weight: bold; color: #b45309;">
+                UPSC CSE Prelims & Mains
+              </div>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            ${cardsHtml}
+          </div>
+          <div style="margin-top: 25px; border-top: 1px solid #cbd5e1; padding-top: 8px; text-align: center; font-size: 10px; color: #64748b;">
+            Compiled via CivilsInshorts • 100% Verified PIB, The Hindu & Express Editorials • Keep Revising!
+          </div>
+        `;
+      }
+    }
+
+    function printRevisionDigest() {
+      const list = pdfDigestScope === "BOOKMARKED" ? readLaterCards : filteredBriefs;
+      if (list.length === 0) {
+        showToast("No briefs to print. Save some cards first!", "info");
+        return;
+      }
+      renderPdfDigest();
+      showToast("Opening print / PDF dialog...", "info");
+      setTimeout(() => {
+        window.print();
+      }, 250);
+    }
+
+
+        function saveCustomBriefs() {
       try {
         localStorage.setItem("civils_custom_briefs", JSON.stringify(customBriefs));
       } catch (e) {}
@@ -4041,6 +5091,51 @@
     /* ========================================================================
        12B. NEWS CARD SHARING ENGINE (NATIVE SHEET, WHATSAPP, TELEGRAM & LINK)
        ======================================================================== */
+    async function handleCardShare(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      const card = filteredBriefs[activeCardIndex] || filteredBriefs[0];
+      if (!card) {
+        showToast("No brief available to share", "info");
+        return;
+      }
+
+      const shareText = formatCardForSharing(card);
+      const shareUrl = getCardShareUrl(card.id);
+
+      // 1. Android Native WebView JavascriptInterface bridge (dispatches system chooser)
+      if (window.AndroidShare && typeof window.AndroidShare.shareBrief === 'function') {
+        try {
+          window.AndroidShare.shareBrief(card.headline || "CivilsInshorts Brief", shareText, shareUrl);
+          showToast("Opening Android share sheet...", "info");
+          return;
+        } catch (err) {
+          console.warn("AndroidShare invocation error, falling back to modal:", err);
+        }
+      }
+
+      // 2. Web Share API (Android Chrome, iOS Safari, desktop Edge/Chrome)
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: (card.headline || "CivilsInshorts UPSC Brief").replace(/:\s*$/, ""),
+            text: shareText,
+            url: shareUrl
+          });
+          showToast("Brief shared successfully!", "success");
+          return;
+        } catch (err) {
+          if (err.name === 'AbortError') return; // User closed sheet
+        }
+      }
+
+      // 3. Fallback: Open dedicated Share Modal with all options
+      openShareModal();
+    }
+
     function openShareModal() {
       if (!filteredBriefs || filteredBriefs.length === 0) {
         showToast("No brief available to share", "info");
@@ -4065,6 +5160,7 @@
       const modal = document.getElementById('shareCardModal');
       if (modal) {
         modal.classList.remove('hidden');
+        modal.style.display = 'flex';
       }
     }
 
@@ -4072,6 +5168,7 @@
       const modal = document.getElementById('shareCardModal');
       if (modal) {
         modal.classList.add('hidden');
+        modal.style.display = 'none';
       }
     }
 
@@ -4082,12 +5179,7 @@
     }
 
     function getCardShareUrl(cardId) {
-      let base = "https://aloktripathi951106-afk.github.io/Civilsinshorts/";
-      if (window.location && window.location.origin && window.location.origin !== "null" && !window.location.origin.startsWith("file:")) {
-        const path = window.location.pathname.startsWith("/Civilsinshorts") ? "/Civilsinshorts/" : window.location.pathname;
-        const cleanPath = path.endsWith("/") ? path : path + "/";
-        base = window.location.origin + cleanPath;
-      }
+      const base = "https://aloktripathi951106-afk.github.io/Civilsinshorts/";
       return `${base}?card=${encodeURIComponent(cardId || "")}`;
     }
 
@@ -4104,6 +5196,16 @@
       return `📚 *CivilsInshorts UPSC CSE Brief*\n\n📌 *${headline}*\n📂 *Syllabus:* ${syllabus}\n🏛️ *Source:* ${source}\n\n${body}${hindi}\n\n🏷️ ${tags}\n\n🔗 Read full brief with Hi-Translate on CivilsInshorts:\n${shareUrl}`;
     }
 
+    function openExternalUrlSafely(url) {
+      try {
+        // Direct location navigation works seamlessly on Android WebView & mobile browsers
+        // It triggers intent filters (WhatsApp/Telegram) without pop-up blocker issues
+        window.location.href = url;
+      } catch (e) {
+        window.open(url, '_blank');
+      }
+    }
+
     function copyTextFallback(text, successMsg = "Copied to clipboard!") {
       const textarea = document.createElement("textarea");
       textarea.value = text;
@@ -4113,8 +5215,11 @@
       textarea.style.opacity = "0";
       const mount = document.body || document.documentElement;
       if (mount) mount.appendChild(textarea);
-      textarea.focus();
-      textarea.select();
+      if (textarea.focus) textarea.focus();
+      if (textarea.select) textarea.select();
+      if (textarea.setSelectionRange) {
+        textarea.setSelectionRange(0, 99999);
+      }
       try {
         const successful = document.execCommand("copy");
         if (successful) {
@@ -4150,7 +5255,7 @@
       if (navigator.share) {
         try {
           await navigator.share({
-            title: card.headline || "CivilsInshorts UPSC Brief",
+            title: (card.headline || "CivilsInshorts UPSC Brief").replace(/:\s*$/, ""),
             text: shareText,
             url: shareUrl
           });
@@ -4171,7 +5276,7 @@
       if (!card) return;
       const shareText = formatCardForSharing(card);
       const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
-      window.open(waUrl, '_blank');
+      openExternalUrlSafely(waUrl);
       closeShareModal();
       showToast("Opening WhatsApp...", "info");
     }
@@ -4182,7 +5287,7 @@
       const shareText = formatCardForSharing(card);
       const cardUrl = getCardShareUrl(card.id);
       const tgUrl = `https://t.me/share/url?url=${encodeURIComponent(cardUrl)}&text=${encodeURIComponent(shareText)}`;
-      window.open(tgUrl, '_blank');
+      openExternalUrlSafely(tgUrl);
       closeShareModal();
       showToast("Opening Telegram...", "info");
     }
@@ -4773,11 +5878,13 @@
     function bootCivilsApp() {
       try {
         checkVersionAndCache();
+        loadReadLaterFromStorage();
         loadCustomBriefs();
         loadOfflineRemoteCache();
         loadSavedWordBank();
         checkURLParamsForSharedCards();
         compileAllBriefs();
+        renderGsFilterChips();
         renderSourceChips();
         updateSortButtonUI();
         applyFilterAndRender();

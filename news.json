@@ -18,7 +18,27 @@
     "pubDate": "2026-10-29T03:47:14.785640+00:00",
     "category": "The Hindu",
     "isLiveFetched": true,
-    "timestamp": 1793245634785
+    "timestamp": 1793245634785,
+    "prelimsMcq": {
+      "question": "Regarding tropical cyclone classification and disaster protocols in the North Indian Ocean, consider the following statements:",
+      "options": [
+        "Cyclones in the Arabian Sea are designated by the World Bank under Sendai Framework guidelines.",
+        "A 'Deep Depression' transitions into a Cyclonic Storm when maximum sustained surface wind speeds reach 34 knots (62 km/h).",
+        "The Disaster Management Act, 2005 designates state governors as ex-officio chairpersons of NDMA.",
+        "Tropical cyclones rotate clockwise in the Northern Hemisphere due to the Coriolis effect."
+      ],
+      "correct": 1,
+      "rationale": "Under IMD nomenclature, sustained wind speeds of 34-47 knots (62-88 km/h) define a Cyclonic Storm. In the Northern Hemisphere, cyclones rotate counter-clockwise, and the Prime Minister heads NDMA."
+    },
+    "mainsBooster": {
+      "question": "Evaluate the institutional shift in India's disaster management paradigm from reactive emergency relief toward structured disaster risk reduction (DRR). (10 Marks, 150 Words)",
+      "dimensions": [
+        "Early Warning & Tech: Real-time Doppler radars, ocean buoys, and IMD numerical weather models have compressed evacuation lead times.",
+        "Infrastructure Resilience: National Cyclone Risk Mitigation Project (NCRMP) construction of multi-purpose cyclone shelters and underground cabling.",
+        "Legal & Fiscal Architecture: State Disaster Response Fund (SDRF) allocation based on Finance Commission vulnerability indices."
+      ],
+      "wayForward": "Adopt localized Sendai Framework priorities by integrating community-based disaster management (CBDM) with automated last-mile siren alerts across coastal panchayats."
+    }
   },
   {
     "id": "ai-20261029034714-3079",
@@ -39,7 +59,27 @@
     "pubDate": "2026-10-29T03:47:14.501235+00:00",
     "category": "The Hindu",
     "isLiveFetched": true,
-    "timestamp": 1793245634501
+    "timestamp": 1793245634501,
+    "prelimsMcq": {
+      "question": "Regarding tropical cyclone classification and disaster protocols in the North Indian Ocean, consider the following statements:",
+      "options": [
+        "Cyclones in the Arabian Sea are designated by the World Bank under Sendai Framework guidelines.",
+        "A 'Deep Depression' transitions into a Cyclonic Storm when maximum sustained surface wind speeds reach 34 knots (62 km/h).",
+        "The Disaster Management Act, 2005 designates state governors as ex-officio chairpersons of NDMA.",
+        "Tropical cyclones rotate clockwise in the Northern Hemisphere due to the Coriolis effect."
+      ],
+      "correct": 1,
+      "rationale": "Under IMD nomenclature, sustained wind speeds of 34-47 knots (62-88 km/h) define a Cyclonic Storm. In the Northern Hemisphere, cyclones rotate counter-clockwise, and the Prime Minister heads NDMA."
+    },
+    "mainsBooster": {
+      "question": "Evaluate the institutional shift in India's disaster management paradigm from reactive emergency relief toward structured disaster risk reduction (DRR). (10 Marks, 150 Words)",
+      "dimensions": [
+        "Early Warning & Tech: Real-time Doppler radars, ocean buoys, and IMD numerical weather models have compressed evacuation lead times.",
+        "Infrastructure Resilience: National Cyclone Risk Mitigation Project (NCRMP) construction of multi-purpose cyclone shelters and underground cabling.",
+        "Legal & Fiscal Architecture: State Disaster Response Fund (SDRF) allocation based on Finance Commission vulnerability indices."
+      ],
+      "wayForward": "Adopt localized Sendai Framework priorities by integrating community-based disaster management (CBDM) with automated last-mile siren alerts across coastal panchayats."
+    }
   },
   {
     "id": "ai-20261029034714-5449",
@@ -61,7 +101,27 @@
     "pubDate": "2026-10-29T03:47:14.201296+00:00",
     "category": "The Hindu",
     "isLiveFetched": true,
-    "timestamp": 1793245634201
+    "timestamp": 1793245634201,
+    "prelimsMcq": {
+      "question": "In the context of India's tertiary healthcare architecture and rare disease policies, which of the following is correct?",
+      "options": [
+        "Intravenous thrombolysis must strictly be administered after 24 hours of stroke onset.",
+        "Under the National Policy for Rare Diseases, financial assistance is restricted to BPL families only.",
+        "The hub-and-spoke healthcare model decentralizes critical acute intervention to district medical colleges while connecting to apex institutes.",
+        "All medical devices in India are exempted from statutory price caps under the Drugs Prices Control Order (DPCO)."
+      ],
+      "correct": 2,
+      "rationale": "The hub-and-spoke clinical model extends specialized thrombolytic stroke care within the 4.5-hour golden window to district hospitals without emergency inter-city transfers."
+    },
+    "mainsBooster": {
+      "question": "Non-communicable diseases and acute neurological emergencies impose severe out-of-pocket health expenditure in India. Discuss how decentralized clinical networks can bridge the urban-rural healthcare divide. (15 Marks, 250 Words)",
+      "dimensions": [
+        "Golden Hour Adherence: Tertiary hub-and-spoke tele-radiology enables remote district neurologists to initiate intravenous thrombolysis.",
+        "Affordability & Universal Coverage: Inclusion of specialized consumables under Ayushman Bharat-PMJAY packages prevents household impoverishment.",
+        "Human Resource Deficits: Uneven geographic concentration of neurologists and cath-labs requires statutory task-shifting to trained medical officers."
+      ],
+      "wayForward": "Scale the National Health Mission's District Residency Programme and establish dedicated stroke-care units across all district general hospitals by 2030."
+    }
   },
   {
     "id": "ai-20261029034713-8550",
@@ -82,7 +142,27 @@
     "pubDate": "2026-10-29T03:47:13.920079+00:00",
     "category": "The Hindu",
     "isLiveFetched": true,
-    "timestamp": 1793245633920
+    "timestamp": 1793245633920,
+    "prelimsMcq": {
+      "question": "Regarding tropical cyclone classification and disaster protocols in the North Indian Ocean, consider the following statements:",
+      "options": [
+        "Cyclones in the Arabian Sea are designated by the World Bank under Sendai Framework guidelines.",
+        "A 'Deep Depression' transitions into a Cyclonic Storm when maximum sustained surface wind speeds reach 34 knots (62 km/h).",
+        "The Disaster Management Act, 2005 designates state governors as ex-officio chairpersons of NDMA.",
+        "Tropical cyclones rotate clockwise in the Northern Hemisphere due to the Coriolis effect."
+      ],
+      "correct": 1,
+      "rationale": "Under IMD nomenclature, sustained wind speeds of 34-47 knots (62-88 km/h) define a Cyclonic Storm. In the Northern Hemisphere, cyclones rotate counter-clockwise, and the Prime Minister heads NDMA."
+    },
+    "mainsBooster": {
+      "question": "Evaluate the institutional shift in India's disaster management paradigm from reactive emergency relief toward structured disaster risk reduction (DRR). (10 Marks, 150 Words)",
+      "dimensions": [
+        "Early Warning & Tech: Real-time Doppler radars, ocean buoys, and IMD numerical weather models have compressed evacuation lead times.",
+        "Infrastructure Resilience: National Cyclone Risk Mitigation Project (NCRMP) construction of multi-purpose cyclone shelters and underground cabling.",
+        "Legal & Fiscal Architecture: State Disaster Response Fund (SDRF) allocation based on Finance Commission vulnerability indices."
+      ],
+      "wayForward": "Adopt localized Sendai Framework priorities by integrating community-based disaster management (CBDM) with automated last-mile siren alerts across coastal panchayats."
+    }
   },
   {
     "id": "ai-20261029034713-5633",
@@ -104,7 +184,27 @@
     "pubDate": "2026-10-29T03:47:13.597479+00:00",
     "category": "The Hindu",
     "isLiveFetched": true,
-    "timestamp": 1793245633597
+    "timestamp": 1793245633597,
+    "prelimsMcq": {
+      "question": "In the context of the recent UPSC CSE policy development concerning GS-III: Urban Infrastructure & Traffic Management, which statement best reflects constitutional and administrative principles?",
+      "options": [
+        "Statutory rules under Union executive power override fundamental rights without legislative approval.",
+        "Effective public policy delivery requires institutional transparency, statutory compliance, and democratic accountability.",
+        "Constitutional bodies are exempted from judicial review under Article 32 of the Constitution.",
+        "Substantive equality under Article 14 prohibits states from enacting affirmative regulatory classifications."
+      ],
+      "correct": 1,
+      "rationale": "Public administration in constitutional democracies is anchored in administrative law, checks and balances, transparency, and statutory accountability."
+    },
+    "mainsBooster": {
+      "question": "Examine the governance and policy implications of this development for Indian public administration under GS-III: Urban Infrastructure & Traffic Management. (10 Marks, 150 Words)",
+      "dimensions": [
+        "Statutory & Institutional Framework: Alignment with constitutional values, legislative intent, and rule of law standards.",
+        "Socio-Economic Dimensions: Ensuring citizen-centric delivery, administrative efficiency, and safeguarding marginalized communities.",
+        "Inter-Agency Coordination: Strengthening cooperative federalism between Union ministries and State administrative machineries."
+      ],
+      "wayForward": "Institutionalize social audits, streamline digital monitoring dashboards, and adhere to Second ARC recommendations for ethical governance."
+    }
   },
   {
     "id": "ai-20261028-tn-collectors-reshuffle",
@@ -126,7 +226,27 @@
     "pubDate": "2026-10-28T18:00:00+00:00",
     "category": "The Hindu",
     "isLiveFetched": true,
-    "timestamp": 1793210400000
+    "timestamp": 1793210400000,
+    "prelimsMcq": {
+      "question": "With reference to the Indian Administrative Service (Cadre) Rules, 1954 and Civil Services Board (CSB), which statement is correct?",
+      "options": [
+        "Cadre transfers of IAS officers can only be ordered by the Union Public Service Commission (UPSC).",
+        "The Civil Services Board at the state level is headed by the state Chief Secretary to recommend transfers and tenures.",
+        "District Collectors are appointed under Article 356 of the Constitution of India.",
+        "The Second ARC recommended abolishing minimum tenure guarantees for district magistrates."
+      ],
+      "correct": 1,
+      "rationale": "The Supreme Court in TSR Subramanian (2013) mandated establishing state-level Civil Services Boards headed by the Chief Secretary to ensure minimum tenure stability."
+    },
+    "mainsBooster": {
+      "question": "Frequent administrative transfers erode bureaucratic accountability and compromise developmental continuity. Critically examine with reference to recommendations of the Second ARC. (10 Marks, 150 Words)",
+      "dimensions": [
+        "Continuity vs Disruption: Premature transfers impede policy execution, beneficiary tracking, and long-term capital expenditure oversight.",
+        "Politicization of Bureaucracy: Discretionary transfers undermine institutional neutrality guaranteed under civil service conduct rules.",
+        "Institutional Safeguards: The 2014 amendment to IAS Cadre Rules established fixed two-year tenures, yet compliance across states remains erratic."
+      ],
+      "wayForward": "Mandate transparent, digital placement tracking through Civil Services Boards and institutionalize open appraisal metrics as recommended by the 2nd ARC."
+    }
   },
   {
     "id": "ai-20261026083840-9474",
@@ -148,7 +268,27 @@
     "pubDate": "2026-10-26T08:38:40.596201+00:00",
     "category": "The Hindu",
     "isLiveFetched": true,
-    "timestamp": 1793003920596
+    "timestamp": 1793003920596,
+    "prelimsMcq": {
+      "question": "In the context of the recent UPSC CSE policy development concerning GS-III: Biodiversity Conservation & Human-Wildlife Conflict, which statement best reflects constitutional and administrative principles?",
+      "options": [
+        "Statutory rules under Union executive power override fundamental rights without legislative approval.",
+        "Effective public policy delivery requires institutional transparency, statutory compliance, and democratic accountability.",
+        "Constitutional bodies are exempted from judicial review under Article 32 of the Constitution.",
+        "Substantive equality under Article 14 prohibits states from enacting affirmative regulatory classifications."
+      ],
+      "correct": 1,
+      "rationale": "Public administration in constitutional democracies is anchored in administrative law, checks and balances, transparency, and statutory accountability."
+    },
+    "mainsBooster": {
+      "question": "Examine the governance and policy implications of this development for Indian public administration under GS-III: Biodiversity Conservation & Human-Wildlife Conflict. (10 Marks, 150 Words)",
+      "dimensions": [
+        "Statutory & Institutional Framework: Alignment with constitutional values, legislative intent, and rule of law standards.",
+        "Socio-Economic Dimensions: Ensuring citizen-centric delivery, administrative efficiency, and safeguarding marginalized communities.",
+        "Inter-Agency Coordination: Strengthening cooperative federalism between Union ministries and State administrative machineries."
+      ],
+      "wayForward": "Institutionalize social audits, streamline digital monitoring dashboards, and adhere to Second ARC recommendations for ethical governance."
+    }
   },
   {
     "id": "ai-20261026083836-7173",
@@ -169,7 +309,27 @@
     "pubDate": "2026-10-26T08:38:36.472629+00:00",
     "category": "The Hindu",
     "isLiveFetched": true,
-    "timestamp": 1793003916472
+    "timestamp": 1793003916472,
+    "prelimsMcq": {
+      "question": "In the context of India's tertiary healthcare architecture and rare disease policies, which of the following is correct?",
+      "options": [
+        "Intravenous thrombolysis must strictly be administered after 24 hours of stroke onset.",
+        "Under the National Policy for Rare Diseases, financial assistance is restricted to BPL families only.",
+        "The hub-and-spoke healthcare model decentralizes critical acute intervention to district medical colleges while connecting to apex institutes.",
+        "All medical devices in India are exempted from statutory price caps under the Drugs Prices Control Order (DPCO)."
+      ],
+      "correct": 2,
+      "rationale": "The hub-and-spoke clinical model extends specialized thrombolytic stroke care within the 4.5-hour golden window to district hospitals without emergency inter-city transfers."
+    },
+    "mainsBooster": {
+      "question": "Non-communicable diseases and acute neurological emergencies impose severe out-of-pocket health expenditure in India. Discuss how decentralized clinical networks can bridge the urban-rural healthcare divide. (15 Marks, 250 Words)",
+      "dimensions": [
+        "Golden Hour Adherence: Tertiary hub-and-spoke tele-radiology enables remote district neurologists to initiate intravenous thrombolysis.",
+        "Affordability & Universal Coverage: Inclusion of specialized consumables under Ayushman Bharat-PMJAY packages prevents household impoverishment.",
+        "Human Resource Deficits: Uneven geographic concentration of neurologists and cath-labs requires statutory task-shifting to trained medical officers."
+      ],
+      "wayForward": "Scale the National Health Mission's District Residency Programme and establish dedicated stroke-care units across all district general hospitals by 2030."
+    }
   },
   {
     "id": "ai-20261026083831-7522",
@@ -190,7 +350,27 @@
     "pubDate": "2026-10-26T08:38:31.065120+00:00",
     "category": "The Hindu",
     "isLiveFetched": true,
-    "timestamp": 1793003911065
+    "timestamp": 1793003911065,
+    "prelimsMcq": {
+      "question": "Under the Representation of the People Act, 1950 and electoral guidelines of the Election Commission of India (ECI), which form is submitted for inclusion of name in the electoral roll?",
+      "options": [
+        "Form 6",
+        "Form 7",
+        "Form 8",
+        "Form 12"
+      ],
+      "correct": 0,
+      "rationale": "Form 6 is used for fresh voter registration; Form 7 is for objections/deletions, and Form 8 is for correction of entries or shifting of residence."
+    },
+    "mainsBooster": {
+      "question": "'Universal adult suffrage without arbitrary disenfranchisement is a bedrock of democratic legitimacy.' Discuss how recent ECI digital initiatives bolster voter list integrity. (10 Marks, 150 Words)",
+      "dimensions": [
+        "Constitutional Guarantees: Article 324 (superintendence) read with Article 326 (adult suffrage) mandates error-free electoral registers.",
+        "Procedural Safeguards: Natural justice requires mandatory notice and inquiry before deleting voter entries from statutory rolls.",
+        "Technological Reforms: Voter Service Portal (ERONET), Aadhaar linking on voluntary basis, and biometric deduplication protocols."
+      ],
+      "wayForward": "Institutionalize universal voter audit trails, transparent deletion disclosures on district portals, and remote voting mechanisms for domestic migrant workers."
+    }
   },
   {
     "id": "ai-20261026083826-9632",
@@ -211,7 +391,27 @@
     "pubDate": "2026-10-26T08:38:26.680518+00:00",
     "category": "The Hindu",
     "isLiveFetched": true,
-    "timestamp": 1793003906680
+    "timestamp": 1793003906680,
+    "prelimsMcq": {
+      "question": "Consider the following statements regarding interstate river water disputes under Article 262 of the Constitution:",
+      "options": [
+        "Parliament may by law provide that neither the Supreme Court nor any other court shall exercise jurisdiction over such disputes.",
+        "The Inter-State River Water Disputes Act, 1956 requires tribunal decisions to be ratified by the President of India.",
+        "Water is an entry in the Union List (List I) of the Seventh Schedule.",
+        "Cauvery and Godavari Water Disputes Tribunals were established under Article 131."
+      ],
+      "correct": 0,
+      "rationale": "Under Article 262(2), Parliament has statutory competence to exclude the jurisdiction of the Supreme Court and other courts over interstate river water disputes."
+    },
+    "mainsBooster": {
+      "question": "Inter-state river water disputes in India are increasingly exacerbated by climate variability and competitive federalism. Analyze the constitutional and administrative mechanisms to resolve them. (15 Marks, 250 Words)",
+      "dimensions": [
+        "Constitutional Architecture: Article 262 and the Inter-State River Water Disputes Act, 1956 facilitate adjudication outside regular civil jurisdiction.",
+        "Implementation Bottlenecks: Prolonged tribunal proceedings, delayed award notifications, and state resistance to tribunal awards.",
+        "Ecological Hydrology: Lift irrigation projects alter basin flow dynamics, necessitating environmental minimum flows for downstream ecology."
+      ],
+      "wayForward": "Operationalize the Inter-State River Water Disputes (Amendment) Bill with a single permanent tribunal, strict statutory timeframes, and real-time telemetry."
+    }
   },
   {
     "id": "ai-20261026083822-15",
@@ -232,7 +432,27 @@
     "pubDate": "2026-10-26T08:38:22.395972+00:00",
     "category": "The Hindu",
     "isLiveFetched": true,
-    "timestamp": 1793003902395
+    "timestamp": 1793003902395,
+    "prelimsMcq": {
+      "question": "In the context of the recent UPSC CSE policy development concerning GS-II: Constitution & Judiciary, which statement best reflects constitutional and administrative principles?",
+      "options": [
+        "Statutory rules under Union executive power override fundamental rights without legislative approval.",
+        "Effective public policy delivery requires institutional transparency, statutory compliance, and democratic accountability.",
+        "Constitutional bodies are exempted from judicial review under Article 32 of the Constitution.",
+        "Substantive equality under Article 14 prohibits states from enacting affirmative regulatory classifications."
+      ],
+      "correct": 1,
+      "rationale": "Public administration in constitutional democracies is anchored in administrative law, checks and balances, transparency, and statutory accountability."
+    },
+    "mainsBooster": {
+      "question": "Examine the governance and policy implications of this development for Indian public administration under GS-II: Constitution & Judiciary. (10 Marks, 150 Words)",
+      "dimensions": [
+        "Statutory & Institutional Framework: Alignment with constitutional values, legislative intent, and rule of law standards.",
+        "Socio-Economic Dimensions: Ensuring citizen-centric delivery, administrative efficiency, and safeguarding marginalized communities.",
+        "Inter-Agency Coordination: Strengthening cooperative federalism between Union ministries and State administrative machineries."
+      ],
+      "wayForward": "Institutionalize social audits, streamline digital monitoring dashboards, and adhere to Second ARC recommendations for ethical governance."
+    }
   },
   {
     "id": "live-pool-1",
@@ -253,7 +473,27 @@
     "pubDate": "2026-10-26T08:37:06.774Z",
     "category": "Down To Earth",
     "isLiveFetched": true,
-    "timestamp": 1793003826774
+    "timestamp": 1793003826774,
+    "prelimsMcq": {
+      "question": "With reference to the National Clean Air Programme (NCAP) and Commission for Air Quality Management (CAQM), which statement is correct?",
+      "options": [
+        "NCAP is a legally binding treaty signed under UNFCCC Paris Agreement.",
+        "CAQM has statutory jurisdiction covering the National Capital Region (NCR) and adjoining areas of Punjab, Haryana, Rajasthan, and UP.",
+        "PM2.5 particles are larger in aerodynamic diameter than PM10 particles.",
+        "Central Pollution Control Board was established under the Environment (Protection) Act, 1986."
+      ],
+      "correct": 1,
+      "rationale": "CAQM was constituted under the CAQM Act, 2021 with exclusive statutory authority over NCR and adjoining states. CPCB was constituted under the Water Act, 1974."
+    },
+    "mainsBooster": {
+      "question": "Airshed management, rather than fragmented municipal governance, is essential to tackle northern India's seasonal air pollution crisis. Elaborate. (15 Marks, 250 Words)",
+      "dimensions": [
+        "Airshed Reality: Atmospheric inversion and meteorological wind corridors disperse particulate matter across state boundaries regardless of municipal jurisdictions.",
+        "Sectoral Synergies: Tackling vehicular emissions, crop residue combustion, thermal power generation, and construction dust simultaneously.",
+        "Institutional Mandate: The CAQM Act, 2021 centralizes directives over multiple states, yet implementation at the district panchayat level remains deficient."
+      ],
+      "wayForward": "Expand continuous ambient monitoring networks (CAAQMS), deploy bio-decomposers at scale, and enforce differential congestion pricing in urban cores."
+    }
   },
   {
     "id": "live-pool-2",
@@ -275,7 +515,27 @@
     "pubDate": "2026-10-26T05:37:06.783Z",
     "category": "Economy / Mint",
     "isLiveFetched": true,
-    "timestamp": 1792993026783
+    "timestamp": 1792993026783,
+    "prelimsMcq": {
+      "question": "Regarding the Reserve Bank of India's Unified Lending Interface (ULI) and digital public infrastructure (DPI), which of the following is correct?",
+      "options": [
+        "ULI is a physical registry maintained by the Department of Revenue for land registration.",
+        "ULI facilitates frictionless, consent-based credit flow by unifying digital land records, satellite data, and identity records for financial institutions.",
+        "Central Bank Digital Currency (CBDC) carries substantial sovereign credit risk compared to commercial bank deposits.",
+        "The Monetary Policy Committee (MPC) is chaired by the Union Finance Minister."
+      ],
+      "correct": 1,
+      "rationale": "ULI unifies disparate siloed data (digitized land records, crop data, identity) into a plug-and-play consent architecture, compressing rural appraisal timelines from months to minutes."
+    },
+    "mainsBooster": {
+      "question": "India's Digital Public Infrastructure (DPI) has revolutionized financial inclusion. How will the Unified Lending Interface (ULI) transform rural and MSME credit delivery? (15 Marks, 250 Words)",
+      "dimensions": [
+        "Credit Asymmetry Compression: Eliminating cumbersome paper documentation and physical verification through digitized land cadastre records.",
+        "Formal Credit Access: Overcoming collateralless constraints for small and marginal farmers, reducing dependency on informal moneylenders.",
+        "Data Privacy & Consent: ULI operates on open protocols with granular, consent-based architecture aligned with the Digital Personal Data Protection Act, 2023."
+      ],
+      "wayForward": "Accelerate digitizing cadastre maps across all states under SVAMITVA, improve rural broadband connectivity via BharatNet, and strengthen grievance redressal."
+    }
   },
   {
     "id": "live-pool-3",
@@ -297,7 +557,27 @@
     "pubDate": "2026-10-26T02:37:06.783Z",
     "category": "ISRO / Science & Tech",
     "isLiveFetched": true,
-    "timestamp": 1792982226783
+    "timestamp": 1792982226783,
+    "prelimsMcq": {
+      "question": "In ISRO's human spaceflight mission (Gaganyaan), the Crew Escape System (CES) is designed to accomplish which primary objective?",
+      "options": [
+        "Propel the spacecraft toward lunar transfer orbit.",
+        "Safely eject and distance the crew module from the launch vehicle in case of mid-flight abort or launch pad contingency.",
+        "Conduct microgravity biological experiments in low earth orbit.",
+        "Provide satellite-based laser communications with deep space ground stations."
+      ],
+      "correct": 1,
+      "rationale": "The Crew Escape System (CES) uses high-thrust solid motors to rapidly separate the crew module from the rocket during any pre-launch or ascent-phase anomaly."
+    },
+    "mainsBooster": {
+      "question": "How will ISRO's Gaganyaan mission and indigenous space initiatives enhance India's strategic, scientific, and commercial standing globally? (10 Marks, 150 Words)",
+      "dimensions": [
+        "Technological Sovereignty: Indigenous development of environmental control and life support systems (ECLSS), crew escape systems, and human-rated launch vehicles (HLVM3).",
+        "Spillover Innovations: Advances in lightweight alloys, cryogenic propulsion, bio-telemetry, and industrial robotics across private Indian aerospace suppliers.",
+        "Commercial Space Economy: Alignment with the Indian Space Policy 2023 to expand India's share of the global commercial satellite launch market beyond 2%."
+      ],
+      "wayForward": "Incentivize private space startups through IN-SPACe, accelerate the Bharatiya Antariksh Station roadmap, and formulate a comprehensive National Space Law."
+    }
   },
   {
     "id": "live-pool-4",
@@ -319,7 +599,27 @@
     "pubDate": "2026-10-25T23:37:06.783Z",
     "category": "The Hindu",
     "isLiveFetched": true,
-    "timestamp": 1792971426783
+    "timestamp": 1792971426783,
+    "prelimsMcq": {
+      "question": "Regarding the Reserve Bank of India's Unified Lending Interface (ULI) and digital public infrastructure (DPI), which of the following is correct?",
+      "options": [
+        "ULI is a physical registry maintained by the Department of Revenue for land registration.",
+        "ULI facilitates frictionless, consent-based credit flow by unifying digital land records, satellite data, and identity records for financial institutions.",
+        "Central Bank Digital Currency (CBDC) carries substantial sovereign credit risk compared to commercial bank deposits.",
+        "The Monetary Policy Committee (MPC) is chaired by the Union Finance Minister."
+      ],
+      "correct": 1,
+      "rationale": "ULI unifies disparate siloed data (digitized land records, crop data, identity) into a plug-and-play consent architecture, compressing rural appraisal timelines from months to minutes."
+    },
+    "mainsBooster": {
+      "question": "India's Digital Public Infrastructure (DPI) has revolutionized financial inclusion. How will the Unified Lending Interface (ULI) transform rural and MSME credit delivery? (15 Marks, 250 Words)",
+      "dimensions": [
+        "Credit Asymmetry Compression: Eliminating cumbersome paper documentation and physical verification through digitized land cadastre records.",
+        "Formal Credit Access: Overcoming collateralless constraints for small and marginal farmers, reducing dependency on informal moneylenders.",
+        "Data Privacy & Consent: ULI operates on open protocols with granular, consent-based architecture aligned with the Digital Personal Data Protection Act, 2023."
+      ],
+      "wayForward": "Accelerate digitizing cadastre maps across all states under SVAMITVA, improve rural broadband connectivity via BharatNet, and strengthen grievance redressal."
+    }
   },
   {
     "id": "live-pool-5",
@@ -341,7 +641,27 @@
     "pubDate": "2026-10-25T20:37:06.783Z",
     "category": "PIB Delhi",
     "isLiveFetched": true,
-    "timestamp": 1792960626783
+    "timestamp": 1792960626783,
+    "prelimsMcq": {
+      "question": "In the context of the recent UPSC CSE policy development concerning GS-III: Renewable Energy & Clean Maritime Hubs, which statement best reflects constitutional and administrative principles?",
+      "options": [
+        "Statutory rules under Union executive power override fundamental rights without legislative approval.",
+        "Effective public policy delivery requires institutional transparency, statutory compliance, and democratic accountability.",
+        "Constitutional bodies are exempted from judicial review under Article 32 of the Constitution.",
+        "Substantive equality under Article 14 prohibits states from enacting affirmative regulatory classifications."
+      ],
+      "correct": 1,
+      "rationale": "Public administration in constitutional democracies is anchored in administrative law, checks and balances, transparency, and statutory accountability."
+    },
+    "mainsBooster": {
+      "question": "Examine the governance and policy implications of this development for Indian public administration under GS-III: Renewable Energy & Clean Maritime Hubs. (10 Marks, 150 Words)",
+      "dimensions": [
+        "Statutory & Institutional Framework: Alignment with constitutional values, legislative intent, and rule of law standards.",
+        "Socio-Economic Dimensions: Ensuring citizen-centric delivery, administrative efficiency, and safeguarding marginalized communities.",
+        "Inter-Agency Coordination: Strengthening cooperative federalism between Union ministries and State administrative machineries."
+      ],
+      "wayForward": "Institutionalize social audits, streamline digital monitoring dashboards, and adhere to Second ARC recommendations for ethical governance."
+    }
   },
   {
     "id": "brief-1",
@@ -363,7 +683,27 @@
     "pubDate": "2026-10-25T17:37:06.783Z",
     "category": "PIB Delhi",
     "isLiveFetched": false,
-    "timestamp": 1792949826783
+    "timestamp": 1792949826783,
+    "prelimsMcq": {
+      "question": "In the context of India's tertiary healthcare architecture and rare disease policies, which of the following is correct?",
+      "options": [
+        "Intravenous thrombolysis must strictly be administered after 24 hours of stroke onset.",
+        "Under the National Policy for Rare Diseases, financial assistance is restricted to BPL families only.",
+        "The hub-and-spoke healthcare model decentralizes critical acute intervention to district medical colleges while connecting to apex institutes.",
+        "All medical devices in India are exempted from statutory price caps under the Drugs Prices Control Order (DPCO)."
+      ],
+      "correct": 2,
+      "rationale": "The hub-and-spoke clinical model extends specialized thrombolytic stroke care within the 4.5-hour golden window to district hospitals without emergency inter-city transfers."
+    },
+    "mainsBooster": {
+      "question": "Non-communicable diseases and acute neurological emergencies impose severe out-of-pocket health expenditure in India. Discuss how decentralized clinical networks can bridge the urban-rural healthcare divide. (15 Marks, 250 Words)",
+      "dimensions": [
+        "Golden Hour Adherence: Tertiary hub-and-spoke tele-radiology enables remote district neurologists to initiate intravenous thrombolysis.",
+        "Affordability & Universal Coverage: Inclusion of specialized consumables under Ayushman Bharat-PMJAY packages prevents household impoverishment.",
+        "Human Resource Deficits: Uneven geographic concentration of neurologists and cath-labs requires statutory task-shifting to trained medical officers."
+      ],
+      "wayForward": "Scale the National Health Mission's District Residency Programme and establish dedicated stroke-care units across all district general hospitals by 2030."
+    }
   },
   {
     "id": "brief-2",
@@ -385,7 +725,27 @@
     "pubDate": "2026-10-25T14:37:06.783Z",
     "category": "Down To Earth",
     "isLiveFetched": false,
-    "timestamp": 1792939026783
+    "timestamp": 1792939026783,
+    "prelimsMcq": {
+      "question": "Consider the following statements regarding interstate river water disputes under Article 262 of the Constitution:",
+      "options": [
+        "Parliament may by law provide that neither the Supreme Court nor any other court shall exercise jurisdiction over such disputes.",
+        "The Inter-State River Water Disputes Act, 1956 requires tribunal decisions to be ratified by the President of India.",
+        "Water is an entry in the Union List (List I) of the Seventh Schedule.",
+        "Cauvery and Godavari Water Disputes Tribunals were established under Article 131."
+      ],
+      "correct": 0,
+      "rationale": "Under Article 262(2), Parliament has statutory competence to exclude the jurisdiction of the Supreme Court and other courts over interstate river water disputes."
+    },
+    "mainsBooster": {
+      "question": "Inter-state river water disputes in India are increasingly exacerbated by climate variability and competitive federalism. Analyze the constitutional and administrative mechanisms to resolve them. (15 Marks, 250 Words)",
+      "dimensions": [
+        "Constitutional Architecture: Article 262 and the Inter-State River Water Disputes Act, 1956 facilitate adjudication outside regular civil jurisdiction.",
+        "Implementation Bottlenecks: Prolonged tribunal proceedings, delayed award notifications, and state resistance to tribunal awards.",
+        "Ecological Hydrology: Lift irrigation projects alter basin flow dynamics, necessitating environmental minimum flows for downstream ecology."
+      ],
+      "wayForward": "Operationalize the Inter-State River Water Disputes (Amendment) Bill with a single permanent tribunal, strict statutory timeframes, and real-time telemetry."
+    }
   },
   {
     "id": "brief-3",
@@ -407,7 +767,27 @@
     "pubDate": "2026-10-25T11:37:06.783Z",
     "category": "The Hindu",
     "isLiveFetched": false,
-    "timestamp": 1792928226783
+    "timestamp": 1792928226783,
+    "prelimsMcq": {
+      "question": "In the context of the recent UPSC CSE policy development concerning GS-II: Judiciary & Constitutional Discretion, which statement best reflects constitutional and administrative principles?",
+      "options": [
+        "Statutory rules under Union executive power override fundamental rights without legislative approval.",
+        "Effective public policy delivery requires institutional transparency, statutory compliance, and democratic accountability.",
+        "Constitutional bodies are exempted from judicial review under Article 32 of the Constitution.",
+        "Substantive equality under Article 14 prohibits states from enacting affirmative regulatory classifications."
+      ],
+      "correct": 1,
+      "rationale": "Public administration in constitutional democracies is anchored in administrative law, checks and balances, transparency, and statutory accountability."
+    },
+    "mainsBooster": {
+      "question": "Examine the governance and policy implications of this development for Indian public administration under GS-II: Judiciary & Constitutional Discretion. (10 Marks, 150 Words)",
+      "dimensions": [
+        "Statutory & Institutional Framework: Alignment with constitutional values, legislative intent, and rule of law standards.",
+        "Socio-Economic Dimensions: Ensuring citizen-centric delivery, administrative efficiency, and safeguarding marginalized communities.",
+        "Inter-Agency Coordination: Strengthening cooperative federalism between Union ministries and State administrative machineries."
+      ],
+      "wayForward": "Institutionalize social audits, streamline digital monitoring dashboards, and adhere to Second ARC recommendations for ethical governance."
+    }
   },
   {
     "id": "brief-4",
@@ -429,7 +809,27 @@
     "pubDate": "2026-10-25T08:37:06.783Z",
     "category": "PIB Delhi",
     "isLiveFetched": false,
-    "timestamp": 1792917426783
+    "timestamp": 1792917426783,
+    "prelimsMcq": {
+      "question": "In the context of the recent UPSC CSE policy development concerning GS-III: Renewable Energy & Decarbonization, which statement best reflects constitutional and administrative principles?",
+      "options": [
+        "Statutory rules under Union executive power override fundamental rights without legislative approval.",
+        "Effective public policy delivery requires institutional transparency, statutory compliance, and democratic accountability.",
+        "Constitutional bodies are exempted from judicial review under Article 32 of the Constitution.",
+        "Substantive equality under Article 14 prohibits states from enacting affirmative regulatory classifications."
+      ],
+      "correct": 1,
+      "rationale": "Public administration in constitutional democracies is anchored in administrative law, checks and balances, transparency, and statutory accountability."
+    },
+    "mainsBooster": {
+      "question": "Examine the governance and policy implications of this development for Indian public administration under GS-III: Renewable Energy & Decarbonization. (10 Marks, 150 Words)",
+      "dimensions": [
+        "Statutory & Institutional Framework: Alignment with constitutional values, legislative intent, and rule of law standards.",
+        "Socio-Economic Dimensions: Ensuring citizen-centric delivery, administrative efficiency, and safeguarding marginalized communities.",
+        "Inter-Agency Coordination: Strengthening cooperative federalism between Union ministries and State administrative machineries."
+      ],
+      "wayForward": "Institutionalize social audits, streamline digital monitoring dashboards, and adhere to Second ARC recommendations for ethical governance."
+    }
   },
   {
     "id": "brief-5",
@@ -451,7 +851,27 @@
     "pubDate": "2026-10-25T05:37:06.783Z",
     "category": "ISRO / Science & Tech",
     "isLiveFetched": false,
-    "timestamp": 1792906626783
+    "timestamp": 1792906626783,
+    "prelimsMcq": {
+      "question": "In ISRO's human spaceflight mission (Gaganyaan), the Crew Escape System (CES) is designed to accomplish which primary objective?",
+      "options": [
+        "Propel the spacecraft toward lunar transfer orbit.",
+        "Safely eject and distance the crew module from the launch vehicle in case of mid-flight abort or launch pad contingency.",
+        "Conduct microgravity biological experiments in low earth orbit.",
+        "Provide satellite-based laser communications with deep space ground stations."
+      ],
+      "correct": 1,
+      "rationale": "The Crew Escape System (CES) uses high-thrust solid motors to rapidly separate the crew module from the rocket during any pre-launch or ascent-phase anomaly."
+    },
+    "mainsBooster": {
+      "question": "How will ISRO's Gaganyaan mission and indigenous space initiatives enhance India's strategic, scientific, and commercial standing globally? (10 Marks, 150 Words)",
+      "dimensions": [
+        "Technological Sovereignty: Indigenous development of environmental control and life support systems (ECLSS), crew escape systems, and human-rated launch vehicles (HLVM3).",
+        "Spillover Innovations: Advances in lightweight alloys, cryogenic propulsion, bio-telemetry, and industrial robotics across private Indian aerospace suppliers.",
+        "Commercial Space Economy: Alignment with the Indian Space Policy 2023 to expand India's share of the global commercial satellite launch market beyond 2%."
+      ],
+      "wayForward": "Incentivize private space startups through IN-SPACe, accelerate the Bharatiya Antariksh Station roadmap, and formulate a comprehensive National Space Law."
+    }
   },
   {
     "id": "brief-6",
@@ -474,7 +894,27 @@
     "pubDate": "2026-10-25T02:37:06.783Z",
     "category": "Economy / Mint",
     "isLiveFetched": false,
-    "timestamp": 1792895826783
+    "timestamp": 1792895826783,
+    "prelimsMcq": {
+      "question": "Regarding the Reserve Bank of India's Unified Lending Interface (ULI) and digital public infrastructure (DPI), which of the following is correct?",
+      "options": [
+        "ULI is a physical registry maintained by the Department of Revenue for land registration.",
+        "ULI facilitates frictionless, consent-based credit flow by unifying digital land records, satellite data, and identity records for financial institutions.",
+        "Central Bank Digital Currency (CBDC) carries substantial sovereign credit risk compared to commercial bank deposits.",
+        "The Monetary Policy Committee (MPC) is chaired by the Union Finance Minister."
+      ],
+      "correct": 1,
+      "rationale": "ULI unifies disparate siloed data (digitized land records, crop data, identity) into a plug-and-play consent architecture, compressing rural appraisal timelines from months to minutes."
+    },
+    "mainsBooster": {
+      "question": "India's Digital Public Infrastructure (DPI) has revolutionized financial inclusion. How will the Unified Lending Interface (ULI) transform rural and MSME credit delivery? (15 Marks, 250 Words)",
+      "dimensions": [
+        "Credit Asymmetry Compression: Eliminating cumbersome paper documentation and physical verification through digitized land cadastre records.",
+        "Formal Credit Access: Overcoming collateralless constraints for small and marginal farmers, reducing dependency on informal moneylenders.",
+        "Data Privacy & Consent: ULI operates on open protocols with granular, consent-based architecture aligned with the Digital Personal Data Protection Act, 2023."
+      ],
+      "wayForward": "Accelerate digitizing cadastre maps across all states under SVAMITVA, improve rural broadband connectivity via BharatNet, and strengthen grievance redressal."
+    }
   },
   {
     "id": "brief-7",
@@ -496,7 +936,27 @@
     "pubDate": "2026-10-24T23:37:06.783Z",
     "category": "PRS Legislative",
     "isLiveFetched": false,
-    "timestamp": 1792885026783
+    "timestamp": 1792885026783,
+    "prelimsMcq": {
+      "question": "Regarding the Reserve Bank of India's Unified Lending Interface (ULI) and digital public infrastructure (DPI), which of the following is correct?",
+      "options": [
+        "ULI is a physical registry maintained by the Department of Revenue for land registration.",
+        "ULI facilitates frictionless, consent-based credit flow by unifying digital land records, satellite data, and identity records for financial institutions.",
+        "Central Bank Digital Currency (CBDC) carries substantial sovereign credit risk compared to commercial bank deposits.",
+        "The Monetary Policy Committee (MPC) is chaired by the Union Finance Minister."
+      ],
+      "correct": 1,
+      "rationale": "ULI unifies disparate siloed data (digitized land records, crop data, identity) into a plug-and-play consent architecture, compressing rural appraisal timelines from months to minutes."
+    },
+    "mainsBooster": {
+      "question": "India's Digital Public Infrastructure (DPI) has revolutionized financial inclusion. How will the Unified Lending Interface (ULI) transform rural and MSME credit delivery? (15 Marks, 250 Words)",
+      "dimensions": [
+        "Credit Asymmetry Compression: Eliminating cumbersome paper documentation and physical verification through digitized land cadastre records.",
+        "Formal Credit Access: Overcoming collateralless constraints for small and marginal farmers, reducing dependency on informal moneylenders.",
+        "Data Privacy & Consent: ULI operates on open protocols with granular, consent-based architecture aligned with the Digital Personal Data Protection Act, 2023."
+      ],
+      "wayForward": "Accelerate digitizing cadastre maps across all states under SVAMITVA, improve rural broadband connectivity via BharatNet, and strengthen grievance redressal."
+    }
   },
   {
     "id": "brief-8",
@@ -518,7 +978,27 @@
     "pubDate": "2026-10-24T20:37:06.783Z",
     "category": "Down To Earth",
     "isLiveFetched": false,
-    "timestamp": 1792874226783
+    "timestamp": 1792874226783,
+    "prelimsMcq": {
+      "question": "Consider the following statements regarding interstate river water disputes under Article 262 of the Constitution:",
+      "options": [
+        "Parliament may by law provide that neither the Supreme Court nor any other court shall exercise jurisdiction over such disputes.",
+        "The Inter-State River Water Disputes Act, 1956 requires tribunal decisions to be ratified by the President of India.",
+        "Water is an entry in the Union List (List I) of the Seventh Schedule.",
+        "Cauvery and Godavari Water Disputes Tribunals were established under Article 131."
+      ],
+      "correct": 0,
+      "rationale": "Under Article 262(2), Parliament has statutory competence to exclude the jurisdiction of the Supreme Court and other courts over interstate river water disputes."
+    },
+    "mainsBooster": {
+      "question": "Inter-state river water disputes in India are increasingly exacerbated by climate variability and competitive federalism. Analyze the constitutional and administrative mechanisms to resolve them. (15 Marks, 250 Words)",
+      "dimensions": [
+        "Constitutional Architecture: Article 262 and the Inter-State River Water Disputes Act, 1956 facilitate adjudication outside regular civil jurisdiction.",
+        "Implementation Bottlenecks: Prolonged tribunal proceedings, delayed award notifications, and state resistance to tribunal awards.",
+        "Ecological Hydrology: Lift irrigation projects alter basin flow dynamics, necessitating environmental minimum flows for downstream ecology."
+      ],
+      "wayForward": "Operationalize the Inter-State River Water Disputes (Amendment) Bill with a single permanent tribunal, strict statutory timeframes, and real-time telemetry."
+    }
   },
   {
     "id": "brief-9",
@@ -540,7 +1020,27 @@
     "pubDate": "2026-10-24T17:37:06.783Z",
     "category": "PIB Delhi",
     "isLiveFetched": false,
-    "timestamp": 1792863426783
+    "timestamp": 1792863426783,
+    "prelimsMcq": {
+      "question": "In the context of the recent UPSC CSE policy development concerning GS-III: Indigenous Defence & Hypersonic Technology, which statement best reflects constitutional and administrative principles?",
+      "options": [
+        "Statutory rules under Union executive power override fundamental rights without legislative approval.",
+        "Effective public policy delivery requires institutional transparency, statutory compliance, and democratic accountability.",
+        "Constitutional bodies are exempted from judicial review under Article 32 of the Constitution.",
+        "Substantive equality under Article 14 prohibits states from enacting affirmative regulatory classifications."
+      ],
+      "correct": 1,
+      "rationale": "Public administration in constitutional democracies is anchored in administrative law, checks and balances, transparency, and statutory accountability."
+    },
+    "mainsBooster": {
+      "question": "Examine the governance and policy implications of this development for Indian public administration under GS-III: Indigenous Defence & Hypersonic Technology. (10 Marks, 150 Words)",
+      "dimensions": [
+        "Statutory & Institutional Framework: Alignment with constitutional values, legislative intent, and rule of law standards.",
+        "Socio-Economic Dimensions: Ensuring citizen-centric delivery, administrative efficiency, and safeguarding marginalized communities.",
+        "Inter-Agency Coordination: Strengthening cooperative federalism between Union ministries and State administrative machineries."
+      ],
+      "wayForward": "Institutionalize social audits, streamline digital monitoring dashboards, and adhere to Second ARC recommendations for ethical governance."
+    }
   },
   {
     "id": "brief-10",
@@ -562,7 +1062,27 @@
     "pubDate": "2026-10-24T14:37:06.783Z",
     "category": "The Hindu",
     "isLiveFetched": false,
-    "timestamp": 1792852626783
+    "timestamp": 1792852626783,
+    "prelimsMcq": {
+      "question": "Consider the following statements regarding interstate river water disputes under Article 262 of the Constitution:",
+      "options": [
+        "Parliament may by law provide that neither the Supreme Court nor any other court shall exercise jurisdiction over such disputes.",
+        "The Inter-State River Water Disputes Act, 1956 requires tribunal decisions to be ratified by the President of India.",
+        "Water is an entry in the Union List (List I) of the Seventh Schedule.",
+        "Cauvery and Godavari Water Disputes Tribunals were established under Article 131."
+      ],
+      "correct": 0,
+      "rationale": "Under Article 262(2), Parliament has statutory competence to exclude the jurisdiction of the Supreme Court and other courts over interstate river water disputes."
+    },
+    "mainsBooster": {
+      "question": "Inter-state river water disputes in India are increasingly exacerbated by climate variability and competitive federalism. Analyze the constitutional and administrative mechanisms to resolve them. (15 Marks, 250 Words)",
+      "dimensions": [
+        "Constitutional Architecture: Article 262 and the Inter-State River Water Disputes Act, 1956 facilitate adjudication outside regular civil jurisdiction.",
+        "Implementation Bottlenecks: Prolonged tribunal proceedings, delayed award notifications, and state resistance to tribunal awards.",
+        "Ecological Hydrology: Lift irrigation projects alter basin flow dynamics, necessitating environmental minimum flows for downstream ecology."
+      ],
+      "wayForward": "Operationalize the Inter-State River Water Disputes (Amendment) Bill with a single permanent tribunal, strict statutory timeframes, and real-time telemetry."
+    }
   },
   {
     "id": "brief-11",
@@ -584,7 +1104,27 @@
     "pubDate": "2026-10-24T11:37:06.783Z",
     "category": "Indian Express",
     "isLiveFetched": false,
-    "timestamp": 1792841826783
+    "timestamp": 1792841826783,
+    "prelimsMcq": {
+      "question": "In the context of the recent UPSC CSE policy development concerning GS-II: Fiscal Federalism & Finance Commission, which statement best reflects constitutional and administrative principles?",
+      "options": [
+        "Statutory rules under Union executive power override fundamental rights without legislative approval.",
+        "Effective public policy delivery requires institutional transparency, statutory compliance, and democratic accountability.",
+        "Constitutional bodies are exempted from judicial review under Article 32 of the Constitution.",
+        "Substantive equality under Article 14 prohibits states from enacting affirmative regulatory classifications."
+      ],
+      "correct": 1,
+      "rationale": "Public administration in constitutional democracies is anchored in administrative law, checks and balances, transparency, and statutory accountability."
+    },
+    "mainsBooster": {
+      "question": "Examine the governance and policy implications of this development for Indian public administration under GS-II: Fiscal Federalism & Finance Commission. (10 Marks, 150 Words)",
+      "dimensions": [
+        "Statutory & Institutional Framework: Alignment with constitutional values, legislative intent, and rule of law standards.",
+        "Socio-Economic Dimensions: Ensuring citizen-centric delivery, administrative efficiency, and safeguarding marginalized communities.",
+        "Inter-Agency Coordination: Strengthening cooperative federalism between Union ministries and State administrative machineries."
+      ],
+      "wayForward": "Institutionalize social audits, streamline digital monitoring dashboards, and adhere to Second ARC recommendations for ethical governance."
+    }
   },
   {
     "id": "brief-12",
@@ -606,7 +1146,27 @@
     "pubDate": "2026-10-24T08:37:06.783Z",
     "category": "International Relations / ORF",
     "isLiveFetched": false,
-    "timestamp": 1792831026783
+    "timestamp": 1792831026783,
+    "prelimsMcq": {
+      "question": "In the context of the recent UPSC CSE policy development concerning GS-II: Geopolitics & Trans-Regional Corridors, which statement best reflects constitutional and administrative principles?",
+      "options": [
+        "Statutory rules under Union executive power override fundamental rights without legislative approval.",
+        "Effective public policy delivery requires institutional transparency, statutory compliance, and democratic accountability.",
+        "Constitutional bodies are exempted from judicial review under Article 32 of the Constitution.",
+        "Substantive equality under Article 14 prohibits states from enacting affirmative regulatory classifications."
+      ],
+      "correct": 1,
+      "rationale": "Public administration in constitutional democracies is anchored in administrative law, checks and balances, transparency, and statutory accountability."
+    },
+    "mainsBooster": {
+      "question": "Examine the governance and policy implications of this development for Indian public administration under GS-II: Geopolitics & Trans-Regional Corridors. (10 Marks, 150 Words)",
+      "dimensions": [
+        "Statutory & Institutional Framework: Alignment with constitutional values, legislative intent, and rule of law standards.",
+        "Socio-Economic Dimensions: Ensuring citizen-centric delivery, administrative efficiency, and safeguarding marginalized communities.",
+        "Inter-Agency Coordination: Strengthening cooperative federalism between Union ministries and State administrative machineries."
+      ],
+      "wayForward": "Institutionalize social audits, streamline digital monitoring dashboards, and adhere to Second ARC recommendations for ethical governance."
+    }
   },
   {
     "id": "brief-13",
@@ -628,7 +1188,27 @@
     "pubDate": "2026-10-24T05:37:06.783Z",
     "category": "Yojana & Kurukshetra",
     "isLiveFetched": false,
-    "timestamp": 1792820226783
+    "timestamp": 1792820226783,
+    "prelimsMcq": {
+      "question": "Consider the following statements regarding interstate river water disputes under Article 262 of the Constitution:",
+      "options": [
+        "Parliament may by law provide that neither the Supreme Court nor any other court shall exercise jurisdiction over such disputes.",
+        "The Inter-State River Water Disputes Act, 1956 requires tribunal decisions to be ratified by the President of India.",
+        "Water is an entry in the Union List (List I) of the Seventh Schedule.",
+        "Cauvery and Godavari Water Disputes Tribunals were established under Article 131."
+      ],
+      "correct": 0,
+      "rationale": "Under Article 262(2), Parliament has statutory competence to exclude the jurisdiction of the Supreme Court and other courts over interstate river water disputes."
+    },
+    "mainsBooster": {
+      "question": "Inter-state river water disputes in India are increasingly exacerbated by climate variability and competitive federalism. Analyze the constitutional and administrative mechanisms to resolve them. (15 Marks, 250 Words)",
+      "dimensions": [
+        "Constitutional Architecture: Article 262 and the Inter-State River Water Disputes Act, 1956 facilitate adjudication outside regular civil jurisdiction.",
+        "Implementation Bottlenecks: Prolonged tribunal proceedings, delayed award notifications, and state resistance to tribunal awards.",
+        "Ecological Hydrology: Lift irrigation projects alter basin flow dynamics, necessitating environmental minimum flows for downstream ecology."
+      ],
+      "wayForward": "Operationalize the Inter-State River Water Disputes (Amendment) Bill with a single permanent tribunal, strict statutory timeframes, and real-time telemetry."
+    }
   },
   {
     "id": "brief-14",
@@ -650,7 +1230,27 @@
     "pubDate": "2026-10-24T02:37:06.783Z",
     "category": "PIB Delhi",
     "isLiveFetched": false,
-    "timestamp": 1792809426783
+    "timestamp": 1792809426783,
+    "prelimsMcq": {
+      "question": "In the context of India's tertiary healthcare architecture and rare disease policies, which of the following is correct?",
+      "options": [
+        "Intravenous thrombolysis must strictly be administered after 24 hours of stroke onset.",
+        "Under the National Policy for Rare Diseases, financial assistance is restricted to BPL families only.",
+        "The hub-and-spoke healthcare model decentralizes critical acute intervention to district medical colleges while connecting to apex institutes.",
+        "All medical devices in India are exempted from statutory price caps under the Drugs Prices Control Order (DPCO)."
+      ],
+      "correct": 2,
+      "rationale": "The hub-and-spoke clinical model extends specialized thrombolytic stroke care within the 4.5-hour golden window to district hospitals without emergency inter-city transfers."
+    },
+    "mainsBooster": {
+      "question": "Non-communicable diseases and acute neurological emergencies impose severe out-of-pocket health expenditure in India. Discuss how decentralized clinical networks can bridge the urban-rural healthcare divide. (15 Marks, 250 Words)",
+      "dimensions": [
+        "Golden Hour Adherence: Tertiary hub-and-spoke tele-radiology enables remote district neurologists to initiate intravenous thrombolysis.",
+        "Affordability & Universal Coverage: Inclusion of specialized consumables under Ayushman Bharat-PMJAY packages prevents household impoverishment.",
+        "Human Resource Deficits: Uneven geographic concentration of neurologists and cath-labs requires statutory task-shifting to trained medical officers."
+      ],
+      "wayForward": "Scale the National Health Mission's District Residency Programme and establish dedicated stroke-care units across all district general hospitals by 2030."
+    }
   },
   {
     "id": "brief-15",
@@ -672,7 +1272,27 @@
     "pubDate": "2026-10-23T23:37:06.783Z",
     "category": "Economy / Mint",
     "isLiveFetched": false,
-    "timestamp": 1792798626783
+    "timestamp": 1792798626783,
+    "prelimsMcq": {
+      "question": "In the context of the recent UPSC CSE policy development concerning GS-III: Semiconductor Manufacturing & Fabless Ecosystem, which statement best reflects constitutional and administrative principles?",
+      "options": [
+        "Statutory rules under Union executive power override fundamental rights without legislative approval.",
+        "Effective public policy delivery requires institutional transparency, statutory compliance, and democratic accountability.",
+        "Constitutional bodies are exempted from judicial review under Article 32 of the Constitution.",
+        "Substantive equality under Article 14 prohibits states from enacting affirmative regulatory classifications."
+      ],
+      "correct": 1,
+      "rationale": "Public administration in constitutional democracies is anchored in administrative law, checks and balances, transparency, and statutory accountability."
+    },
+    "mainsBooster": {
+      "question": "Examine the governance and policy implications of this development for Indian public administration under GS-III: Semiconductor Manufacturing & Fabless Ecosystem. (10 Marks, 150 Words)",
+      "dimensions": [
+        "Statutory & Institutional Framework: Alignment with constitutional values, legislative intent, and rule of law standards.",
+        "Socio-Economic Dimensions: Ensuring citizen-centric delivery, administrative efficiency, and safeguarding marginalized communities.",
+        "Inter-Agency Coordination: Strengthening cooperative federalism between Union ministries and State administrative machineries."
+      ],
+      "wayForward": "Institutionalize social audits, streamline digital monitoring dashboards, and adhere to Second ARC recommendations for ethical governance."
+    }
   },
   {
     "id": "brief-16",
@@ -694,7 +1314,27 @@
     "pubDate": "2026-10-23T20:37:06.783Z",
     "category": "The Hindu",
     "isLiveFetched": false,
-    "timestamp": 1792787826783
+    "timestamp": 1792787826783,
+    "prelimsMcq": {
+      "question": "Under the Representation of the People Act, 1950 and electoral guidelines of the Election Commission of India (ECI), which form is submitted for inclusion of name in the electoral roll?",
+      "options": [
+        "Form 6",
+        "Form 7",
+        "Form 8",
+        "Form 12"
+      ],
+      "correct": 0,
+      "rationale": "Form 6 is used for fresh voter registration; Form 7 is for objections/deletions, and Form 8 is for correction of entries or shifting of residence."
+    },
+    "mainsBooster": {
+      "question": "'Universal adult suffrage without arbitrary disenfranchisement is a bedrock of democratic legitimacy.' Discuss how recent ECI digital initiatives bolster voter list integrity. (10 Marks, 150 Words)",
+      "dimensions": [
+        "Constitutional Guarantees: Article 324 (superintendence) read with Article 326 (adult suffrage) mandates error-free electoral registers.",
+        "Procedural Safeguards: Natural justice requires mandatory notice and inquiry before deleting voter entries from statutory rolls.",
+        "Technological Reforms: Voter Service Portal (ERONET), Aadhaar linking on voluntary basis, and biometric deduplication protocols."
+      ],
+      "wayForward": "Institutionalize universal voter audit trails, transparent deletion disclosures on district portals, and remote voting mechanisms for domestic migrant workers."
+    }
   },
   {
     "id": "brief-17",
@@ -717,7 +1357,27 @@
     "pubDate": "2026-10-23T17:37:06.783Z",
     "category": "Down To Earth",
     "isLiveFetched": false,
-    "timestamp": 1792777026783
+    "timestamp": 1792777026783,
+    "prelimsMcq": {
+      "question": "With reference to the National Clean Air Programme (NCAP) and Commission for Air Quality Management (CAQM), which statement is correct?",
+      "options": [
+        "NCAP is a legally binding treaty signed under UNFCCC Paris Agreement.",
+        "CAQM has statutory jurisdiction covering the National Capital Region (NCR) and adjoining areas of Punjab, Haryana, Rajasthan, and UP.",
+        "PM2.5 particles are larger in aerodynamic diameter than PM10 particles.",
+        "Central Pollution Control Board was established under the Environment (Protection) Act, 1986."
+      ],
+      "correct": 1,
+      "rationale": "CAQM was constituted under the CAQM Act, 2021 with exclusive statutory authority over NCR and adjoining states. CPCB was constituted under the Water Act, 1974."
+    },
+    "mainsBooster": {
+      "question": "Airshed management, rather than fragmented municipal governance, is essential to tackle northern India's seasonal air pollution crisis. Elaborate. (15 Marks, 250 Words)",
+      "dimensions": [
+        "Airshed Reality: Atmospheric inversion and meteorological wind corridors disperse particulate matter across state boundaries regardless of municipal jurisdictions.",
+        "Sectoral Synergies: Tackling vehicular emissions, crop residue combustion, thermal power generation, and construction dust simultaneously.",
+        "Institutional Mandate: The CAQM Act, 2021 centralizes directives over multiple states, yet implementation at the district panchayat level remains deficient."
+      ],
+      "wayForward": "Expand continuous ambient monitoring networks (CAAQMS), deploy bio-decomposers at scale, and enforce differential congestion pricing in urban cores."
+    }
   },
   {
     "id": "brief-18",
@@ -739,7 +1399,27 @@
     "pubDate": "2026-10-23T14:37:06.783Z",
     "category": "Yojana & Kurukshetra",
     "isLiveFetched": false,
-    "timestamp": 1792766226783
+    "timestamp": 1792766226783,
+    "prelimsMcq": {
+      "question": "In the context of the recent UPSC CSE policy development concerning GS-III: Agricultural Digital Infrastructure & Agri-Stack, which statement best reflects constitutional and administrative principles?",
+      "options": [
+        "Statutory rules under Union executive power override fundamental rights without legislative approval.",
+        "Effective public policy delivery requires institutional transparency, statutory compliance, and democratic accountability.",
+        "Constitutional bodies are exempted from judicial review under Article 32 of the Constitution.",
+        "Substantive equality under Article 14 prohibits states from enacting affirmative regulatory classifications."
+      ],
+      "correct": 1,
+      "rationale": "Public administration in constitutional democracies is anchored in administrative law, checks and balances, transparency, and statutory accountability."
+    },
+    "mainsBooster": {
+      "question": "Examine the governance and policy implications of this development for Indian public administration under GS-III: Agricultural Digital Infrastructure & Agri-Stack. (10 Marks, 150 Words)",
+      "dimensions": [
+        "Statutory & Institutional Framework: Alignment with constitutional values, legislative intent, and rule of law standards.",
+        "Socio-Economic Dimensions: Ensuring citizen-centric delivery, administrative efficiency, and safeguarding marginalized communities.",
+        "Inter-Agency Coordination: Strengthening cooperative federalism between Union ministries and State administrative machineries."
+      ],
+      "wayForward": "Institutionalize social audits, streamline digital monitoring dashboards, and adhere to Second ARC recommendations for ethical governance."
+    }
   },
   {
     "id": "brief-19",
@@ -762,7 +1442,27 @@
     "pubDate": "2026-10-23T11:37:06.783Z",
     "category": "PRS Legislative",
     "isLiveFetched": false,
-    "timestamp": 1792755426783
+    "timestamp": 1792755426783,
+    "prelimsMcq": {
+      "question": "Under the Representation of the People Act, 1950 and electoral guidelines of the Election Commission of India (ECI), which form is submitted for inclusion of name in the electoral roll?",
+      "options": [
+        "Form 6",
+        "Form 7",
+        "Form 8",
+        "Form 12"
+      ],
+      "correct": 0,
+      "rationale": "Form 6 is used for fresh voter registration; Form 7 is for objections/deletions, and Form 8 is for correction of entries or shifting of residence."
+    },
+    "mainsBooster": {
+      "question": "'Universal adult suffrage without arbitrary disenfranchisement is a bedrock of democratic legitimacy.' Discuss how recent ECI digital initiatives bolster voter list integrity. (10 Marks, 150 Words)",
+      "dimensions": [
+        "Constitutional Guarantees: Article 324 (superintendence) read with Article 326 (adult suffrage) mandates error-free electoral registers.",
+        "Procedural Safeguards: Natural justice requires mandatory notice and inquiry before deleting voter entries from statutory rolls.",
+        "Technological Reforms: Voter Service Portal (ERONET), Aadhaar linking on voluntary basis, and biometric deduplication protocols."
+      ],
+      "wayForward": "Institutionalize universal voter audit trails, transparent deletion disclosures on district portals, and remote voting mechanisms for domestic migrant workers."
+    }
   },
   {
     "id": "brief-20",
@@ -784,7 +1484,27 @@
     "pubDate": "2026-10-23T08:37:06.783Z",
     "category": "International Relations / ORF",
     "isLiveFetched": false,
-    "timestamp": 1792744626783
+    "timestamp": 1792744626783,
+    "prelimsMcq": {
+      "question": "Under the Representation of the People Act, 1950 and electoral guidelines of the Election Commission of India (ECI), which form is submitted for inclusion of name in the electoral roll?",
+      "options": [
+        "Form 6",
+        "Form 7",
+        "Form 8",
+        "Form 12"
+      ],
+      "correct": 0,
+      "rationale": "Form 6 is used for fresh voter registration; Form 7 is for objections/deletions, and Form 8 is for correction of entries or shifting of residence."
+    },
+    "mainsBooster": {
+      "question": "'Universal adult suffrage without arbitrary disenfranchisement is a bedrock of democratic legitimacy.' Discuss how recent ECI digital initiatives bolster voter list integrity. (10 Marks, 150 Words)",
+      "dimensions": [
+        "Constitutional Guarantees: Article 324 (superintendence) read with Article 326 (adult suffrage) mandates error-free electoral registers.",
+        "Procedural Safeguards: Natural justice requires mandatory notice and inquiry before deleting voter entries from statutory rolls.",
+        "Technological Reforms: Voter Service Portal (ERONET), Aadhaar linking on voluntary basis, and biometric deduplication protocols."
+      ],
+      "wayForward": "Institutionalize universal voter audit trails, transparent deletion disclosures on district portals, and remote voting mechanisms for domestic migrant workers."
+    }
   },
   {
     "id": "brief-21",
@@ -806,7 +1526,27 @@
     "pubDate": "2026-10-23T05:37:06.783Z",
     "category": "ISRO / Science & Tech",
     "isLiveFetched": false,
-    "timestamp": 1792733826783
+    "timestamp": 1792733826783,
+    "prelimsMcq": {
+      "question": "In the context of the recent UPSC CSE policy development concerning GS-III: Quantum Computing & Cryogenic Hardware, which statement best reflects constitutional and administrative principles?",
+      "options": [
+        "Statutory rules under Union executive power override fundamental rights without legislative approval.",
+        "Effective public policy delivery requires institutional transparency, statutory compliance, and democratic accountability.",
+        "Constitutional bodies are exempted from judicial review under Article 32 of the Constitution.",
+        "Substantive equality under Article 14 prohibits states from enacting affirmative regulatory classifications."
+      ],
+      "correct": 1,
+      "rationale": "Public administration in constitutional democracies is anchored in administrative law, checks and balances, transparency, and statutory accountability."
+    },
+    "mainsBooster": {
+      "question": "Examine the governance and policy implications of this development for Indian public administration under GS-III: Quantum Computing & Cryogenic Hardware. (10 Marks, 150 Words)",
+      "dimensions": [
+        "Statutory & Institutional Framework: Alignment with constitutional values, legislative intent, and rule of law standards.",
+        "Socio-Economic Dimensions: Ensuring citizen-centric delivery, administrative efficiency, and safeguarding marginalized communities.",
+        "Inter-Agency Coordination: Strengthening cooperative federalism between Union ministries and State administrative machineries."
+      ],
+      "wayForward": "Institutionalize social audits, streamline digital monitoring dashboards, and adhere to Second ARC recommendations for ethical governance."
+    }
   },
   {
     "id": "brief-22",
@@ -827,7 +1567,27 @@
     "pubDate": "2026-10-23T02:37:06.783Z",
     "category": "Indian Express",
     "isLiveFetched": false,
-    "timestamp": 1792723026783
+    "timestamp": 1792723026783,
+    "prelimsMcq": {
+      "question": "Under the Representation of the People Act, 1950 and electoral guidelines of the Election Commission of India (ECI), which form is submitted for inclusion of name in the electoral roll?",
+      "options": [
+        "Form 6",
+        "Form 7",
+        "Form 8",
+        "Form 12"
+      ],
+      "correct": 0,
+      "rationale": "Form 6 is used for fresh voter registration; Form 7 is for objections/deletions, and Form 8 is for correction of entries or shifting of residence."
+    },
+    "mainsBooster": {
+      "question": "'Universal adult suffrage without arbitrary disenfranchisement is a bedrock of democratic legitimacy.' Discuss how recent ECI digital initiatives bolster voter list integrity. (10 Marks, 150 Words)",
+      "dimensions": [
+        "Constitutional Guarantees: Article 324 (superintendence) read with Article 326 (adult suffrage) mandates error-free electoral registers.",
+        "Procedural Safeguards: Natural justice requires mandatory notice and inquiry before deleting voter entries from statutory rolls.",
+        "Technological Reforms: Voter Service Portal (ERONET), Aadhaar linking on voluntary basis, and biometric deduplication protocols."
+      ],
+      "wayForward": "Institutionalize universal voter audit trails, transparent deletion disclosures on district portals, and remote voting mechanisms for domestic migrant workers."
+    }
   },
   {
     "id": "brief-23",
@@ -849,7 +1609,27 @@
     "pubDate": "2026-10-22T23:37:06.783Z",
     "category": "Economy / Mint",
     "isLiveFetched": false,
-    "timestamp": 1792712226783
+    "timestamp": 1792712226783,
+    "prelimsMcq": {
+      "question": "Under the Representation of the People Act, 1950 and electoral guidelines of the Election Commission of India (ECI), which form is submitted for inclusion of name in the electoral roll?",
+      "options": [
+        "Form 6",
+        "Form 7",
+        "Form 8",
+        "Form 12"
+      ],
+      "correct": 0,
+      "rationale": "Form 6 is used for fresh voter registration; Form 7 is for objections/deletions, and Form 8 is for correction of entries or shifting of residence."
+    },
+    "mainsBooster": {
+      "question": "'Universal adult suffrage without arbitrary disenfranchisement is a bedrock of democratic legitimacy.' Discuss how recent ECI digital initiatives bolster voter list integrity. (10 Marks, 150 Words)",
+      "dimensions": [
+        "Constitutional Guarantees: Article 324 (superintendence) read with Article 326 (adult suffrage) mandates error-free electoral registers.",
+        "Procedural Safeguards: Natural justice requires mandatory notice and inquiry before deleting voter entries from statutory rolls.",
+        "Technological Reforms: Voter Service Portal (ERONET), Aadhaar linking on voluntary basis, and biometric deduplication protocols."
+      ],
+      "wayForward": "Institutionalize universal voter audit trails, transparent deletion disclosures on district portals, and remote voting mechanisms for domestic migrant workers."
+    }
   },
   {
     "id": "brief-24",
@@ -871,7 +1651,27 @@
     "pubDate": "2026-10-22T20:37:06.783Z",
     "category": "Down To Earth",
     "isLiveFetched": false,
-    "timestamp": 1792701426783
+    "timestamp": 1792701426783,
+    "prelimsMcq": {
+      "question": "Consider the following statements regarding interstate river water disputes under Article 262 of the Constitution:",
+      "options": [
+        "Parliament may by law provide that neither the Supreme Court nor any other court shall exercise jurisdiction over such disputes.",
+        "The Inter-State River Water Disputes Act, 1956 requires tribunal decisions to be ratified by the President of India.",
+        "Water is an entry in the Union List (List I) of the Seventh Schedule.",
+        "Cauvery and Godavari Water Disputes Tribunals were established under Article 131."
+      ],
+      "correct": 0,
+      "rationale": "Under Article 262(2), Parliament has statutory competence to exclude the jurisdiction of the Supreme Court and other courts over interstate river water disputes."
+    },
+    "mainsBooster": {
+      "question": "Inter-state river water disputes in India are increasingly exacerbated by climate variability and competitive federalism. Analyze the constitutional and administrative mechanisms to resolve them. (15 Marks, 250 Words)",
+      "dimensions": [
+        "Constitutional Architecture: Article 262 and the Inter-State River Water Disputes Act, 1956 facilitate adjudication outside regular civil jurisdiction.",
+        "Implementation Bottlenecks: Prolonged tribunal proceedings, delayed award notifications, and state resistance to tribunal awards.",
+        "Ecological Hydrology: Lift irrigation projects alter basin flow dynamics, necessitating environmental minimum flows for downstream ecology."
+      ],
+      "wayForward": "Operationalize the Inter-State River Water Disputes (Amendment) Bill with a single permanent tribunal, strict statutory timeframes, and real-time telemetry."
+    }
   },
   {
     "id": "brief-25",
@@ -893,7 +1693,27 @@
     "pubDate": "2026-10-22T17:37:06.783Z",
     "category": "PIB Delhi",
     "isLiveFetched": false,
-    "timestamp": 1792690626783
+    "timestamp": 1792690626783,
+    "prelimsMcq": {
+      "question": "In the context of the recent UPSC CSE policy development concerning GS-II: Criminal Justice Reforms & Bharatiya Nyaya Sanhita, which statement best reflects constitutional and administrative principles?",
+      "options": [
+        "Statutory rules under Union executive power override fundamental rights without legislative approval.",
+        "Effective public policy delivery requires institutional transparency, statutory compliance, and democratic accountability.",
+        "Constitutional bodies are exempted from judicial review under Article 32 of the Constitution.",
+        "Substantive equality under Article 14 prohibits states from enacting affirmative regulatory classifications."
+      ],
+      "correct": 1,
+      "rationale": "Public administration in constitutional democracies is anchored in administrative law, checks and balances, transparency, and statutory accountability."
+    },
+    "mainsBooster": {
+      "question": "Examine the governance and policy implications of this development for Indian public administration under GS-II: Criminal Justice Reforms & Bharatiya Nyaya Sanhita. (10 Marks, 150 Words)",
+      "dimensions": [
+        "Statutory & Institutional Framework: Alignment with constitutional values, legislative intent, and rule of law standards.",
+        "Socio-Economic Dimensions: Ensuring citizen-centric delivery, administrative efficiency, and safeguarding marginalized communities.",
+        "Inter-Agency Coordination: Strengthening cooperative federalism between Union ministries and State administrative machineries."
+      ],
+      "wayForward": "Institutionalize social audits, streamline digital monitoring dashboards, and adhere to Second ARC recommendations for ethical governance."
+    }
   },
   {
     "id": "brief-26",
@@ -915,7 +1735,27 @@
     "pubDate": "2026-10-22T14:37:06.783Z",
     "category": "PRS Legislative",
     "isLiveFetched": false,
-    "timestamp": 1792679826783
+    "timestamp": 1792679826783,
+    "prelimsMcq": {
+      "question": "In the context of the recent UPSC CSE policy development concerning GS-II: Digital Governance & Deceptive Design Patterns, which statement best reflects constitutional and administrative principles?",
+      "options": [
+        "Statutory rules under Union executive power override fundamental rights without legislative approval.",
+        "Effective public policy delivery requires institutional transparency, statutory compliance, and democratic accountability.",
+        "Constitutional bodies are exempted from judicial review under Article 32 of the Constitution.",
+        "Substantive equality under Article 14 prohibits states from enacting affirmative regulatory classifications."
+      ],
+      "correct": 1,
+      "rationale": "Public administration in constitutional democracies is anchored in administrative law, checks and balances, transparency, and statutory accountability."
+    },
+    "mainsBooster": {
+      "question": "Examine the governance and policy implications of this development for Indian public administration under GS-II: Digital Governance & Deceptive Design Patterns. (10 Marks, 150 Words)",
+      "dimensions": [
+        "Statutory & Institutional Framework: Alignment with constitutional values, legislative intent, and rule of law standards.",
+        "Socio-Economic Dimensions: Ensuring citizen-centric delivery, administrative efficiency, and safeguarding marginalized communities.",
+        "Inter-Agency Coordination: Strengthening cooperative federalism between Union ministries and State administrative machineries."
+      ],
+      "wayForward": "Institutionalize social audits, streamline digital monitoring dashboards, and adhere to Second ARC recommendations for ethical governance."
+    }
   },
   {
     "id": "brief-27",
@@ -937,7 +1777,27 @@
     "pubDate": "2026-10-22T11:37:06.783Z",
     "category": "PIB Delhi",
     "isLiveFetched": false,
-    "timestamp": 1792669026783
+    "timestamp": 1792669026783,
+    "prelimsMcq": {
+      "question": "Consider the following statements regarding interstate river water disputes under Article 262 of the Constitution:",
+      "options": [
+        "Parliament may by law provide that neither the Supreme Court nor any other court shall exercise jurisdiction over such disputes.",
+        "The Inter-State River Water Disputes Act, 1956 requires tribunal decisions to be ratified by the President of India.",
+        "Water is an entry in the Union List (List I) of the Seventh Schedule.",
+        "Cauvery and Godavari Water Disputes Tribunals were established under Article 131."
+      ],
+      "correct": 0,
+      "rationale": "Under Article 262(2), Parliament has statutory competence to exclude the jurisdiction of the Supreme Court and other courts over interstate river water disputes."
+    },
+    "mainsBooster": {
+      "question": "Inter-state river water disputes in India are increasingly exacerbated by climate variability and competitive federalism. Analyze the constitutional and administrative mechanisms to resolve them. (15 Marks, 250 Words)",
+      "dimensions": [
+        "Constitutional Architecture: Article 262 and the Inter-State River Water Disputes Act, 1956 facilitate adjudication outside regular civil jurisdiction.",
+        "Implementation Bottlenecks: Prolonged tribunal proceedings, delayed award notifications, and state resistance to tribunal awards.",
+        "Ecological Hydrology: Lift irrigation projects alter basin flow dynamics, necessitating environmental minimum flows for downstream ecology."
+      ],
+      "wayForward": "Operationalize the Inter-State River Water Disputes (Amendment) Bill with a single permanent tribunal, strict statutory timeframes, and real-time telemetry."
+    }
   },
   {
     "id": "brief-28",
@@ -959,7 +1819,27 @@
     "pubDate": "2026-10-22T08:37:06.783Z",
     "category": "The Hindu",
     "isLiveFetched": false,
-    "timestamp": 1792658226783
+    "timestamp": 1792658226783,
+    "prelimsMcq": {
+      "question": "In the context of the recent UPSC CSE policy development concerning GS-I: Ancient Stratigraphy & Urban Continuity, which statement best reflects constitutional and administrative principles?",
+      "options": [
+        "Statutory rules under Union executive power override fundamental rights without legislative approval.",
+        "Effective public policy delivery requires institutional transparency, statutory compliance, and democratic accountability.",
+        "Constitutional bodies are exempted from judicial review under Article 32 of the Constitution.",
+        "Substantive equality under Article 14 prohibits states from enacting affirmative regulatory classifications."
+      ],
+      "correct": 1,
+      "rationale": "Public administration in constitutional democracies is anchored in administrative law, checks and balances, transparency, and statutory accountability."
+    },
+    "mainsBooster": {
+      "question": "Examine the governance and policy implications of this development for Indian public administration under GS-I: Ancient Stratigraphy & Urban Continuity. (10 Marks, 150 Words)",
+      "dimensions": [
+        "Statutory & Institutional Framework: Alignment with constitutional values, legislative intent, and rule of law standards.",
+        "Socio-Economic Dimensions: Ensuring citizen-centric delivery, administrative efficiency, and safeguarding marginalized communities.",
+        "Inter-Agency Coordination: Strengthening cooperative federalism between Union ministries and State administrative machineries."
+      ],
+      "wayForward": "Institutionalize social audits, streamline digital monitoring dashboards, and adhere to Second ARC recommendations for ethical governance."
+    }
   },
   {
     "id": "brief-29",
@@ -981,7 +1861,27 @@
     "pubDate": "2026-10-22T05:37:06.783Z",
     "category": "International Relations / ORF",
     "isLiveFetched": false,
-    "timestamp": 1792647426783
+    "timestamp": 1792647426783,
+    "prelimsMcq": {
+      "question": "In the context of the recent UPSC CSE policy development concerning GS-III: Clean Fuels & Bioeconomy Standards, which statement best reflects constitutional and administrative principles?",
+      "options": [
+        "Statutory rules under Union executive power override fundamental rights without legislative approval.",
+        "Effective public policy delivery requires institutional transparency, statutory compliance, and democratic accountability.",
+        "Constitutional bodies are exempted from judicial review under Article 32 of the Constitution.",
+        "Substantive equality under Article 14 prohibits states from enacting affirmative regulatory classifications."
+      ],
+      "correct": 1,
+      "rationale": "Public administration in constitutional democracies is anchored in administrative law, checks and balances, transparency, and statutory accountability."
+    },
+    "mainsBooster": {
+      "question": "Examine the governance and policy implications of this development for Indian public administration under GS-III: Clean Fuels & Bioeconomy Standards. (10 Marks, 150 Words)",
+      "dimensions": [
+        "Statutory & Institutional Framework: Alignment with constitutional values, legislative intent, and rule of law standards.",
+        "Socio-Economic Dimensions: Ensuring citizen-centric delivery, administrative efficiency, and safeguarding marginalized communities.",
+        "Inter-Agency Coordination: Strengthening cooperative federalism between Union ministries and State administrative machineries."
+      ],
+      "wayForward": "Institutionalize social audits, streamline digital monitoring dashboards, and adhere to Second ARC recommendations for ethical governance."
+    }
   },
   {
     "id": "brief-30",
@@ -1003,6 +1903,26 @@
     "pubDate": "2026-10-22T02:37:06.783Z",
     "category": "Indian Express",
     "isLiveFetched": false,
-    "timestamp": 1792636626783
+    "timestamp": 1792636626783,
+    "prelimsMcq": {
+      "question": "In the context of the recent UPSC CSE policy development concerning GS-II: Tribal Rights & Forest Rights Act (FRA), which statement best reflects constitutional and administrative principles?",
+      "options": [
+        "Statutory rules under Union executive power override fundamental rights without legislative approval.",
+        "Effective public policy delivery requires institutional transparency, statutory compliance, and democratic accountability.",
+        "Constitutional bodies are exempted from judicial review under Article 32 of the Constitution.",
+        "Substantive equality under Article 14 prohibits states from enacting affirmative regulatory classifications."
+      ],
+      "correct": 1,
+      "rationale": "Public administration in constitutional democracies is anchored in administrative law, checks and balances, transparency, and statutory accountability."
+    },
+    "mainsBooster": {
+      "question": "Examine the governance and policy implications of this development for Indian public administration under GS-II: Tribal Rights & Forest Rights Act (FRA). (10 Marks, 150 Words)",
+      "dimensions": [
+        "Statutory & Institutional Framework: Alignment with constitutional values, legislative intent, and rule of law standards.",
+        "Socio-Economic Dimensions: Ensuring citizen-centric delivery, administrative efficiency, and safeguarding marginalized communities.",
+        "Inter-Agency Coordination: Strengthening cooperative federalism between Union ministries and State administrative machineries."
+      ],
+      "wayForward": "Institutionalize social audits, streamline digital monitoring dashboards, and adhere to Second ARC recommendations for ethical governance."
+    }
   }
 ]

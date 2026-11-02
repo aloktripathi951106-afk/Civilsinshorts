@@ -130,28 +130,38 @@ fun CivilsWebViewContainer(
           mixedContentMode = WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE
         }
 
-        // Native Share bridge for Android
+        // Native Share bridge for Android (dispatched on main UI thread)
         addJavascriptInterface(object {
           @android.webkit.JavascriptInterface
           fun shareBrief(title: String?, text: String?, url: String?) {
-            try {
-              val shareBody = buildString {
-                if (!title.isNullOrBlank()) append(title).append("\n\n")
-                if (!text.isNullOrBlank()) append(text).append("\n\n")
-                if (!url.isNullOrBlank() && url != "#") append("Source: ").append(url)
-              }.trim()
+            post {
+              try {
+                val shareBody = buildString {
+                  if (!title.isNullOrBlank()) append(title).append("\n\n")
+                  if (!text.isNullOrBlank()) append(text).append("\n\n")
+                  if (!url.isNullOrBlank() && url != "#") append("Source: ").append(url)
+                }.trim()
 
-              val sendIntent = Intent(Intent.ACTION_SEND).apply {
-                type = "text/plain"
-                putExtra(Intent.EXTRA_SUBJECT, title ?: "CivilsInshorts UPSC Brief")
-                putExtra(Intent.EXTRA_TEXT, shareBody)
+                val sendIntent = Intent(Intent.ACTION_SEND).apply {
+                  type = "text/plain"
+                  putExtra(Intent.EXTRA_SUBJECT, title ?: "CivilsInshorts UPSC Brief")
+                  putExtra(Intent.EXTRA_TEXT, shareBody)
+                  addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                val chooser = Intent.createChooser(sendIntent, "Share UPSC Brief").apply {
+                  addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                context.startActivity(chooser)
+              } catch (e: Exception) {
+                try {
+                  val fallback = Intent(Intent.ACTION_SEND).apply {
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_TEXT, "$title\n\n$text")
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                  }
+                  context.startActivity(fallback)
+                } catch (_: Exception) {}
               }
-              val chooser = Intent.createChooser(sendIntent, "Share UPSC Brief").apply {
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-              }
-              context.startActivity(chooser)
-            } catch (_: Exception) {
-              // Fallback silently if intent fails
             }
           }
         }, "AndroidShare")
@@ -171,7 +181,7 @@ fun CivilsWebViewContainer(
             }
 
             // Strictly whitelist allowed outgoing URL schemes for 100% security
-            val safeSchemes = setOf("http", "https", "mailto", "tel", "whatsapp", "sms")
+            val safeSchemes = setOf("http", "https", "mailto", "tel", "whatsapp", "sms", "tg", "telegram")
             if (scheme !in safeSchemes) {
               return true // Block dangerous schemes like javascript:, content:, or malicious intents
             }
