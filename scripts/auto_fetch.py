@@ -352,23 +352,29 @@ def fallback_summarize(article):
         expansion = "The Central Pollution Control Board (CPCB) enforces statutory mandates framed under the Air (Prevention and Control of Pollution) Act, 1981. The National Clean Air Programme (NCAP) incorporates multi-sectoral airshed management, continuous ambient monitoring (CAAQMS), and city-specific emission mitigation targets to curb PM2.5 and PM10 levels across non-attainment urban clusters."
     elif any(k in t_lower for k in ["sma", "drug", "generic", "health", "pharma"]):
         expansion = "Affordable access to orphan drugs and life-saving genetic treatments aligns with constitutional guarantees under Article 21 and the National Policy for Rare Diseases, 2021. Leveraging generic synthesis and compulsory licensing mechanisms under the Indian Patents Act, 1970 remains pivotal for reducing prohibitive medical costs for underprivileged families."
-    elif any(k in t_lower for k in ["srfti", "naseeruddin", "actor", "cinema", "protest"]):
-        expansion = "Premier autonomous media institutions established under the Ministry of Information and Broadcasting play a pivotal role in national creative education. Maintaining institutional autonomy, meritocratic governance, and student welfare protocols balances administrative regulation with constitutional freedom of artistic expression protected under Article 19(1)(a)."
+    elif any(k in t_lower for k in ["rbi", "economy", "bank", "inflation", "gdp", "market", "trade"]):
+        expansion = "Prudential regulatory oversight by monetary authorities ensures financial sector stability, disciplined credit expansion, and macro-economic resilience."
+    elif any(k in t_lower for k in ["space", "isro", "drdo", "defence", "missile", "satellite"]):
+        expansion = "Indigenous research capabilities and technological self-reliance accelerate mission qualification standards across critical strategic domains."
+    elif any(k in t_lower for k in ["farm", "farmer", "agriculture", "crop", "msp", "kisan"]):
+        expansion = "Sustainable agrarian governance requires technological integration, climate-resilient cropping patterns, and targeted price support mechanisms."
+    elif any(k in t_lower for k in ["diplomacy", "treaty", "summit", "bilateral", "global", "foreign"]):
+        expansion = "Strategic multilateral diplomacy reinforces regional security architecture, resilient supply chains, and sovereign national interests."
     else:
-        expansion = f"This developmental and regulatory development carries direct significance for Civil Services aspirants preparing for {syllabus}. Core implications span statutory compliance, constitutional safeguards, public policy execution, and institutional accountability necessary for sound governance across Union and State administrative frameworks."
+        expansion = "This developmental initiative reinforces statutory compliance, institutional governance, and public administration mechanisms across Union and State frameworks."
 
-    # Construct synthesized 60-70 word body
+    # Construct synthesized 55-70 word body with complete sentence boundaries
     clean_desc = desc if len(desc.split()) >= 25 else (title.rstrip(".:") + ". " + desc)
-    combined_text = clean_desc.rstrip(".:") + ". " + expansion
+    clean_desc = clean_desc.rstrip(".:") + "."
+    
+    # If the article description is already rich and self-contained (50+ words), keep it intact
+    if len(clean_desc.split()) >= 50:
+        body = clean_desc
+    else:
+        body = f"{clean_desc} {expansion}"
 
-    words = combined_text.split()
-    if len(words) > 68:
-        words = words[:65]
-    elif len(words) < 60:
-        fillers = "Exam key takeaway: Aspirants must analyze statutory provisions and policy impacts for Prelims and Mains.".split()
-        words.extend(fillers[:62 - len(words)])
-
-    body = " ".join(words).strip()
+    # Ensure clean ending with single full stop
+    body = body.strip()
     if not body.endswith("."):
         body = re.sub(r"[^\w]$", "", body) + "."
 
