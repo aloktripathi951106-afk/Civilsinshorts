@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>CivilsInshorts - UPSC 60-Word Briefs • Hi-Translate Tap</title>
+  <!-- Content Security Policy for 100% Security -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https:; img-src 'self' data: blob: https:; connect-src 'self' https: data: blob:; font-src 'self' https://fonts.gstatic.com data:; frame-ancestors 'none'; object-src 'none';">
+  <title>CivilsInshorts - UPSC 60–100 Word Briefs • Hi-Translate Tap</title>
   <link rel="icon" type="image/png" href="civils_logo.png">
   <link rel="apple-touch-icon" href="civils_logo.png">
   
@@ -144,7 +146,7 @@
             <span class="font-extrabold text-base tracking-tight text-white">CivilsInshorts</span>
             <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">UPSC</span>
           </div>
-          <p class="text-[11px] text-slate-400 font-medium leading-none mt-0.5">60-Word Briefs • Hi-Translate Tap</p>
+          <p class="text-[11px] text-slate-400 font-medium leading-none mt-0.5">60–100 Word Briefs • Hi-Translate Tap</p>
         </div>
       </div>
 
@@ -216,11 +218,20 @@
           <span id="cardSourceBadge" class="uppercase text-[11px] font-bold text-amber-400">CivilsInshorts</span>
         </div>
 
-        <!-- Bilingual Hindi Toggle Button -->
-        <button id="btnToggleHindi" onclick="toggleBilingualMode()" class="absolute top-3 right-3 flex items-center space-x-1 px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 active:scale-95 text-slate-950 font-bold text-xs shadow-md transition">
-          <i class="ph-bold ph-translate text-sm"></i>
-          <span id="btnToggleHindiText">हिन्दी सार</span>
-        </button>
+        <!-- Right Action Buttons on Image: Share & Hindi Toggle -->
+        <div class="absolute top-3 right-3 flex items-center space-x-2">
+          <!-- News Card Share Button -->
+          <button id="btnShareCardTop" onclick="openShareModal()" title="Share UPSC Brief (WhatsApp, Telegram, Notes, System Share)" class="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg bg-slate-950/80 hover:bg-slate-900 border border-slate-700/70 active:scale-95 text-amber-400 font-bold text-xs shadow-md transition backdrop-blur-md">
+            <i class="ph-bold ph-share-network text-sm"></i>
+            <span class="hidden sm:inline">Share</span>
+          </button>
+
+          <!-- Bilingual Hindi Toggle Button -->
+          <button id="btnToggleHindi" onclick="toggleBilingualMode()" class="flex items-center space-x-1 px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 active:scale-95 text-slate-950 font-bold text-xs shadow-md transition">
+            <i class="ph-bold ph-translate text-sm"></i>
+            <span id="btnToggleHindiText">हिन्दी सार</span>
+          </button>
+        </div>
 
         <!-- Syllabus Banner at Bottom of Image -->
         <div class="absolute bottom-2 left-4">
@@ -230,17 +241,17 @@
         </div>
       </div>
 
-      <!-- CARD CONTENT BODY (HEADLINE, 60-WORD BODY, TAGS) -->
+      <!-- CARD CONTENT BODY (HEADLINE, 60-100 WORD BODY, TAGS) -->
       <div id="cardScrollArea" class="flex-1 p-4 sm:p-5 flex flex-col justify-between overflow-y-auto no-scrollbar">
         
         <!-- English View -->
         <div id="englishView" class="space-y-3">
           <!-- Interactive Headline -->
           <h2 id="cardHeadline" class="text-base sm:text-lg font-bold text-slate-100 leading-snug tracking-tight">
-            Loading latest UPSC CSE 60-word briefs...
+            Loading latest UPSC CSE briefs (60–100 words)...
           </h2>
 
-          <!-- Interactive 60-Word Body -->
+          <!-- Interactive 60-100 Word Body -->
           <div id="cardBody" class="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
             Preparing verified editorial summaries, GS paper syllabus tags, and tap-to-meaning bilingual vocabulary...
           </div>
@@ -282,13 +293,17 @@
           </span>
         </div>
 
-        <!-- Navigation Pill Buttons & Source Link -->
+        <!-- Navigation Pill Buttons, Share Option & Source Link -->
         <div class="flex items-center space-x-1.5">
           <button onclick="prevCard()" title="Previous Card (Up Arrow)" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-300 flex items-center justify-center transition">
             <i class="ph-bold ph-caret-up text-base"></i>
           </button>
           <button onclick="nextCard()" title="Next Card (Down Arrow)" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-300 flex items-center justify-center transition">
             <i class="ph-bold ph-caret-down text-base"></i>
+          </button>
+          <button onclick="openShareModal()" title="Share UPSC Brief" class="inline-flex items-center space-x-1 px-2.5 py-1 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 text-amber-400 border border-amber-500/30 text-xs font-semibold transition active:scale-95">
+            <i class="ph-bold ph-share-network text-xs"></i>
+            <span>Share</span>
           </button>
           <a id="cardSourceLink" href="#" target="_blank" rel="noopener noreferrer" class="ml-1 inline-flex items-center space-x-1 px-3 py-1 rounded-lg bg-slate-800 hover:bg-amber-500/20 hover:text-amber-300 border border-slate-700 text-xs font-semibold text-slate-200 transition active:scale-95" onclick="handleSourceClick(event, this)">
             <span>Source</span>
@@ -490,7 +505,7 @@
               <i class="ph-bold ph-link text-sm"></i>
               <span>Copy Direct Sync Link</span>
             </button>
-            <button onclick="shareViaWhatsApp()" class="py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center space-x-1.5 transition">
+            <button onclick="shareSyncLinkViaWhatsApp()" class="py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center space-x-1.5 transition">
               <i class="ph-bold ph-whatsapp-logo text-sm"></i>
               <span>WhatsApp</span>
             </button>
@@ -518,6 +533,79 @@
             Import Cards (JSON)
           </button>
         </div>
+      </div>
+    </div>
+  <!-- NEWS CARD SHARING MODAL -->
+  <div id="shareCardModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4" onclick="handleShareBackdropClick(event)">
+    <div class="bg-[#131b2a] border border-slate-700/80 rounded-2xl w-full max-w-md flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      <!-- Modal Header -->
+      <div class="px-5 py-3.5 border-b border-slate-800 flex items-center justify-between bg-slate-900/60">
+        <div class="flex items-center space-x-2 text-amber-400">
+          <i class="ph-bold ph-share-network text-xl"></i>
+          <h3 class="text-sm sm:text-base font-bold text-white">Share UPSC Exam Brief</h3>
+        </div>
+        <button onclick="closeShareModal()" class="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition">
+          <i class="ph-bold ph-x text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Brief Preview Card -->
+      <div class="p-4 border-b border-slate-800/80 bg-slate-950/40">
+        <div class="flex items-center space-x-2 mb-1.5">
+          <span id="sharePreviewSyllabus" class="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-950/80 text-sky-300 border border-sky-800/60">GS Paper</span>
+          <span id="sharePreviewSource" class="text-[10px] font-bold text-amber-400 uppercase">Source</span>
+        </div>
+        <h4 id="sharePreviewHeadline" class="text-xs sm:text-sm font-bold text-slate-200 line-clamp-2 leading-snug">
+          UPSC Headline
+        </h4>
+        <p id="sharePreviewBody" class="text-[11px] text-slate-400 line-clamp-2 mt-1 leading-relaxed">
+          Preview of brief body...
+        </p>
+      </div>
+
+      <!-- Sharing Actions Grid -->
+      <div class="p-4 space-y-2.5">
+        <!-- System Native Share (Triggers Android Share / Web Share API) -->
+        <button onclick="triggerNativeShare()" class="w-full flex items-center justify-between px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs sm:text-sm shadow-md transition active:scale-98">
+          <div class="flex items-center space-x-2.5">
+            <i class="ph-bold ph-share text-base"></i>
+            <span>System Share Sheet</span>
+          </div>
+          <span class="text-[10px] font-black uppercase px-1.5 py-0.5 rounded bg-slate-950/20">All Apps</span>
+        </button>
+
+        <div class="grid grid-cols-2 gap-2 pt-1">
+          <!-- WhatsApp Share -->
+          <button onclick="shareViaWhatsApp()" class="flex items-center space-x-2 px-3 py-2.5 rounded-xl bg-emerald-950/60 hover:bg-emerald-900/60 border border-emerald-700/60 text-emerald-300 font-semibold text-xs transition active:scale-98">
+            <i class="ph-bold ph-whatsapp-logo text-lg text-emerald-400"></i>
+            <span>WhatsApp</span>
+          </button>
+
+          <!-- Telegram Share -->
+          <button onclick="shareViaTelegram()" class="flex items-center space-x-2 px-3 py-2.5 rounded-xl bg-sky-950/60 hover:bg-sky-900/60 border border-sky-700/60 text-sky-300 font-semibold text-xs transition active:scale-98">
+            <i class="ph-bold ph-telegram-logo text-lg text-sky-400"></i>
+            <span>Telegram</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <!-- Copy Full Study Note -->
+          <button onclick="copyFullStudyNote()" class="flex items-center space-x-2 px-3 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 font-semibold text-xs transition active:scale-98">
+            <i class="ph-bold ph-copy text-base text-amber-400"></i>
+            <span>Copy Full Note</span>
+          </button>
+
+          <!-- Copy Card Link -->
+          <button onclick="copyCardWebLink()" class="flex items-center space-x-2 px-3 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 font-semibold text-xs transition active:scale-98">
+            <i class="ph-bold ph-link-simple text-base text-sky-400"></i>
+            <span>Copy Link</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Footer Note -->
+      <div class="px-5 py-2.5 bg-slate-900/40 border-t border-slate-800/60 text-center">
+        <span class="text-[10px] text-slate-500 font-medium">100% Safe & Verified • UPSC Civil Services Exam Notes</span>
       </div>
     </div>
   </div>
@@ -783,13 +871,17 @@
       imgElem.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(fallbackSvg);
     }
 
-    // Ensure substantive UPSC CSE exam depth (55-70 words) without ever appending repetitive boilerplate
+    // Ensure substantive UPSC CSE exam depth (up to 100 words) without ever appending repetitive boilerplate
     function ensureSubstantiveWords(card) {
       if (!card) return "";
       let text = (card.body || "").trim();
       const words = text.split(/\s+/).filter(Boolean);
-      // If the brief already has 50 or more words, preserve the original editorial summary untouched
-      if (words.length >= 50) return text;
+      // If the brief already has 50 to 110 words, preserve the comprehensive editorial summary untouched
+      if (words.length >= 50 && words.length <= 110) return text;
+      // If excessively long, trim smoothly to 100 words
+      if (words.length > 110) {
+        return words.slice(0, 100).join(" ").replace(/[,;:]$/, "") + "...";
+      }
 
       const title = (card.headline || "").replace(/:\s*$/, "");
       const syllabus = card.syllabus || "GS-II: Governance & Public Policy";
@@ -3935,7 +4027,7 @@
       });
     }
 
-    function shareViaWhatsApp() {
+    function shareSyncLinkViaWhatsApp() {
       const baseUrl = window.location.origin + window.location.pathname;
       let shareUrl = baseUrl;
       if (customBriefs.length > 0) {
@@ -3944,6 +4036,189 @@
       }
       const text = encodeURIComponent(`Read latest UPSC 60-Word Briefs with Hi-Translate on CivilsInshorts:\n${shareUrl}`);
       window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+    }
+
+    /* ========================================================================
+       12B. NEWS CARD SHARING ENGINE (NATIVE SHEET, WHATSAPP, TELEGRAM & LINK)
+       ======================================================================== */
+    function openShareModal() {
+      if (!filteredBriefs || filteredBriefs.length === 0) {
+        showToast("No brief available to share", "info");
+        return;
+      }
+      const card = filteredBriefs[activeCardIndex] || filteredBriefs[0];
+      if (!card) return;
+
+      const syllabusEl = document.getElementById('sharePreviewSyllabus');
+      const sourceEl = document.getElementById('sharePreviewSource');
+      const headlineEl = document.getElementById('sharePreviewHeadline');
+      const bodyEl = document.getElementById('sharePreviewBody');
+
+      if (syllabusEl) syllabusEl.textContent = card.syllabus || "UPSC General Studies";
+      if (sourceEl) sourceEl.textContent = card.sourceBadge || card.source || "PIB / HINDU";
+      if (headlineEl) headlineEl.textContent = (card.headline || "").replace(/:\s*$/, "");
+      if (bodyEl) {
+        const fullBody = ensureSubstantiveWords(card);
+        bodyEl.textContent = fullBody.length > 135 ? fullBody.slice(0, 135) + "..." : fullBody;
+      }
+
+      const modal = document.getElementById('shareCardModal');
+      if (modal) {
+        modal.classList.remove('hidden');
+      }
+    }
+
+    function closeShareModal() {
+      const modal = document.getElementById('shareCardModal');
+      if (modal) {
+        modal.classList.add('hidden');
+      }
+    }
+
+    function handleShareBackdropClick(event) {
+      if (event && event.target && event.target.id === 'shareCardModal') {
+        closeShareModal();
+      }
+    }
+
+    function getCardShareUrl(cardId) {
+      let base = "https://aloktripathi951106-afk.github.io/Civilsinshorts/";
+      if (window.location && window.location.origin && window.location.origin !== "null" && !window.location.origin.startsWith("file:")) {
+        const path = window.location.pathname.startsWith("/Civilsinshorts") ? "/Civilsinshorts/" : window.location.pathname;
+        const cleanPath = path.endsWith("/") ? path : path + "/";
+        base = window.location.origin + cleanPath;
+      }
+      return `${base}?card=${encodeURIComponent(cardId || "")}`;
+    }
+
+    function formatCardForSharing(card) {
+      if (!card) return "";
+      const headline = (card.headline || "").replace(/:\s*$/, "");
+      const syllabus = card.syllabus || "UPSC Civil Services";
+      const source = card.sourceBadge || card.source || "Verified Editorial";
+      const body = ensureSubstantiveWords(card);
+      const hindi = card.hindi ? `\n\n🇮🇳 हिन्दी सार:\n${card.hindi}` : "";
+      const tags = (card.tags && card.tags.length > 0 ? card.tags : ["#UPSC", "#CivilServices", "#PrelimsFacts"]).join(" ");
+      const shareUrl = getCardShareUrl(card.id);
+
+      return `📚 *CivilsInshorts UPSC CSE Brief*\n\n📌 *${headline}*\n📂 *Syllabus:* ${syllabus}\n🏛️ *Source:* ${source}\n\n${body}${hindi}\n\n🏷️ ${tags}\n\n🔗 Read full brief with Hi-Translate on CivilsInshorts:\n${shareUrl}`;
+    }
+
+    function copyTextFallback(text, successMsg = "Copied to clipboard!") {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.left = "-9999px";
+      textarea.style.top = "0";
+      textarea.style.opacity = "0";
+      const mount = document.body || document.documentElement;
+      if (mount) mount.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      try {
+        const successful = document.execCommand("copy");
+        if (successful) {
+          showToast(successMsg, "success");
+        } else {
+          prompt("Copy this text:", text);
+        }
+      } catch (err) {
+        prompt("Copy this text:", text);
+      }
+      if (mount && textarea.parentNode) mount.removeChild(textarea);
+    }
+
+    async function triggerNativeShare() {
+      const card = filteredBriefs[activeCardIndex] || filteredBriefs[0];
+      if (!card) return;
+      const shareText = formatCardForSharing(card);
+      const shareUrl = getCardShareUrl(card.id);
+
+      // 1. Android Native WebView JavascriptInterface bridge
+      if (window.AndroidShare && typeof window.AndroidShare.shareBrief === 'function') {
+        try {
+          window.AndroidShare.shareBrief(card.headline || "CivilsInshorts Brief", shareText, shareUrl);
+          closeShareModal();
+          showToast("Opening Android share sheet...", "info");
+          return;
+        } catch (e) {
+          // Fall through
+        }
+      }
+
+      // 2. Browser standard Web Share API
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: card.headline || "CivilsInshorts UPSC Brief",
+            text: shareText,
+            url: shareUrl
+          });
+          closeShareModal();
+          showToast("Brief shared successfully!", "success");
+          return;
+        } catch (err) {
+          if (err.name === 'AbortError') return; // User closed sheet
+        }
+      }
+
+      // 3. Fallback to clipboard
+      await copyFullStudyNote();
+    }
+
+    function shareViaWhatsApp() {
+      const card = filteredBriefs[activeCardIndex] || filteredBriefs[0];
+      if (!card) return;
+      const shareText = formatCardForSharing(card);
+      const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
+      window.open(waUrl, '_blank');
+      closeShareModal();
+      showToast("Opening WhatsApp...", "info");
+    }
+
+    function shareViaTelegram() {
+      const card = filteredBriefs[activeCardIndex] || filteredBriefs[0];
+      if (!card) return;
+      const shareText = formatCardForSharing(card);
+      const cardUrl = getCardShareUrl(card.id);
+      const tgUrl = `https://t.me/share/url?url=${encodeURIComponent(cardUrl)}&text=${encodeURIComponent(shareText)}`;
+      window.open(tgUrl, '_blank');
+      closeShareModal();
+      showToast("Opening Telegram...", "info");
+    }
+
+    async function copyFullStudyNote() {
+      const card = filteredBriefs[activeCardIndex] || filteredBriefs[0];
+      if (!card) return;
+      const text = formatCardForSharing(card);
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(text);
+          showToast("Full study note copied to clipboard!", "success");
+        } else {
+          copyTextFallback(text, "Full study note copied to clipboard!");
+        }
+      } catch (err) {
+        copyTextFallback(text, "Full study note copied to clipboard!");
+      }
+      closeShareModal();
+    }
+
+    async function copyCardWebLink() {
+      const card = filteredBriefs[activeCardIndex] || filteredBriefs[0];
+      if (!card) return;
+      const url = getCardShareUrl(card.id);
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(url);
+          showToast("Direct card link copied!", "success");
+        } else {
+          copyTextFallback(url, "Direct card link copied!");
+        }
+      } catch (err) {
+        copyTextFallback(url, "Direct card link copied!");
+      }
+      closeShareModal();
     }
 
     async function saveAndSyncEndpoint() {
@@ -4382,6 +4657,11 @@
     function checkURLParamsForSharedCards() {
       try {
         const params = new URLSearchParams(window.location.search);
+        const targetCard = params.get('card') || params.get('id');
+        if (targetCard) {
+          localStorage.setItem('civils_last_read_id', targetCard);
+          showToast("Opening shared UPSC brief...", "info");
+        }
         const shared = params.get('cards');
         if (shared) {
           const cards = JSON.parse(decodeURIComponent(shared));

@@ -262,7 +262,7 @@ def fetch_rss_feed(feed_info):
 
 def summarize_with_gemini(article, api_key):
     """
-    Summarize article using Gemini API into an under-70, minimum-60 word UPSC brief.
+    Summarize article using Gemini API into a comprehensive 60 to 100 word UPSC brief.
     """
     if not api_key:
         return None
@@ -276,9 +276,9 @@ Content: {article['desc'][:1200]}
 
 Strict constraints:
 1. "headline": 8-14 words, informative, punchy, ending with a colon ':'
-2. "body": Strictly 60 to 70 words (never fewer than 60 words, never more than 70 words). Cover core facts, constitutional/statutory provisions, data metrics, and high-yield relevance for UPSC Prelims & Mains.
+2. "body": Between 60 and 100 words (informative depth covering core facts, constitutional/statutory provisions, data metrics, and high-yield relevance for UPSC Prelims & Mains).
 3. "syllabus": Map to exact GS Paper (e.g. 'GS-II: Civil Services & District Administration', 'GS-III: Disaster Management & Meteorology', 'GS-III: Renewable Energy', 'GS-II: Interstate Water Governance', 'GS-III: Environment & Air Quality', etc.)
-4. "hindi": Accurate, professional Hindi translation (संक्षेप) in Noto Sans Devanagari script (strictly 55 to 65 words).
+4. "hindi": Accurate, professional Hindi translation (संक्षेप) in Noto Sans Devanagari script (strictly 60 to 90 words).
 5. "tags": 3 to 5 exam tags like ["#GS2", "#UPSC", "#CivilServices", "#CurrentAffairs"].
 
 Respond strictly with a valid JSON object only. No markdown fences.

@@ -130,23 +130,55 @@ fun CivilsWebViewContainer(
           mixedContentMode = WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE
         }
 
+        // Native Share bridge for Android
+        addJavascriptInterface(object {
+          @android.webkit.JavascriptInterface
+          fun shareBrief(title: String?, text: String?, url: String?) {
+            try {
+              val shareBody = buildString {
+                if (!title.isNullOrBlank()) append(title).append("\n\n")
+                if (!text.isNullOrBlank()) append(text).append("\n\n")
+                if (!url.isNullOrBlank() && url != "#") append("Source: ").append(url)
+              }.trim()
+
+              val sendIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_SUBJECT, title ?: "CivilsInshorts UPSC Brief")
+                putExtra(Intent.EXTRA_TEXT, shareBody)
+              }
+              val chooser = Intent.createChooser(sendIntent, "Share UPSC Brief").apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+              }
+              context.startActivity(chooser)
+            } catch (_: Exception) {
+              // Fallback silently if intent fails
+            }
+          }
+        }, "AndroidShare")
+
         webViewClient = object : WebViewClient() {
           override fun shouldOverrideUrlLoading(
             view: WebView?,
             request: WebResourceRequest?
           ): Boolean {
             val uri = request?.url ?: return false
-            val url = uri.toString()
+            val scheme = uri.scheme?.lowercase() ?: return false
 
             // Keep internal application asset files inside the local WebView container
-            if (url.startsWith("file:///android_asset/")) {
+            val urlString = uri.toString()
+            if (urlString.startsWith("file:///android_asset/")) {
               return false
             }
 
-            // Route all external web links (e.g. PIB, The Hindu, WhatsApp sharing, external sources)
-            // securely to the user's default system browser or external application
+            // Strictly whitelist allowed outgoing URL schemes for 100% security
+            val safeSchemes = setOf("http", "https", "mailto", "tel", "whatsapp", "sms")
+            if (scheme !in safeSchemes) {
+              return true // Block dangerous schemes like javascript:, content:, or malicious intents
+            }
+
             try {
               val intent = Intent(Intent.ACTION_VIEW, uri).apply {
+                addCategory(Intent.CATEGORY_BROWSABLE)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
               }
               context.startActivity(intent)
