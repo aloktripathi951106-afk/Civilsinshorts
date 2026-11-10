@@ -4,13 +4,16 @@
  * to guarantee that stale cached copies are never served.
  */
 
-const STATIC_CACHE_NAME = 'civils-static-v2.5';
-const DATA_CACHE_NAME = 'civils-news-live-data-v2.5';
+const STATIC_CACHE_NAME = 'civils-static-v3.0';
+const DATA_CACHE_NAME = 'civils-news-live-data-v3.0';
 
 const STATIC_ASSETS = [
   './',
   './index.html',
-  './manifest.json'
+  './manifest.json',
+  './news.json',
+  './icons/icon-192.png',
+  './icons/icon-512.png'
 ];
 
 self.addEventListener('install', (event) => {

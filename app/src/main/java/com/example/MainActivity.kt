@@ -133,22 +133,179 @@ fun CivilsWebViewContainer(
         // Native Share bridge for Android (dispatched on main UI thread)
         addJavascriptInterface(object {
           @android.webkit.JavascriptInterface
+          fun shareCardImage(title: String?, base64ImageData: String?, textCaption: String?) {
+            post {
+              try {
+                if (!base64ImageData.isNullOrBlank()) {
+                  val rawBase64 = if (base64ImageData.contains(",")) {
+                    base64ImageData.substringAfter(",")
+                  } else {
+                    base64ImageData
+                  }
+                  val imageBytes = android.util.Base64.decode(rawBase64, android.util.Base64.DEFAULT)
+                  val sharedFolder = java.io.File(context.cacheDir, "shared_cards")
+                  sharedFolder.mkdirs()
+                  val cardFile = java.io.File(sharedFolder, "civilsinshorts_card_${System.currentTimeMillis()}.png")
+                  java.io.FileOutputStream(cardFile).use { it.write(imageBytes) }
+
+                  val fileUri = androidx.core.content.FileProvider.getUriForFile(
+                    context,
+                    "${context.packageName}.fileprovider",
+                    cardFile
+                  )
+
+                  // Intent ACTION_SEND with type image/png to share the visual news card image
+                  val imageIntent = Intent(Intent.ACTION_SEND).apply {
+                    type = "image/png"
+                    putExtra(Intent.EXTRA_STREAM, fileUri)
+                    clipData = android.content.ClipData.newUri(context.contentResolver, "News Card", fileUri)
+                    if (!textCaption.isNullOrBlank()) {
+                      putExtra(Intent.EXTRA_TEXT, textCaption)
+                    }
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                  }
+                  val chooser = Intent.createChooser(imageIntent, "Share News Card Image").apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                  }
+                  context.startActivity(chooser)
+                  return@post
+                }
+              } catch (e: Exception) {
+                android.util.Log.e("MainActivity", "Failed to share card image", e)
+              }
+
+              // Fallback if image data is absent
+              shareBrief(title, textCaption, "")
+            }
+          }
+
+          @android.webkit.JavascriptInterface
+          fun shareCardImageToWhatsApp(title: String?, base64ImageData: String?) {
+            post {
+              try {
+                if (!base64ImageData.isNullOrBlank()) {
+                  val rawBase64 = if (base64ImageData.contains(",")) {
+                    base64ImageData.substringAfter(",")
+                  } else {
+                    base64ImageData
+                  }
+                  val imageBytes = android.util.Base64.decode(rawBase64, android.util.Base64.DEFAULT)
+                  val sharedFolder = java.io.File(context.cacheDir, "shared_cards")
+                  sharedFolder.mkdirs()
+                  val cardFile = java.io.File(sharedFolder, "civilsinshorts_card_${System.currentTimeMillis()}.png")
+                  java.io.FileOutputStream(cardFile).use { it.write(imageBytes) }
+
+                  val fileUri = androidx.core.content.FileProvider.getUriForFile(
+                    context,
+                    "${context.packageName}.fileprovider",
+                    cardFile
+                  )
+
+                  val waIntent = Intent(Intent.ACTION_SEND).apply {
+                    type = "image/png"
+                    putExtra(Intent.EXTRA_STREAM, fileUri)
+                    clipData = android.content.ClipData.newUri(context.contentResolver, "News Card", fileUri)
+                    setPackage("com.whatsapp")
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                  }
+                  try {
+                    context.startActivity(waIntent)
+                    return@post
+                  } catch (_: Exception) {
+                    // Try WhatsApp Business package if standard WhatsApp is not present
+                    try {
+                      waIntent.setPackage("com.whatsapp.w4b")
+                      context.startActivity(waIntent)
+                      return@post
+                    } catch (_: Exception) {}
+                  }
+
+                  // If WhatsApp not found, fallback to chooser
+                  val chooser = Intent.createChooser(waIntent.apply { setPackage(null) }, "Share News Card").apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                  }
+                  context.startActivity(chooser)
+                  return@post
+                }
+              } catch (e: Exception) {
+                android.util.Log.e("MainActivity", "Failed to share card image to WhatsApp", e)
+              }
+            }
+          }
+
+          @android.webkit.JavascriptInterface
+          fun shareCardImageToTelegram(title: String?, base64ImageData: String?) {
+            post {
+              try {
+                if (!base64ImageData.isNullOrBlank()) {
+                  val rawBase64 = if (base64ImageData.contains(",")) {
+                    base64ImageData.substringAfter(",")
+                  } else {
+                    base64ImageData
+                  }
+                  val imageBytes = android.util.Base64.decode(rawBase64, android.util.Base64.DEFAULT)
+                  val sharedFolder = java.io.File(context.cacheDir, "shared_cards")
+                  sharedFolder.mkdirs()
+                  val cardFile = java.io.File(sharedFolder, "civilsinshorts_card_${System.currentTimeMillis()}.png")
+                  java.io.FileOutputStream(cardFile).use { it.write(imageBytes) }
+
+                  val fileUri = androidx.core.content.FileProvider.getUriForFile(
+                    context,
+                    "${context.packageName}.fileprovider",
+                    cardFile
+                  )
+
+                  val tgIntent = Intent(Intent.ACTION_SEND).apply {
+                    type = "image/png"
+                    putExtra(Intent.EXTRA_STREAM, fileUri)
+                    clipData = android.content.ClipData.newUri(context.contentResolver, "News Card", fileUri)
+                    setPackage("org.telegram.messenger")
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                  }
+                  try {
+                    context.startActivity(tgIntent)
+                    return@post
+                  } catch (_: Exception) {}
+
+                  // Fallback to chooser
+                  val chooser = Intent.createChooser(tgIntent.apply { setPackage(null) }, "Share News Card").apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                  }
+                  context.startActivity(chooser)
+                  return@post
+                }
+              } catch (e: Exception) {
+                android.util.Log.e("MainActivity", "Failed to share card image to Telegram", e)
+              }
+            }
+          }
+
+          @android.webkit.JavascriptInterface
           fun shareBrief(title: String?, text: String?, url: String?) {
             post {
               try {
-                val shareBody = buildString {
-                  if (!title.isNullOrBlank()) append(title).append("\n\n")
-                  if (!text.isNullOrBlank()) append(text).append("\n\n")
-                  if (!url.isNullOrBlank() && url != "#") append("Source: ").append(url)
-                }.trim()
+                // If url is a base64 image data URL, route to shareCardImage
+                if (!url.isNullOrBlank() && url.startsWith("data:image/")) {
+                  shareCardImage(title, url, text)
+                  return@post
+                }
+
+                val cardContent = when {
+                  !text.isNullOrBlank() -> text
+                  !title.isNullOrBlank() -> title
+                  else -> "CivilsInshorts UPSC Brief"
+                }
 
                 val sendIntent = Intent(Intent.ACTION_SEND).apply {
                   type = "text/plain"
                   putExtra(Intent.EXTRA_SUBJECT, title ?: "CivilsInshorts UPSC Brief")
-                  putExtra(Intent.EXTRA_TEXT, shareBody)
+                  putExtra(Intent.EXTRA_TEXT, cardContent)
                   addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 }
-                val chooser = Intent.createChooser(sendIntent, "Share UPSC Brief").apply {
+                val chooser = Intent.createChooser(sendIntent, "Share UPSC Card").apply {
                   addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 }
                 context.startActivity(chooser)
@@ -156,7 +313,7 @@ fun CivilsWebViewContainer(
                 try {
                   val fallback = Intent(Intent.ACTION_SEND).apply {
                     type = "text/plain"
-                    putExtra(Intent.EXTRA_TEXT, "$title\n\n$text")
+                    putExtra(Intent.EXTRA_TEXT, text ?: title ?: "")
                     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                   }
                   context.startActivity(fallback)

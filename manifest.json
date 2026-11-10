@@ -1,0 +1,63 @@
+{
+  "name": "Civilsinshorts - UPSC CSE News Summaries",
+  "short_name": "Civilsinshorts",
+  "description": "Short, verified 150-word editorial summaries for UPSC Civil Services Examination with bilingual translations, audio reader, and GS syllabus filtering.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b0f17",
+  "theme_color": "#0f172a",
+  "lang": "en-IN",
+  "dir": "ltr",
+  "categories": ["education", "news", "books"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Latest Briefs",
+      "short_name": "Latest",
+      "description": "Read latest UPSC CSE editorial summaries",
+      "url": "./index.html?view=latest",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "My Bookmarks",
+      "short_name": "Bookmarks",
+      "description": "Access your saved UPSC news cards",
+      "url": "./index.html?view=bookmarks",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Admin Control Panel",
+      "short_name": "Admin",
+      "description": "Manage and publish news items",
+      "url": "./index.html#admin",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

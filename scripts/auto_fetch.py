@@ -483,23 +483,8 @@ def main():
 
     print(f"Successfully generated {len(new_cards)} new UPSC briefs.")
 
-    # 3. Clean and upgrade any existing articles that have < 50 words
-    cleaned_existing = []
-    for a in existing_articles:
-        body_w = a.get("body", "").split()
-        if len(body_w) < 55:
-            fake_item = {
-                "title": a.get("headline", "").rstrip(":"),
-                "desc": a.get("body", ""),
-                "source": a.get("source", "The Hindu"),
-                "category": a.get("category", "The Hindu")
-            }
-            fixed = fallback_summarize(fake_item)
-            a["body"] = fixed["body"]
-            a["hindi"] = fixed["hindi"]
-            a["syllabus"] = fixed["syllabus"]
-            a["image"] = resolve_topic_photo(fixed["syllabus"], a["headline"] + " " + fixed["body"], a.get("id", ""))
-        cleaned_existing.append(a)
+    # 3. Preserve all existing high-quality articles without injecting boilerplate
+    cleaned_existing = existing_articles
 
     # 4. Combine: Prepend new cards and sort strictly NEWEST TO OLDEST
     updated_articles = new_cards + cleaned_existing
@@ -523,8 +508,8 @@ def main():
             return 0
 
     final_list.sort(key=lambda x: parse_date(x.get("pubDate")), reverse=True)
-    # Keep up to 100 articles
-    final_list = final_list[:100]
+    # Keep comprehensive pool (up to 300 articles)
+    final_list = final_list[:300]
 
     # Write to all target locations
     for path in NEWS_JSON_PATHS:
